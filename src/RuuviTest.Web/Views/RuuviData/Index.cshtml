@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "ToDo List";
+}
+@model IEnumerable<RuuviTest.Core.Entities.RuuviData>
+<h2>To Do Items (MVC View)</h2>
+<ul>
+@foreach (var item in Model)
+{
+    <li>@item.DeviceId<br/>@item.Temperature</li>
+}
+</ul>
