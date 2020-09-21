@@ -13,6 +13,11 @@ const routes: Routes = [
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
+        path: 'asset',
+        loadChildren: () =>
+          import('../modules/ruuvi-monitoring/ruuvi-monitoring.module').then((m) => m.RuuviMonitoringModule),
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',
