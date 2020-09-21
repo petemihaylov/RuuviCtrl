@@ -17,6 +17,7 @@ import { DropdownMenusModule } from '../dropdown-menus/dropdown-menus.module';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { Widget3DropdownComponent } from './lists/lists-widget3/widget3-dropdown/widget3-dropdown.component';
 import { Widget4DropdownComponent } from './lists/lists-widget4/widget4-dropdown/widget4-dropdown.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { Widget4DropdownComponent } from './lists/lists-widget4/widget4-dropdown
     InlineSVGModule,
     NgApexchartsModule,
     NgbDropdownModule,
+    RouterModule,
   ],
   exports: [
     MixedWidget1Component,
