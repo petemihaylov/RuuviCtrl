@@ -28,7 +28,7 @@ export class AssetDashboardComponent implements OnInit {
     icon: 'Weather/Rain5.svg'
    };
   batteryLevel: StatsWidget = {
-    title: 'BatteryLevel',
+    title: 'Battery Level',
     measurementValue: '%',
     icon: 'Devices/Battery-charging.svg'
    };
