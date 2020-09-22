@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import { LayoutService } from '../../../../_metronic/core';
+import {StatsWidget, ValueAsset} from '../_models/stats-widget.model';
+import {DatePipe, DecimalPipe} from '@angular/common';
 
 @Component({
   selector: 'app-stats-widget',
   templateUrl: './stats-widget.component.html',
 })
-export class StatsWidgetComponent implements OnInit {
+export class StatsWidgetComponent implements OnChanges {
   chartOptions: any = {};
   fontFamily = '';
   colorsGrayGray500 = '';
@@ -17,7 +19,10 @@ export class StatsWidgetComponent implements OnInit {
   colorsThemeBaseSuccess = '';
   colorsThemeLightSuccess = '';
 
-  constructor(private layout: LayoutService) {
+  @Input() info: StatsWidget;
+  @Input() data: any;
+
+  constructor(private layout: LayoutService, private datePipe: DatePipe, private decimalPipe: DecimalPipe) {
     this.fontFamily = this.layout.getProp('js.fontFamily');
     this.colorsGrayGray500 = this.layout.getProp('js.colors.gray.gray500');
     this.colorsGrayGray200 = this.layout.getProp('js.colors.gray.gray200');
@@ -39,16 +44,24 @@ export class StatsWidgetComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
+  currentValue: number;
+
+  ngOnChanges(): void {
     this.chartOptions = this.getChartOptions();
+    if (this.data)
+    {
+      const lastIndex = this.data.length - 1;
+      this.currentValue = this.decimalPipe.transform(this.data[lastIndex].value, '1.2-2');
+
+    }
   }
 
   getChartOptions() {
     return {
       series: [
         {
-          name: 'Net Profit',
-          data: [30, 45, 32, 70, 40],
+          name: this.info.title,
+          data: this.data.map(({value}) => this.decimalPipe.transform(value, '1.2-2')),
         },
       ],
       chart: {
@@ -79,10 +92,10 @@ export class StatsWidgetComponent implements OnInit {
         curve: 'smooth',
         show: true,
         width: 3,
-        colors: [this.colorsThemeBaseSuccess],
+        colors: [this.colorsThemeBasePrimary],
       },
       xaxis: {
-        categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: this.data.map(({time}) => this.datePipe.transform(time, 'dd/MM/yyyy HH:mm')),
         axisBorder: {
           show: false,
         },
@@ -107,7 +120,7 @@ export class StatsWidgetComponent implements OnInit {
           },
         },
         tooltip: {
-          enabled: true,
+          enabled: false,
           formatter: undefined,
           offsetY: 0,
           style: {
@@ -155,14 +168,14 @@ export class StatsWidgetComponent implements OnInit {
         y: {
           // tslint:disable-next-line
           formatter: function (val) {
-            return '$' + val + ' thousands';
+            return val;
           },
         },
       },
-      colors: [this.colorsThemeLightSuccess],
+      colors: [this.colorsThemeLightPrimary],
       markers: {
-        colors: this.colorsThemeLightSuccess,
-        strokeColor: [this.colorsThemeBaseSuccess],
+        colors: this.colorsThemeLightPrimary,
+        strokeColor: [this.colorsThemeLightPrimary],
         strokeWidth: 3,
       },
     };
