@@ -32,15 +32,6 @@ export class AssetDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.Data = this.ruuviDataService.list().pipe();
-    // console.table(this.ruuviDataService.temperature())
-    this.Data.subscribe(value => {
-      console.log(value);
-      // this.temperature.values = value.temperature;
-      // this.pressure.values = value.pressure;
-      // this.humidity.values = value.humidity;
-    });
-
-
   }
 
 }

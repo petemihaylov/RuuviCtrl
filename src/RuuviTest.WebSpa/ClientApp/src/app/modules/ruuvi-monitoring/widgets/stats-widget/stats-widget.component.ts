@@ -44,7 +44,7 @@ export class StatsWidgetComponent implements OnChanges {
     );
   }
 
-  currentValue: number;
+  currentValue: string;
 
   ngOnChanges(): void {
     this.chartOptions = this.getChartOptions();
