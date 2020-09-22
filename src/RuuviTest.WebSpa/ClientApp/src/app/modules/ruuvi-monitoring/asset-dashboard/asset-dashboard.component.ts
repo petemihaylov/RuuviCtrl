@@ -26,7 +26,12 @@ export class AssetDashboardComponent implements OnInit {
     title: 'Humidity',
     measurementValue: '%',
     icon: 'Weather/Rain5.svg'
-  };
+   };
+  batteryLevel: StatsWidget = {
+    title: 'BatteryLevel',
+    measurementValue: '%',
+    icon: 'Devices/Battery-charging.svg'
+   };
 
   constructor(private ruuviDataService: RuuviDataService) { }
 

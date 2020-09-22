@@ -15,5 +15,6 @@ namespace RuuviTest.Core.Entities
         public List<SingleStat> Temperature { get; set; }
         public List<SingleStat> Humidity { get; set; }
         public List<SingleStat> Pressure { get; set; }
+        public List<SingleStat> BatteryLevel { get; set; }
     }
 }
