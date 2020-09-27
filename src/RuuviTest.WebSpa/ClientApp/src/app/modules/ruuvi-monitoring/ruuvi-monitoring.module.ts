@@ -8,12 +8,14 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { RuuviMonitoringRoutingModule } from './ruuvi-monitoring-routing.module';
 import { AssetDashboardComponent } from './asset-dashboard/asset-dashboard.component';
+import { MapWidgetComponent } from './widgets/map-widget/map-widget.component';
 
 @NgModule({
     declarations: [
       RuuviMonitoringComponent,
       StatsWidgetComponent,
-      AssetDashboardComponent
+      AssetDashboardComponent,
+      MapWidgetComponent
     ],
     imports: [
       CommonModule,

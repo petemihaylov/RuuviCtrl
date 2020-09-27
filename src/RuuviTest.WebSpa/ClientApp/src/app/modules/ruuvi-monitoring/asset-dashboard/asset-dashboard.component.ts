@@ -11,7 +11,7 @@ import {StatsWidget} from '../widgets/_models/stats-widget.model';
 })
 export class AssetDashboardComponent implements OnInit {
 
-  Data: Observable<RuuviData[]>;
+  Data: Observable<RuuviData>;
   temperature: StatsWidget = {
     title: 'Temperature',
     measurementValue: '°C',

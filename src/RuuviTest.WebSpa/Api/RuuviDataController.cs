@@ -27,15 +27,15 @@ namespace RuuviTest.WebSpa.Api
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            //var items = _repository.FilterBy(c => c.DeviceId == deviceID);
-            var items = _repository.FilterBy(_ => true);
-            Asset test = new Core.Entities.Asset();
-            test.DeviceId = items.Select(c => c.DeviceId).First();
-            test.Temperature  = items.Select(c => new SingleStat { Value = c.Temperature, Time = c.Time }).ToList();
-            test.BatteryLevel = items.Select(c => new SingleStat { Value = c.BatteryLevel, Time = c.Time }).ToList();
-            test.Humidity = items.Select(c => new SingleStat { Value = c.Humidity, Time = c.Time }).ToList();
-            test.Pressure = items.Select(c => new SingleStat { Value = c.Pressure, Time = c.Time }).ToList();
-            return Ok(test);
+            Asset output = new Asset();
+            var ruuviDatas = _repository.FilterBy(_ => true).ToList();
+            output.DeviceId = ruuviDatas.Select(c => c.DeviceId).First();
+            output.Temperature  = ruuviDatas.Select(c => new SingleStat { Value = c.Temperature, Time = c.Time }).ToList();
+            output.BatteryLevel = ruuviDatas.Select(c => new SingleStat { Value = c.BatteryLevel, Time = c.Time }).ToList();
+            output.Humidity = ruuviDatas.Select(c => new SingleStat { Value = c.Humidity, Time = c.Time }).ToList();
+            output.Pressure = ruuviDatas.Select(c => new SingleStat { Value = c.Pressure, Time = c.Time }).ToList();
+            output.Route = ruuviDatas.Select(c => new LocationStat { Latitude = c.Latitude, Longitude = c.Longitude, Time = c.Time }).ToList();
+            return Ok(output);
         }
     }
 }
