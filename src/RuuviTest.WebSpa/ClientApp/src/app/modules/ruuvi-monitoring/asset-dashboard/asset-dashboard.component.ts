@@ -10,7 +10,7 @@ import { RuuviDataService } from '../_services/ruuvi-data.service';
 })
 export class AssetDashboardComponent implements OnInit {
 
-  Data: Observable<RuuviData[]>
+  Data: Observable<RuuviData[]>;
 
   constructor(private ruuviDataService: RuuviDataService) { }
 

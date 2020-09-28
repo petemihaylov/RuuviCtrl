@@ -14,16 +14,18 @@ namespace RuuviTest.Infrastructure
         public static void AddDbContext(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(connectionString)); // will be created in web project root
+                options.UseSqlServer(connectionString)); // will be created in web project root
         }
 
         public static void AddMongoDb(this IServiceCollection services, IConfiguration configuration)
         {
             var mongoDbSettings = new MongoDbSettings();
             configuration.GetSection("MongoDbSettings").Bind(mongoDbSettings);
+
             services.AddSingleton<IMongoDbSettings>(mongoDbSettings);
 
             services.AddScoped(typeof(IMongoRepository<>), typeof(MongoRepository<>));
+           
         }
     }
 }
