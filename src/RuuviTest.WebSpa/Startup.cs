@@ -22,7 +22,7 @@ namespace RuuviTest.WebSpa
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = Configuration.GetConnectionString("SqliteConnection");  //Configuration.GetConnectionString("DefaultConnection");
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext(connectionString);
             services.AddMongoDb(Configuration);

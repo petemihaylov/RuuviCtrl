@@ -16,12 +16,12 @@ export class RuuviDataService {
     protected httpClient: HttpClient) {}
 
     read(id: number): Observable<RuuviData> {
-        return this.httpClient
-            .get<RuuviData>(`${this.url}/${this.endpoint}/${id}`);
+    return this.httpClient
+        .get<RuuviData>(`${this.url}/${this.endpoint}/${id}`);
     }
 
-    list(): Observable<RuuviData[]> {
-        return this.httpClient
-            .get<RuuviData[]>(`${this.url}/${this.endpoint}`);
+    list(): Observable<RuuviData> {
+    return this.httpClient
+        .get<RuuviData>(`${this.url}/${this.endpoint}`);
     }
 }

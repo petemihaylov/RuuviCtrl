@@ -1,6 +1,8 @@
 ﻿using RuuviTest.SharedKernel.Attributes;
 using RuuviTest.SharedKernel.Base;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace RuuviTest.Core.Entities
 {
@@ -20,4 +22,6 @@ namespace RuuviTest.Core.Entities
         public float Temperature { get; set; }
         public DateTime Time { get; set; }
     }
+
+    
 }
