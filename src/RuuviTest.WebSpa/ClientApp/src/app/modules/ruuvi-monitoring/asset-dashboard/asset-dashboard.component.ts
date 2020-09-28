@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { RuuviData } from '../_models/ruuvi-data.model';
 import { RuuviDataService } from '../_services/ruuvi-data.service';
 import {StatsWidget} from '../widgets/_models/stats-widget.model';
+import {RuuviWebsocketService} from '../_services/ruuvi-websocket.service';
 
 @Component({
   selector: 'app-asset-dashboard',
@@ -32,11 +33,17 @@ export class AssetDashboardComponent implements OnInit {
     measurementValue: '%',
     icon: 'Devices/Battery-charging.svg'
    };
-
-  constructor(private ruuviDataService: RuuviDataService) { }
+  locationSubscription;
+  constructor(private ruuviDataService: RuuviDataService, private ruuviWebsocketService: RuuviWebsocketService) { }
 
   ngOnInit(): void {
     this.Data = this.ruuviDataService.list().pipe();
+
+    this.ruuviWebsocketService.connect(0);
+    this.locationSubscription = this.ruuviWebsocketService.
+    ruuviAsset.subscribe(loc => {
+      console.log(loc);
+    });
   }
 
 }

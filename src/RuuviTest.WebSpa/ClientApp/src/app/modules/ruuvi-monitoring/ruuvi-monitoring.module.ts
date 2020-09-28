@@ -8,6 +8,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { RuuviMonitoringRoutingModule } from './ruuvi-monitoring-routing.module';
 import { AssetDashboardComponent } from './asset-dashboard/asset-dashboard.component';
+import {RuuviWebsocketService} from './_services/ruuvi-websocket.service';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,6 @@ import { AssetDashboardComponent } from './asset-dashboard/asset-dashboard.compo
       NgApexchartsModule,
       RuuviMonitoringRoutingModule,
     ],
-    providers: [RuuviDataService, DatePipe, DecimalPipe]
+    providers: [RuuviDataService, RuuviWebsocketService, DatePipe, DecimalPipe]
   })
   export class RuuviMonitoringModule {}
