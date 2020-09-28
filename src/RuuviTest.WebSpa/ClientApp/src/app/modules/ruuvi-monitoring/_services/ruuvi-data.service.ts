@@ -20,8 +20,8 @@ export class RuuviDataService {
         .get<RuuviData>(`${this.url}/${this.endpoint}/${id}`);
     }
 
-    list(): Observable<RuuviData[]> {
+    list(): Observable<RuuviData> {
     return this.httpClient
-        .get<RuuviData[]>(`${this.url}/${this.endpoint}`);
+        .get<RuuviData>(`${this.url}/${this.endpoint}`);
     }
 }

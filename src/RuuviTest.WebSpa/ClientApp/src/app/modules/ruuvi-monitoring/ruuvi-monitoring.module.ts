@@ -1,6 +1,6 @@
 import { RuuviMonitoringComponent } from './ruuvi-monitoring.component';
 import { StatsWidgetComponent } from './widgets/stats-widget/stats-widget.component';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe, DecimalPipe} from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { RuuviDataService } from './_services/ruuvi-data.service';
@@ -8,12 +8,14 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { RuuviMonitoringRoutingModule } from './ruuvi-monitoring-routing.module';
 import { AssetDashboardComponent } from './asset-dashboard/asset-dashboard.component';
+import { MapWidgetComponent } from './widgets/map-widget/map-widget.component';
 
 @NgModule({
     declarations: [
       RuuviMonitoringComponent,
       StatsWidgetComponent,
-      AssetDashboardComponent
+      AssetDashboardComponent,
+      MapWidgetComponent
     ],
     imports: [
       CommonModule,
@@ -21,6 +23,6 @@ import { AssetDashboardComponent } from './asset-dashboard/asset-dashboard.compo
       NgApexchartsModule,
       RuuviMonitoringRoutingModule,
     ],
-    providers: [RuuviDataService]
+    providers: [RuuviDataService, DatePipe, DecimalPipe]
   })
   export class RuuviMonitoringModule {}
