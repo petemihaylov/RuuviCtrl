@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input  } from '@angular/core';
+import { Component, AfterViewInit, Input, OnChanges  } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 
@@ -9,13 +9,23 @@ import { LocationStat } from '../../_models/location-stat.model';
   templateUrl: './map-widget.component.html',
   styleUrls: ['./map-widget.component.scss']
 })
-export class MapWidgetComponent implements AfterViewInit  {
+export class MapWidgetComponent implements AfterViewInit {
+  ngDoCheck() {
+    if(this.routeHistoryLayer){
+      this.removeRouteHistory();
+      this.addRouteHistory();
+    }
+  }
+
   private map;
   
   @Input() routeHistory: LocationStat[];
 
   constructor() { }
 
+  private routeHistoryLayer;
+
+  
   ngAfterViewInit(): void {
     this.initMap();
     if(this.routeHistory != null){
@@ -39,11 +49,15 @@ export class MapWidgetComponent implements AfterViewInit  {
   }
 
   private addRouteHistory(): void {
-      var routeHistory = new L.Polyline(this.routeHistory.map(res => L.latLng(res.latitude, res.longitude)), {
+    this.routeHistoryLayer = new L.Polyline(this.routeHistory.map(res => L.latLng(res.latitude, res.longitude)), {
         color: 'blue',
         weight: 6,
         opacity: 0.5,
         smoothFactor: 1
     }).addTo(this.map);
+  }
+
+  private removeRouteHistory(): void {
+    this.map.removeLayer(this.routeHistoryLayer);
   }
 }

@@ -1,7 +1,10 @@
+import { LocationStat } from './location-stat.model';
+import { SingleStat } from './single-stat.model';
+
 export class RuuviWebsocket {
-    temperature: number;
-    pressure: number;
-    humidity: number;
-    batteryLevel: number;
-    route: any;
+    temperature: SingleStat;
+    pressure: SingleStat;
+    humidity: SingleStat;
+    batteryLevel: SingleStat;
+    route: LocationStat;
   }

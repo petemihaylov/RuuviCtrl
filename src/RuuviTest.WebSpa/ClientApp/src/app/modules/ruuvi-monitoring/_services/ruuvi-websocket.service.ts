@@ -1,53 +1,51 @@
 import { Injectable } from '@angular/core';
-import {Subject} from 'rxjs';
-import {RuuviData} from '../_models/ruuvi-data.model';
+import { Subject, Observable } from 'rxjs';
 import * as signalR from '@aspnet/signalr';
-import {environment} from '../../../../environments/environment.prod';
-import {RuuviWebsocket} from '../_models/ruuvi-websocket.model';
+import { RuuviWebsocket } from '../_models/ruuvi-websocket.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RuuviWebsocketService {
-
   private url = environment.apiUrl;
   private endpoint = 'liveasset';
 
-  // tslint:disable-next-line:ban-types
-  connectionEstablished = new Subject<Boolean>();
-  ruuviAsset = new Subject<RuuviWebsocket>();
-  private connection: signalR.HubConnection;
+  private receivedMessageObject: RuuviWebsocket = new RuuviWebsocket();
+  private sharedObj = new Subject<RuuviWebsocket>();
 
-  constructor() { }
+  private connection: any = new signalR.HubConnectionBuilder()
+    .withUrl(`${this.url}/${this.endpoint}`)
+    .configureLogging(signalR.LogLevel.Information)
+    .build();
 
-  connect(id: number) {
-    if (!this.connection) {
-      this.connection = new signalR.HubConnectionBuilder()
-          .withUrl(`${this.url}/${this.endpoint}`)
-          .build();
+  constructor(private http: HttpClient) {
+    this.connection.onclose(async () => {
+      await this.start();
+    });
+    this.connection.on('GetNewAssetData', output => {
+      this.mapReceivedMessage(output);
+    });
+    this.start();
+  }
 
-      this.connection.start().then(() => {
-        console.log('Hub connection started');
-        this.connectionEstablished.next(true);
-      }).catch(err => console.log(err));
-
-      this.connection.on('GetNewAssetData', (output) => {
-        console.log('Received', output);
-        this.ruuviAsset.next({
-          batteryLevel: 0,
-          humidity: 0,
-          pressure: 0,
-          route: undefined,
-          temperature: 0});
-      });
+  // Strart the connection
+  public async start() {
+    try {
+      await this.connection.start();
+    } catch (err) {
+      console.log(err);
+      setTimeout(() => this.start(), 5000);
     }
   }
 
+  private mapReceivedMessage(output: RuuviWebsocket): void {
+    this.receivedMessageObject = output;
+    this.sharedObj.next(this.receivedMessageObject);
+  }
 
-  disconnect() {
-    if (this.connection) {
-      this.connection.stop();
-      this.connection = null;
-    }
+  public retrieveMappedObject(): Observable<RuuviWebsocket> {
+    return this.sharedObj.asObservable();
   }
 }

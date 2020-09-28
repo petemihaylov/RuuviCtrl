@@ -52,7 +52,16 @@ export class StatsWidgetComponent implements OnChanges {
     {
       const lastIndex = this.data.length - 1;
       this.currentValue = this.decimalPipe.transform(this.data[lastIndex].value, '1.2-2');
+    }
+  }
 
+  ngDoCheck() {
+    this.chartOptions = this.getChartOptions();
+
+    if (this.data)
+    {
+      const lastIndex = this.data.length - 1;
+      this.currentValue = this.decimalPipe.transform(this.data[lastIndex].value, '1.2-2');
     }
   }
 

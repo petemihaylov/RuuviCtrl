@@ -76,6 +76,7 @@ namespace RuuviTest.Web
                 .WithOrigins("https://localhost:44322", "https://ruuvitest.jordihuntjens.nl")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
+                .AllowCredentials()
             );
 
             app.UseHttpsRedirection();
