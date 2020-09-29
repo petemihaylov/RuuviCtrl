@@ -16,7 +16,8 @@ export class DashboardComponent implements OnInit {
   constructor(private assetDataService: AssetDataService) { }
   
   ngOnInit(): void {
-    this.Data = this.assetDataService.list().pipe();
+      this.Data = this.assetDataService.list().pipe();
+      console.log(this.Data);
   }
 
 }

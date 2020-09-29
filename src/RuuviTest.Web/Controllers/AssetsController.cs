@@ -23,15 +23,15 @@ namespace RuuviTest.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAssets()
         {
-            var assets = await _repository.ListAsync<AssetDto>();
+            var assets = await _repository.ListAsync<Asset>();
             return Ok(assets);
         }
 
         //GET api/assets/{id}
         [HttpGet("{id}", Name = "GetAssetById")]
-        public ActionResult<AssetDto> GetAssetById(int id)
+        public ActionResult<Asset> GetAssetById(int id)
         {
-            var assetItem = _repository.GetByIdAsync<AssetDto>(id);
+            var assetItem = _repository.GetByIdAsync<Asset>(id);
             if (assetItem != null)
             {
 
@@ -42,7 +42,7 @@ namespace RuuviTest.Web.Controllers
 
         // POST: api/assets
         [HttpPost]
-        public async Task<IActionResult> PostAssets([FromBody]AssetDto asset)
+        public async Task<IActionResult> PostAssets([FromBody]Asset asset)
         {
             var assetItem = await _repository.AddAsync(asset);
             return CreatedAtRoute(nameof(GetAssetById), new { id = assetItem.Id }, assetItem);

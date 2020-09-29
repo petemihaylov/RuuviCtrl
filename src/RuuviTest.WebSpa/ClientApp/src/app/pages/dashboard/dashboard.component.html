@@ -1,9 +1,11 @@
+Table for dashboard
 <div class="row" *ngIf="Data | async as assetDataList">
-    <div class="col-lg-6 col-xxl-3">
-        <app-advance-tables-widget4 class="w-100" [data]="assetDataList.DeviceId"></app-advance-tables-widget4>
-    </div>
 
     <div class="col-lg-6 col-xxl-3">
-        <app-advance-tables-widget4 class="w-100" [data]="assetDataList.Name"></app-advance-tables-widget4>
-      </div>
+        <li *ngFor="let asset of assetDataList">
+           <h1>{{asset.DeviceId}}</h1> 
+           <h1>{{asset.Name}</h1> 
+        </li>
+    </div>
+
 </div>

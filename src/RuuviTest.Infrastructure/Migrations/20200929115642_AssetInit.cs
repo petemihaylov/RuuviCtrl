@@ -2,7 +2,7 @@
 
 namespace RuuviTest.Infrastructure.Migrations
 {
-    public partial class AssetDtoInit : Migration
+    public partial class AssetInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +13,7 @@ namespace RuuviTest.Infrastructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DeviceId = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Temperature = table.Column<float>(nullable: false),
-                    Humidity = table.Column<float>(nullable: false),
-                    Pressure = table.Column<float>(nullable: false),
-                    BatteryLevel = table.Column<float>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

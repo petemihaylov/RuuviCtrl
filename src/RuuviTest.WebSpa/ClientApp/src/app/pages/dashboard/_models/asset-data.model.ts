@@ -1,10 +1,10 @@
 
 export class AssetData {
     deviceId: string;
-    id: string;
     name: string;
     temperature: number;
-    pressure: number;
     humidity: number;
+    pressure: number;
     batteryLevel: number;
-}
+    id: number;
+   }

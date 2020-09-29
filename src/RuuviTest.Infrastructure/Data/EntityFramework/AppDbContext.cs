@@ -9,7 +9,7 @@ namespace RuuviTest.Infrastructure.Data.EntityFramework
        
         public AppDbContext(DbContextOptions<AppDbContext> opt): base(opt) 
         { }
-        public DbSet<AssetDto> Assets { get; set; }
+        public DbSet<Asset> Assets { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

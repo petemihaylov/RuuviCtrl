@@ -18,30 +18,18 @@ namespace RuuviTest.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("RuuviTest.Core.Entities.AssetDto", b =>
+            modelBuilder.Entity("RuuviTest.Core.Entities.Asset", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<float>("BatteryLevel")
-                        .HasColumnType("real");
-
                     b.Property<string>("DeviceId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Humidity")
-                        .HasColumnType("real");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Pressure")
-                        .HasColumnType("real");
-
-                    b.Property<float>("Temperature")
-                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
