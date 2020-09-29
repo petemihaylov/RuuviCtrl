@@ -1,11 +1,6 @@
 ﻿using Ardalis.EFCore.Extensions;
 using Microsoft.EntityFrameworkCore;
 using RuuviTest.Core.Entities;
-using RuuviTest.SharedKernel.Base;
-using RuuviTest.SharedKernel.Interfaces;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace RuuviTest.Infrastructure.Data.EntityFramework
 {
@@ -14,7 +9,7 @@ namespace RuuviTest.Infrastructure.Data.EntityFramework
        
         public AppDbContext(DbContextOptions<AppDbContext> opt): base(opt) 
         { }
-        public DbSet<Asset> Assets { get; set; }
+        public DbSet<AssetDto> Assets { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

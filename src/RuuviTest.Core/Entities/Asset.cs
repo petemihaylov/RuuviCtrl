@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RuuviTest.Core.ValueObjects;
+﻿using RuuviTest.Core.ValueObjects;
 using RuuviTest.SharedKernel.Base;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace RuuviTest.Core.Entities
 {

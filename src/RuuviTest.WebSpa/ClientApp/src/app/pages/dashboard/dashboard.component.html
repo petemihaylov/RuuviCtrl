@@ -1,4 +1,9 @@
-<div class="row">
-    <app-advance-tables-widget4 class="w-100"></app-advance-tables-widget4>
+<div class="row" *ngIf="Data | async as assetDataList">
+    <div class="col-lg-6 col-xxl-3">
+        <app-advance-tables-widget4 class="w-100" [data]="assetDataList.DeviceId"></app-advance-tables-widget4>
+    </div>
+
+    <div class="col-lg-6 col-xxl-3">
+        <app-advance-tables-widget4 class="w-100" [data]="assetDataList.Name"></app-advance-tables-widget4>
+      </div>
 </div>
-  

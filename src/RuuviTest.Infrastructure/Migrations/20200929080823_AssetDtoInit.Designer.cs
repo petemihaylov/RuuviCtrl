@@ -9,8 +9,8 @@ using RuuviTest.Infrastructure.Data.EntityFramework;
 namespace RuuviTest.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200928095511_AssetInit")]
-    partial class AssetInit
+    [Migration("20200929080823_AssetDtoInit")]
+    partial class AssetDtoInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,18 +20,30 @@ namespace RuuviTest.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("RuuviTest.Core.Entities.Asset", b =>
+            modelBuilder.Entity("RuuviTest.Core.Entities.AssetDto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<float>("BatteryLevel")
+                        .HasColumnType("real");
+
                     b.Property<string>("DeviceId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<float>("Humidity")
+                        .HasColumnType("real");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Pressure")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Temperature")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

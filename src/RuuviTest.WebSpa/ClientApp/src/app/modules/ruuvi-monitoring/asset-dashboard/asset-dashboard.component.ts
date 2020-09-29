@@ -9,6 +9,7 @@ import {StatsWidget} from '../widgets/_models/stats-widget.model';
   templateUrl: './asset-dashboard.component.html',
   styleUrls: ['./asset-dashboard.component.scss']
 })
+
 export class AssetDashboardComponent implements OnInit {
 
   Data: Observable<RuuviData>;

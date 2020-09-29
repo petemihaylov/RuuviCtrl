@@ -4,6 +4,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Migrations\20200929075429_AssetDtoInit.cs" />
+    <Compile Remove="Migrations\20200929075429_AssetDtoInit.Designer.cs" />
+    <Compile Remove="Migrations\20200929080658_AssetDTOInit.cs" />
+    <Compile Remove="Migrations\20200929080658_AssetDTOInit.Designer.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
