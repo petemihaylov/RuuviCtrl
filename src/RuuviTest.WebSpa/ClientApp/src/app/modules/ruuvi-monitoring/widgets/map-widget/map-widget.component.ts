@@ -10,31 +10,31 @@ import { LocationStat } from '../../_models/location-stat.model';
   styleUrls: ['./map-widget.component.scss']
 })
 export class MapWidgetComponent implements AfterViewInit {
+
+  constructor() { }
+
+  private map;
+
+  @Input() routeHistory: LocationStat[];
+
+  private routeHistoryLayer;
   ngDoCheck() {
-    if(this.routeHistoryLayer){
+    if (this.routeHistoryLayer){
       this.removeRouteHistory();
       this.addRouteHistory();
     }
   }
 
-  private map;
-  
-  @Input() routeHistory: LocationStat[];
 
-  constructor() { }
-
-  private routeHistoryLayer;
-
-  
   ngAfterViewInit(): void {
     this.initMap();
-    if(this.routeHistory != null){
+    if (this.routeHistory != null){
       this.addRouteHistory();
     }
   }
 
   private initMap(): void {
-    var lastRouteHistory = this.routeHistory[this.routeHistory.length - 1];
+    const lastRouteHistory = this.routeHistory[this.routeHistory.length - 1];
     this.map = L.map('map', {
       center: [ lastRouteHistory.latitude, lastRouteHistory.longitude],
       zoom: 16
