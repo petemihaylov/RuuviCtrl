@@ -41,7 +41,7 @@ export class AssetDashboardComponent implements OnInit {
     digitsInfo: '1.2-2'
   };
   batteryLevel: StatsWidget = {
-    title: 'Battery Level',
+    title: 'Phone Battery Level',
     measurementValue: '%',
     icon: 'Devices/Battery-charging.svg',
     minValue: 0,
