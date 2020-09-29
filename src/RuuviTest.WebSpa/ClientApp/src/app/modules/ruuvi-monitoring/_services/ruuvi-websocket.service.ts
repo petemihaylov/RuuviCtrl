@@ -40,6 +40,10 @@ export class RuuviWebsocketService {
     }
   }
 
+  public stop() {
+    this.connection.stop();
+  }
+
   private mapReceivedMessage(output: RuuviWebsocket): void {
     this.receivedMessageObject = output;
     this.sharedObj.next(this.receivedMessageObject);

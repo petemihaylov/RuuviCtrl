@@ -55,9 +55,10 @@ export class AssetDashboardComponent implements OnInit {
         this._data.next(res);
       }
     );
+
   }
   addToData(obj: RuuviWebsocket) {
-    let nextData = this._data.getValue();
+    const nextData = this._data.getValue();
     nextData.temperature.push(obj.temperature);
     nextData.humidity.push(obj.humidity);
     nextData.pressure.push(obj.pressure);

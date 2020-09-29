@@ -19,6 +19,8 @@ export class StatsWidgetComponent implements OnChanges {
   colorsThemeBaseSuccess = '';
   colorsThemeLightSuccess = '';
 
+  currentValue: string;
+
   @Input() info: StatsWidget;
   @Input() data: any;
 
@@ -44,8 +46,6 @@ export class StatsWidgetComponent implements OnChanges {
     );
   }
 
-  currentValue: string;
-
   ngOnChanges(): void {
     this.chartOptions = this.getChartOptions();
     if (this.data)
@@ -57,7 +57,6 @@ export class StatsWidgetComponent implements OnChanges {
 
   ngDoCheck() {
     this.chartOptions = this.getChartOptions();
-
     if (this.data)
     {
       const lastIndex = this.data.length - 1;
@@ -80,11 +79,14 @@ export class StatsWidgetComponent implements OnChanges {
           show: false,
         },
         zoom: {
-          enabled: false,
+          enabled: true,
         },
         sparkline: {
           enabled: true,
         },
+        animations: {
+          enabled: false,
+        }
       },
       plotOptions: {},
       legend: {
