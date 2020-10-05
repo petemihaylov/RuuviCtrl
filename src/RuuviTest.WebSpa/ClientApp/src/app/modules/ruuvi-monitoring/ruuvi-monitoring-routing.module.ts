@@ -5,7 +5,7 @@ import { AssetDashboardComponent } from './asset-dashboard/asset-dashboard.compo
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: RuuviMonitoringComponent,
     children: [
       {

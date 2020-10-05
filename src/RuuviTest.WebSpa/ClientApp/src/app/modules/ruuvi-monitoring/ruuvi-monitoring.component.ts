@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RuuviDataService } from './_services/ruuvi-data.service';
-import { RuuviData } from './_models/ruuvi-data.model';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-ruuvi-monitoring',

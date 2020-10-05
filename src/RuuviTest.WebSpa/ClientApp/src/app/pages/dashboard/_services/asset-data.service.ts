@@ -11,7 +11,7 @@ import { AssetData } from '../_models/asset-data.model';
 export class AssetDataService {
 
     private url = environment.apiUrl;
-    private endpoint = 'assets';
+    private endpoint = 'api/assets';
 
     constructor(
     protected httpClient: HttpClient) {}

@@ -3,10 +3,12 @@ using RuuviTest.Core.ValueObjects;
 using RuuviTest.SharedKernel.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
+using RuuviTest.Core.Dto;
+using RuuviTest.Core.Services.Interfaces;
 
 namespace RuuviTest.Core.Services
 {
-    public class AssetService
+    public class AssetService : IAssetService
     {
         private readonly IMongoRepository<RuuviData> _repository;
         private readonly IEFRepository _eFRepository;
@@ -19,26 +21,27 @@ namespace RuuviTest.Core.Services
 
         public async Task<AssetDto> GetAssetDtoById(int id)
         {
-            try
+            var asset = await _eFRepository.GetByIdAsync<Asset>(id);
+            if (asset == null)
+                return null;
+
+            var ruuviData = _repository.FilterBy(s => s.DeviceId == asset.DeviceId).ToList();
+            if (ruuviData.Count == 0)
+                return null;
+
+            var assetDto = new AssetDto
             {
-                Asset result = await _eFRepository.GetByIdAsync<Asset>(id);
-                string RuuviId = result.DeviceId;
+                Id = asset.Id,
+                DeviceId = asset.DeviceId,
+                Name = asset.Name,
+                Temperature  = ruuviData.Select(c => new SingleStat { Value = c.Temperature, Time = c.Time }).ToArray(),
+                BatteryLevel = ruuviData.Select(c => new SingleStat { Value = c.BatteryLevel, Time = c.Time }).ToArray(),
+                Humidity = ruuviData.Select(c => new SingleStat { Value = c.Humidity, Time = c.Time }).ToArray(),
+                Pressure = ruuviData.Select(c => new SingleStat { Value = c.Pressure, Time = c.Time }).ToArray(),
+                Route = ruuviData.Select(c => new LocationStat { Latitude = c.Latitude, Longitude = c.Longitude, Time = c.Time }).ToArray()
+            };
 
-                var ruuviData = _repository.FilterBy(s => s.DeviceId == RuuviId).SingleOrDefault();
-
-                var output = new AssetDto();
-                output.Temperature = new SingleStat() { Value = ruuviData.Temperature, Time = ruuviData.Time };
-                output.BatteryLevel = new SingleStat() { Value = ruuviData.BatteryLevel, Time = ruuviData.Time };
-                output.Humidity = new SingleStat() { Value = ruuviData.Humidity, Time = ruuviData.Time };
-                output.Pressure = new SingleStat() { Value = ruuviData.Pressure, Time = ruuviData.Time };
-                output.Route = new LocationStat() { Latitude = ruuviData.Latitude, Longitude = ruuviData.Longitude, Time = ruuviData.Time };
-
-                return output;
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            return assetDto;
         }
 
     }

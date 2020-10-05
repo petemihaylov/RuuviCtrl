@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RuuviTest.Core.Dto;
 using RuuviTest.Core.Entities;
+using RuuviTest.Core.Services.Interfaces;
 using RuuviTest.SharedKernel.Interfaces;
 
 namespace RuuviTest.WebSpa.Api
@@ -9,10 +11,12 @@ namespace RuuviTest.WebSpa.Api
     public class AssetsController : Controller
     {
         private readonly IEFRepository _repository;
+        private readonly IAssetService _assetService;
 
-        public AssetsController(IEFRepository repository)
+        public AssetsController(IEFRepository repository, IAssetService assetService)
         {
             this._repository = repository;
+            _assetService = assetService;
         }
 
         // GET: api/assets
@@ -25,9 +29,9 @@ namespace RuuviTest.WebSpa.Api
 
         //GET api/assets/{id}
         [HttpGet("{id}", Name = "GetAssetById")]
-        public async Task<ActionResult<Asset>> GetAssetById(int id)
+        public async Task<ActionResult<AssetDto>> GetAssetById(int id)
         {
-            var assetItem = await _repository.GetByIdAsync<Asset>(id);
+            var assetItem = await _assetService.GetAssetDtoById(id);
             if (assetItem != null)
             {
 
