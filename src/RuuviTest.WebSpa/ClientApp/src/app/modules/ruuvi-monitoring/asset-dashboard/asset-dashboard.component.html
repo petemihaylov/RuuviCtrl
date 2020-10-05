@@ -1,45 +1,18 @@
-<div class="row">
-    <div class="col-lg-6 col-xxl-4">
-        <app-stats-widget></app-stats-widget>
-    </div>
-    <div class="col-lg-6 col-xxl-4">
-        <app-stats-widget></app-stats-widget>
+<div class="row" *ngIf="Data | async as ruuviDataList">
+    <div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.temperature != null">
+        <app-stats-widget [info]="temperature" [data]="ruuviDataList.temperature"></app-stats-widget>
     </div>
 
-    <div class="col-lg-6 col-xxl-4">
-        <app-stats-widget></app-stats-widget>
+    <div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.pressure != null">
+        <app-stats-widget [info]="pressure" [data]="ruuviDataList.pressure"></app-stats-widget>
     </div>
-    <div class="col-lg-12">
-        <div class="card card-custom gutter-b">
-            <div class="card-header">
-                <div class="card-title">
-                    <h3 class="card-label">
-                        Data overview
-                    </h3>
-                </div>
-            </div>
-            <div class="card-body">
-                <div *ngIf="Data | async as ruuviDataList">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Time</th>
-                                <th scope="col">Temp</th>
-                                <th scope="col">Hum</th>
-                                <th scope="col">Press</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let ruuviData of ruuviDataList">
-                                <th scope="row">{{ruuviData.time | date}}</th>
-                                <td>{{ruuviData.temperature}}</td>
-                                <td>{{ruuviData.humidity}}</td>
-                                <td>{{ruuviData.pressure}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.humidity != null">
+        <app-stats-widget [info]="humidity" [data]="ruuviDataList.humidity"></app-stats-widget>
+    </div>
+    <div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.batteryLevel != null">
+        <app-stats-widget [info]="batteryLevel" [data]="ruuviDataList.batteryLevel"></app-stats-widget>
+    </div>
+    <div class="col-lg-12" *ngIf="ruuviDataList.route != null">
+        <app-map-widget [routeHistory]="ruuviDataList.route"></app-map-widget>
     </div>
 </div>

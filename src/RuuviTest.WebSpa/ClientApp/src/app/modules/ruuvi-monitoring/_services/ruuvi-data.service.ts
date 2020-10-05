@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 export class RuuviDataService {
 
     private url = environment.apiUrl;
-    private endpoint = 'RuuviData';
+    private endpoint = 'api/RuuviData';
 
     constructor(
     protected httpClient: HttpClient) {}
@@ -20,8 +20,8 @@ export class RuuviDataService {
         .get<RuuviData>(`${this.url}/${this.endpoint}/${id}`);
     }
 
-    list(): Observable<RuuviData[]> {
+    list(): Observable<RuuviData> {
     return this.httpClient
-        .get<RuuviData[]>(`${this.url}/${this.endpoint}`);
+        .get<RuuviData>(`${this.url}/${this.endpoint}`);
     }
 }
