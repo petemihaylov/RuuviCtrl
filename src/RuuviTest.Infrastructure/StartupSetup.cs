@@ -18,7 +18,6 @@ namespace RuuviTest.Infrastructure
                 options.UseSqlServer(connectionString)); // will be created in web project root
 
             services.AddScoped(typeof(IEFRepository), typeof(EfRepository));
-   
         }
 
         public static void AddMongoDb(this IServiceCollection services, IConfiguration configuration)

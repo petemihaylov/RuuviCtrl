@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using RuuviTest.Infrastructure;
 using System.Collections.Generic;
+using RuuviTest.Web.Hubs;
 
 namespace RuuviTest.Web
 {
@@ -39,6 +40,8 @@ namespace RuuviTest.Web
             services.AddControllersWithViews().AddNewtonsoftJson();
             services.AddRazorPages();
 
+            services.AddSignalR();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -69,7 +72,15 @@ namespace RuuviTest.Web
             }
             app.UseRouting();
 
+            app.UseCors(builder => builder
+                .WithOrigins("https://localhost:44322", "https://ruuvitest.jordihuntjens.nl")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+            );
+
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
@@ -81,6 +92,7 @@ namespace RuuviTest.Web
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<LiveAssetHub>("/liveasset");
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });

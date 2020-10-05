@@ -1,4 +1,5 @@
-<!--begin::Advance Table Widget 4-->
+
+<!--begin::Dashboard Table Widget-->
 <div class="card card-custom card-stretch gutter-b">
     <div class="card-header border-0 py-5">
         <h3 class="card-title align-items-start flex-column">
@@ -20,32 +21,34 @@
                 <tbody>
 
                     <tr *ngFor="let item of assetData | async">
-                    <td>
-                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                            Asset
-                        </span>
-                        <span class="text-muted font-weight-bold">
-                            Enabled
-                        </span>
-                    </td>
-                    <td>
-                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                            {{item.deviceId}}
-                        </span>
-                        <span class="text-muted font-weight-bold">
-                            Id
-                        </span>
-                    </td>
-                    <td>
-                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                            {{item.name}}
-                        </span>
-                        <span class="text-muted font-weight-bold">
-                            Name
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        <td>
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                Asset
+                            </span>
+                            <span class="text-muted font-weight-bold">
+                                Enabled
+                            </span>
+                        </td>
+                        <td>
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                {{item.deviceId}}
+                            </span>
+                            <span class="text-muted font-weight-bold">
+                                Id
+                            </span>
+                        </td>
+                        <td>
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                {{item.name}}
+                            </span>
+                            <span class="text-muted font-weight-bold">
+                                Name
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div></div><!--end::Advance Table Widget 4-->
+</div>
+<!--end::Dashboard Table Widget-->

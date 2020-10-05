@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
 
 
   Data: Observable<AssetData>;
+  page = 3;
 
   constructor(private assetDataService: AssetDataService) {}
 

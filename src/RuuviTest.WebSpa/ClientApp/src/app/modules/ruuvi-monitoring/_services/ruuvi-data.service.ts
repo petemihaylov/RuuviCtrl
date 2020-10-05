@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 export class RuuviDataService {
 
     private url = environment.apiUrl;
-    private endpoint = 'RuuviData';
+    private endpoint = 'api/RuuviData';
 
     constructor(
     protected httpClient: HttpClient) {}

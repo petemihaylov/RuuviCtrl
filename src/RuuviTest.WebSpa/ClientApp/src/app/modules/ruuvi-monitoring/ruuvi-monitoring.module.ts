@@ -9,6 +9,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { RuuviMonitoringRoutingModule } from './ruuvi-monitoring-routing.module';
 import { AssetDashboardComponent } from './asset-dashboard/asset-dashboard.component';
 import { MapWidgetComponent } from './widgets/map-widget/map-widget.component';
+import {RuuviWebsocketService} from './_services/ruuvi-websocket.service';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,6 @@ import { MapWidgetComponent } from './widgets/map-widget/map-widget.component';
       NgApexchartsModule,
       RuuviMonitoringRoutingModule,
     ],
-    providers: [RuuviDataService, DatePipe, DecimalPipe]
+    providers: [RuuviDataService, RuuviWebsocketService, DatePipe, DecimalPipe]
   })
   export class RuuviMonitoringModule {}
