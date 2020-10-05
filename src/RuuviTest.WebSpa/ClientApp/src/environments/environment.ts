@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  appVersion: 'v711demo1',
-  USERDATA_KEY: 'authf649fc9a5f55',
+  appVersion: "v711demo1",
+  USERDATA_KEY: "authf649fc9a5f55",
   isMockEnabled: true,
-  apiUrl: 'https://localhost:44322'
+  apiUrl: "https://localhost:44322",
 };
 
 /*

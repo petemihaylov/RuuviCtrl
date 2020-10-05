@@ -1,27 +1,28 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { RuuviData } from '../_models/ruuvi-data.model';
-import { RuuviDataService } from '../_services/ruuvi-data.service';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { StatsWidget } from '../widgets/_models/stats-widget.model';
 import { RuuviWebsocketService } from '../_services/ruuvi-websocket.service';
 import { RuuviWebsocket } from '../_models/ruuvi-websocket.model';
 import { map } from 'rxjs/operators';
+import { AssetDto } from '../_models/assetDto.model';
+import { AssetDetailService } from '../_services/asset-detail.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-asset-dashboard',
   templateUrl: './asset-dashboard.component.html',
   styleUrls: ['./asset-dashboard.component.scss']
 })
-export class AssetDashboardComponent implements OnInit {
-  _data: BehaviorSubject<RuuviData> = new BehaviorSubject(new RuuviData());
-  public readonly Data: Observable<RuuviData> = this._data.asObservable();
+export class AssetDashboardComponent implements OnInit, OnDestroy {
+  _data: BehaviorSubject<AssetDto> = new BehaviorSubject(new AssetDto());
+  public readonly Data: Observable<AssetDto> = this._data.asObservable();
 
   temperature: StatsWidget = {
     title: 'Temperature',
     measurementValue: '°C',
     icon: 'Weather/Temperature-half.svg',
-    minValue: 0,
-    maxValue: 40,
+    minValue: 18,
+    maxValue: 26,
     digitsInfo: '1.2-2'
   };
   pressure: StatsWidget = {
@@ -49,25 +50,30 @@ export class AssetDashboardComponent implements OnInit {
     digitsInfo: '1.0-0'
   };
 
+  private unsubscribe: Subscription[] = [];
+
   constructor(
-    private ruuviDataService: RuuviDataService,
+    private assetDetailService: AssetDetailService,
     private ruuviWebsocketService: RuuviWebsocketService,
-    private _changeRef: ChangeDetectorRef
-  ) {
-    this.ruuviWebsocketService
-      .retrieveMappedObject()
-      .subscribe((receivedObj: RuuviWebsocket) => {
-        this.addToData(receivedObj);
-      });
-  }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.ruuviDataService.list().subscribe(
-      res => {
-        this._data.next(res);
-      }
-    );
+    const paramsSub = this.route.parent.params.subscribe(params => {
+      const id = +params['id']; // (+) converts string 'id' to a number
 
+      const websocketSub = this.ruuviWebsocketService
+        .retrieveMappedObject()
+        .subscribe((receivedObj: RuuviWebsocket) => {
+          this.addToData(receivedObj);
+        });
+      const detailsSub = this.assetDetailService.read(id).subscribe(res => {
+        this._data.next(res);
+      });
+      this.unsubscribe.push(detailsSub);
+      this.unsubscribe.push(websocketSub);
+    });
+    this.unsubscribe.push(paramsSub);
   }
   addToData(obj: RuuviWebsocket) {
     const nextData = this._data.getValue();
@@ -77,5 +83,9 @@ export class AssetDashboardComponent implements OnInit {
     nextData.batteryLevel.push(obj.batteryLevel);
     nextData.route.push(obj.route);
     this._data.next(nextData);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.forEach(sb => sb.unsubscribe());
   }
 }

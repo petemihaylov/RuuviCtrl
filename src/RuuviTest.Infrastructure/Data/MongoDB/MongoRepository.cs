@@ -75,7 +75,6 @@ namespace RuuviTest.Infrastructure.Data.MongoDB
             });
         }
 
-
         public virtual void InsertOne(TDocument document)
         {
             _collection.InsertOne(document);

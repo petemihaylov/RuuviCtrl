@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using RuuviTest.Core;
 using RuuviTest.Infrastructure;
 
 namespace RuuviTest.WebSpa
@@ -24,6 +25,7 @@ namespace RuuviTest.WebSpa
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
+            services.AddServices();
             services.AddDbContext(connectionString);
             services.AddMongoDb(Configuration);
 

@@ -1,27 +1,28 @@
 import { Observable } from 'rxjs';
-import { RuuviData } from '../_models/ruuvi-data.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
+import { AssetData } from '../_models/asset-data.model';
 
 @Injectable({
     providedIn: 'root',
 })
-export class RuuviDataService {
+
+export class AssetDataService {
 
     private url = environment.apiUrl;
-    private endpoint = 'api/RuuviData';
+    private endpoint = 'api/assets';
 
     constructor(
     protected httpClient: HttpClient) {}
 
-    read(id: number): Observable<RuuviData> {
+    read(id: number): Observable<AssetData> {
     return this.httpClient
-        .get<RuuviData>(`${this.url}/${this.endpoint}/${id}`);
+        .get<AssetData>(`${this.url}/${this.endpoint}/${id}`);
     }
 
-    list(): Observable<RuuviData> {
+    list(): Observable<AssetData> {
     return this.httpClient
-        .get<RuuviData>(`${this.url}/${this.endpoint}`);
+        .get<AssetData>(`${this.url}/${this.endpoint}`);
     }
 }
