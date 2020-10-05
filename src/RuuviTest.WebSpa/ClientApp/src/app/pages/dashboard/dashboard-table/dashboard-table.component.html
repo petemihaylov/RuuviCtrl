@@ -18,41 +18,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <div class="col-lg-6 col-xxl-3" *ngFor="let item of assetData | async">
-                        <h1>{{item.deviceId}}</h1>
-                        <h1>{{item.name}}</h1>
-                    </div>
 
-                    <tr>
-
-                        <td>
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                Asset
-                            </span>
-                            <span class="text-muted font-weight-bold">
-                                Enabled
-                            </span>
-                        </td>
-                        <td>
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                affnq4oxn0z4-1d20htzngrdvl
-                            </span>
-                            <span class="text-muted font-weight-bold">
-                                Id
-                            </span>
-                        </td>
-                        <td>
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                Ruuvi #4444
-                            </span>
-                            <span class="text-muted font-weight-bold">
-                                Name
-                            </span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                    <tr *ngFor="let item of assetData | async">
+                    <td>
+                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                            Asset
+                        </span>
+                        <span class="text-muted font-weight-bold">
+                            Enabled
+                        </span>
+                    </td>
+                    <td>
+                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                            {{item.deviceId}}
+                        </span>
+                        <span class="text-muted font-weight-bold">
+                            Id
+                        </span>
+                    </td>
+                    <td>
+                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                            {{item.name}}
+                        </span>
+                        <span class="text-muted font-weight-bold">
+                            Name
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-</div>
-<!--end::Advance Table Widget 4-->
+</div></div><!--end::Advance Table Widget 4-->
