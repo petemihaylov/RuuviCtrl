@@ -19,6 +19,8 @@ export class StatsWidgetComponent implements OnChanges {
   colorsThemeBaseSuccess = '';
   colorsThemeLightSuccess = '';
 
+  currentValue: string;
+
   @Input() info: StatsWidget;
   @Input() data: any;
 
@@ -44,24 +46,21 @@ export class StatsWidgetComponent implements OnChanges {
     );
   }
 
-  currentValue: string;
-
   ngOnChanges(): void {
     this.chartOptions = this.getChartOptions();
     if (this.data)
     {
       const lastIndex = this.data.length - 1;
-      this.currentValue = this.decimalPipe.transform(this.data[lastIndex].value, '1.2-2');
+      this.currentValue = this.decimalPipe.transform(this.data[lastIndex].value, this.info.digitsInfo);
     }
   }
 
   ngDoCheck() {
     this.chartOptions = this.getChartOptions();
-
     if (this.data)
     {
       const lastIndex = this.data.length - 1;
-      this.currentValue = this.decimalPipe.transform(this.data[lastIndex].value, '1.2-2');
+      this.currentValue = this.decimalPipe.transform(this.data[lastIndex].value, this.info.digitsInfo);
     }
   }
 
@@ -70,7 +69,7 @@ export class StatsWidgetComponent implements OnChanges {
       series: [
         {
           name: this.info.title,
-          data: this.data.map(({value}) => this.decimalPipe.transform(value, '1.2-2')),
+          data: this.data.map(({value}) => this.decimalPipe.transform(value, this.info.digitsInfo)),
         },
       ],
       chart: {
@@ -80,11 +79,14 @@ export class StatsWidgetComponent implements OnChanges {
           show: false,
         },
         zoom: {
-          enabled: false,
+          enabled: true,
         },
         sparkline: {
           enabled: true,
         },
+        animations: {
+          enabled: false,
+        }
       },
       plotOptions: {},
       legend: {
@@ -139,6 +141,8 @@ export class StatsWidgetComponent implements OnChanges {
         },
       },
       yaxis: {
+        min: this.info.minValue,
+        max: this.info.maxValue,
         labels: {
           show: false,
           style: {
