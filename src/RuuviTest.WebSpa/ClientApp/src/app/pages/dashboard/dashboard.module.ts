@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { WidgetsModule } from '../../_metronic/partials/content/widgets/widgets.module';
+import { DashboardTableComponent } from './dashboard-table/dashboard-table.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, DashboardTableComponent],
   imports: [
     CommonModule,
     WidgetsModule,

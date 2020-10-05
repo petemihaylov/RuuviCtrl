@@ -1,0 +1,58 @@
+<!--begin::Advance Table Widget 4-->
+<div class="card card-custom card-stretch gutter-b">
+    <div class="card-header border-0 py-5">
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label font-weight-bolder text-dark">Assets Stats</span>
+        </h3>
+    </div>
+    <div class="card-body pt-0 pb-3">
+        <div class="tab-content">
+            <table class="table table-head-custom table-head-bg table-borderless table-vertical-center">
+                <thead>
+                    <tr class="text-left text-uppercase">
+                        <th style="min-width: 250px;" class="pl-7">
+                            <span class="text-dark-75">Active Assets</span>
+                        </th>
+                        <th style="min-width: 100px;">Device Id</th>
+                        <th style="min-width: 100px;">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <div class="col-lg-6 col-xxl-3" *ngFor="let item of assetData | async">
+                        <h1>{{item.deviceId}}</h1>
+                        <h1>{{item.name}}</h1>
+                    </div>
+
+                    <tr>
+
+                        <td>
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                Asset
+                            </span>
+                            <span class="text-muted font-weight-bold">
+                                Enabled
+                            </span>
+                        </td>
+                        <td>
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                affnq4oxn0z4-1d20htzngrdvl
+                            </span>
+                            <span class="text-muted font-weight-bold">
+                                Id
+                            </span>
+                        </td>
+                        <td>
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                Ruuvi #4444
+                            </span>
+                            <span class="text-muted font-weight-bold">
+                                Name
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--end::Advance Table Widget 4-->

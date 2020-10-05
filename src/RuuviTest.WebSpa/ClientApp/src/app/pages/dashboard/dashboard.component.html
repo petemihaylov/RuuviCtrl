@@ -1,11 +1,1 @@
-Table for dashboard
-<div class="row" *ngIf="Data | async as assetDataList">
-
-    <div class="col-lg-6 col-xxl-3">
-        <li *ngFor="let asset of assetDataList">
-           <h1>{{asset.DeviceId}}</h1> 
-           <h1>{{asset.Name}</h1> 
-        </li>
-    </div>
-
-</div>
+<app-dashboard-table [assetData]="Data"></app-dashboard-table>
