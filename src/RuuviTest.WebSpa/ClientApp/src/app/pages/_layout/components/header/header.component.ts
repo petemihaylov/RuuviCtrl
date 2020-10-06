@@ -88,14 +88,14 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private getLogoURL(): string {
-    let result = 'logo-light.png';
+    let result = 'G3-logo-dark.png';
 
     if (this.headerSelfTheme && this.headerSelfTheme === 'light') {
-      result = 'logo-dark.png';
+      result = 'G3-logo-dark.png';
     }
 
     if (this.headerSelfTheme && this.headerSelfTheme === 'dark') {
-      result = 'logo-dark.png';
+      result = 'G3-logo-light.png';
     }
 
     return `./assets/media/logos/${result}`;
