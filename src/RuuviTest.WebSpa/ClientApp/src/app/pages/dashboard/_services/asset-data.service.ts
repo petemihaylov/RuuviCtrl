@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { AssetData } from '../_models/asset-data.model';
+import { AssetDto } from '../_models/assetDto.model';
 
 @Injectable({
     providedIn: 'root',
@@ -16,13 +17,13 @@ export class AssetDataService {
     constructor(
     protected httpClient: HttpClient) {}
 
-    read(id: number): Observable<AssetData> {
+    read(id: number): Observable<AssetDto> {
     return this.httpClient
-        .get<AssetData>(`${this.url}/${this.endpoint}/${id}`);
+        .get<AssetDto>(`${this.url}/${this.endpoint}/${id}`);
     }
 
-    list(): Observable<AssetData> {
+    list(): Observable<AssetDto> {
     return this.httpClient
-        .get<AssetData>(`${this.url}/${this.endpoint}`);
+        .get<AssetDto>(`${this.url}/${this.endpoint}`);
     }
 }
