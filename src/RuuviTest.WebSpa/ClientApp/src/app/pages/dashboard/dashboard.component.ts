@@ -41,7 +41,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   addToData(obj: RuuviWebsocket) {
     const nextData = this._data.getValue();
-    console.log(nextData[0].temperature.length);
     nextData[0].temperature.push(obj.temperature);
     nextData[0].humidity.push(obj.humidity);
     nextData[0].pressure.push(obj.pressure);
