@@ -9,5 +9,6 @@ namespace RuuviTest.Core.Services.Interfaces
     public interface IAssetService
     {
         Task<AssetDto> GetAssetDtoById(int id);
+        Task<List<AssetDto>> GetAssetDtos();
     }
 }

@@ -1,4 +1,5 @@
-﻿using RuuviTest.Core.Entities;
+﻿using System.Collections.Generic;
+using RuuviTest.Core.Entities;
 using RuuviTest.Core.ValueObjects;
 using RuuviTest.SharedKernel.Interfaces;
 using System.Linq;
@@ -42,6 +43,36 @@ namespace RuuviTest.Core.Services
             };
 
             return assetDto;
+        }
+
+        public async Task<List<AssetDto>> GetAssetDtos()
+        {
+            var assets = await _eFRepository.ListAsync<Asset>();
+            List<AssetDto> resultDtos = new List<AssetDto>();
+            assets.ForEach(asset =>
+                {
+                    var ruuviData = _repository.FilterBy(s => s.DeviceId == asset.DeviceId).ToList();
+                    if (ruuviData.Count != 0)
+                    {
+                        var assetDto = new AssetDto
+                        {
+                            Id = asset.Id,
+                            DeviceId = asset.DeviceId,
+                            Name = asset.Name,
+                            Temperature = new []{ ruuviData.Select(c => new SingleStat { Value = c.Temperature, Time = c.Time }).Last()},
+                            BatteryLevel = new []{ ruuviData.Select(c => new SingleStat { Value = c.BatteryLevel, Time = c.Time }).Last()},
+                            Humidity = new []{ ruuviData.Select(c => new SingleStat { Value = c.Humidity, Time = c.Time }).Last()},
+                            Pressure = new []{ ruuviData.Select(c => new SingleStat { Value = c.Pressure, Time = c.Time }).Last()},
+                            Route = new[]{ ruuviData.Select(c => new LocationStat { Latitude = c.Latitude, Longitude = c.Longitude, Time = c.Time }).Last()}
+                        };
+
+                        resultDtos.Add(assetDto);
+                    }
+                }
+                
+                );
+
+            return resultDtos;
         }
 
     }

@@ -67,6 +67,7 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
         .subscribe((receivedObj: RuuviWebsocket) => {
           this.addToData(receivedObj);
         });
+
       const detailsSub = this.assetDetailService.read(id).subscribe(res => {
         this._data.next(res);
       });
@@ -75,6 +76,7 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
     });
     this.unsubscribe.push(paramsSub);
   }
+  
   addToData(obj: RuuviWebsocket) {
     const nextData = this._data.getValue();
     nextData.temperature.push(obj.temperature);

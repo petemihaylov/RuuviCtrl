@@ -23,7 +23,7 @@ namespace RuuviTest.WebSpa.Api
         [HttpGet]
         public async Task<IActionResult> GetAssets()
         {
-            var assets = await _repository.ListAsync<Asset>();
+            var assets = await _assetService.GetAssetDtos();
             return Ok(assets);
         }
 
@@ -34,7 +34,6 @@ namespace RuuviTest.WebSpa.Api
             var assetItem = await _assetService.GetAssetDtoById(id);
             if (assetItem != null)
             {
-
                 return Ok(assetItem);
             }
             return NotFound();
