@@ -1,48 +1,56 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
-import { AssetData } from "./_models/asset-data.model";
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { AssetData } from './_models/asset-data.model';
 import { AssetDto } from './_models/assetDto.model';
 import { RuuviWebsocket } from './_models/ruuvi-websocket.model';
-import { AssetDataService } from "./_services/asset-data.service";
+import { AssetDataService } from './_services/asset-data.service';
 import { RuuviWebsocketService } from './_services/ruuvi-websocket.service';
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.scss"],
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
 
-  private _data: BehaviorSubject<AssetDto> = new BehaviorSubject(new AssetDto());
-  public Data: Observable<AssetDto> = this._data.asObservable();
+  private _data: BehaviorSubject<AssetDto[]> = new BehaviorSubject([]);
+  public Data: Observable<AssetDto[]> = this._data.asObservable();
 
+  private unsubscribe: Subscription[] = [];
 
   constructor(
     private assetDataService: AssetDataService,
     private ruuviDataService: RuuviWebsocketService) { }
 
-  ngOnInit(): void {
-    this.Data = this.assetDataService.list().pipe();
 
-    this.ruuviDataService.startConnection();
-    this.ruuviDataService.addAssetDataListener();
-    this.ruuviDataService.retrieveMappedObject();
-   
+  ngOnInit(): void {
+    const listSub = this.assetDataService.list().subscribe(res => {
+      this._data.next(res);
+    });
+
     const websocketSub = this.ruuviDataService
       .retrieveMappedObject()
       .subscribe((receivedObj: RuuviWebsocket) => {
         this.addToData(receivedObj);
       });
+    this.unsubscribe.push(listSub);
+    this.unsubscribe.push(websocketSub);
+
   }
 
   addToData(obj: RuuviWebsocket) {
     const nextData = this._data.getValue();
-    nextData.temperature.push(obj.temperature);
-    nextData.humidity.push(obj.humidity);
-    nextData.pressure.push(obj.pressure);
-    nextData.batteryLevel.push(obj.batteryLevel);
-    nextData.route.push(obj.route);
+    console.log(nextData[0].temperature.length);
+    nextData[0].temperature.push(obj.temperature);
+    nextData[0].humidity.push(obj.humidity);
+    nextData[0].pressure.push(obj.pressure);
+    nextData[0].batteryLevel.push(obj.batteryLevel);
+    nextData[0].route.push(obj.route);
     this._data.next(nextData);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.forEach(sb => sb.unsubscribe());
   }
 }

@@ -12,7 +12,7 @@ import { RuuviWebsocketService } from '../_services/ruuvi-websocket.service';
 })
 export class DashboardTableComponent implements OnInit {
 
-  @Input('assetData') assetData: Observable<AssetDto>;
+  @Input('assetData') assetData: Observable<AssetDto[]>;
 
   constructor() { }
 

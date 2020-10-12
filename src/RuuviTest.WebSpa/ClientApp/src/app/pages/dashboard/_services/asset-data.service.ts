@@ -22,8 +22,8 @@ export class AssetDataService {
         .get<AssetDto>(`${this.url}/${this.endpoint}/${id}`);
     }
 
-    list(): Observable<AssetDto> {
+    list(): Observable<AssetDto[]> {
     return this.httpClient
-        .get<AssetDto>(`${this.url}/${this.endpoint}`);
+        .get<AssetDto[]>(`${this.url}/${this.endpoint}`);
     }
 }

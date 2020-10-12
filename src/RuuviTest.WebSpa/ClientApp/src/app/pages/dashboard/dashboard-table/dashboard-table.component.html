@@ -36,17 +36,17 @@
                         </td>
                         <td > 
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg" >
-                                {{item.temperature[0].value}} °C
+                                {{item.temperature[item.temperature.length - 1].value}} °C
                             </span>
                         </td>
                         <td >
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg" >
-                                {{item.humidity[0].value}} Pa
+                                {{item.pressure[item.pressure.length - 1].value}} Pa
                             </span>
                          </td>
                         <td >
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg" >
-                                {{item.pressure[0].value}} %
+                                {{item.humidity[item.humidity.length - 1].value}} %
                             </span> 
                         </td>
                         <td>
