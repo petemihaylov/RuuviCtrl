@@ -15,6 +15,9 @@
                             <span class="text-dark-75">Name</span>
                         </th>
                         <th style="min-width: 100px;">Device Id</th>
+                        <th style="min-width: 100px;">Temperature</th>
+                        <th style="min-width: 100px;">Humidity</th>
+                        <th style="min-width: 100px;">Pressure</th>
                         <th style="min-width: 100px;">Actions</th>
                     </tr>
                 </thead>
@@ -30,6 +33,21 @@
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                 {{item.deviceId}}
                             </span>
+                        </td>
+                        <td > 
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg" >
+                                {{item.temperature[item.temperature.length - 1].value}} °C
+                            </span>
+                        </td>
+                        <td >
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg" >
+                                {{item.pressure[item.pressure.length - 1].value}} Pa
+                            </span>
+                         </td>
+                        <td >
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg" >
+                                {{item.humidity[item.humidity.length - 1].value}} %
+                            </span> 
                         </td>
                         <td>
                             <a [routerLink]="['/asset', item.id]" class="btn btn-light btn-hover-primary btn-sm">
