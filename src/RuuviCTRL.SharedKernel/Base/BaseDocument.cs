@@ -1,8 +1,8 @@
-﻿using MongoDB.Bson;
-using RuuviTest.SharedKernel.Interfaces;
-using System;
+﻿using System;
+using MongoDB.Bson;
+using RuuviCTRL.SharedKernel.Interfaces;
 
-namespace RuuviTest.SharedKernel.Base
+namespace RuuviCTRL.SharedKernel.Base
 {
     public abstract class BaseDocument : IDocument
     {

@@ -1,8 +1,8 @@
 ﻿using Ardalis.EFCore.Extensions;
 using Microsoft.EntityFrameworkCore;
-using RuuviTest.Core.Entities;
+using RuuviCTRL.Core.Entities;
 
-namespace RuuviTest.Infrastructure.Data.EntityFramework
+namespace RuuviCTRL.Infrastructure.Data.EntityFramework
 {
     public class AppDbContext : DbContext
     {

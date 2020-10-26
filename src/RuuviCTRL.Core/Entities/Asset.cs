@@ -1,9 +1,6 @@
-﻿using RuuviTest.Core.ValueObjects;
-using RuuviTest.SharedKernel.Base;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using RuuviCTRL.SharedKernel.Base;
 
-namespace RuuviTest.Core.Entities
+namespace RuuviCTRL.Core.Entities
 {
     public class Asset : BaseEntity
     {

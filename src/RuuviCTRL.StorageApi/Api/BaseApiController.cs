@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace RuuviTest.Web.Api
+namespace RuuviCTRL.StorageApi.Api
 {
     [Route("api/[controller]")]
     [ApiController]

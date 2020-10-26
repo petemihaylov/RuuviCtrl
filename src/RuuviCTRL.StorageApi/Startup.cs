@@ -1,16 +1,15 @@
-﻿using Ardalis.ListStartupServices;
-using Autofac;
+﻿using System.Collections.Generic;
+using Ardalis.ListStartupServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using RuuviTest.Infrastructure;
-using System.Collections.Generic;
-using RuuviTest.Web.Hubs;
+using RuuviCTRL.Infrastructure;
+using RuuviCTRL.StorageApi.Hubs;
 
-namespace RuuviTest.Web
+namespace RuuviCTRL.StorageApi
 {
     public class Startup
     {

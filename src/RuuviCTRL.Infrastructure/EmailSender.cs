@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
-using RuuviTest.Core.Interfaces;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using RuuviCTRL.Core.Interfaces;
 
-namespace RuuviTest.Infrastructure
+namespace RuuviCTRL.Infrastructure
 {
     public class EmailSender : IEmailSender
     {

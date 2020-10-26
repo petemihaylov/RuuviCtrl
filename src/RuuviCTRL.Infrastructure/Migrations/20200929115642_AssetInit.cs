@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace RuuviTest.Infrastructure.Migrations
+namespace RuuviCTRL.Infrastructure.Migrations
 {
     public partial class AssetInit : Migration
     {

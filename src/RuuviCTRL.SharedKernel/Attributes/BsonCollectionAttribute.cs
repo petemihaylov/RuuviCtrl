@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RuuviTest.SharedKernel.Attributes
+namespace RuuviCTRL.SharedKernel.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class BsonCollectionAttribute : Attribute

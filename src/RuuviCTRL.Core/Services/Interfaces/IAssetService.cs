@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using RuuviTest.Core.Dto;
+using RuuviCTRL.Core.Dto;
 
-namespace RuuviTest.Core.Services.Interfaces
+namespace RuuviCTRL.Core.Services.Interfaces
 {
     public interface IAssetService
     {

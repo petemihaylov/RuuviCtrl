@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RuuviTest.Core.Entities;
-using RuuviTest.SharedKernel.Interfaces;
-using RuuviTest.Web.ApiModels;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using RuuviTest.Core.ValueObjects;
-using RuuviTest.Web.Hubs;
+using RuuviCTRL.Core.Entities;
+using RuuviCTRL.Core.ValueObjects;
+using RuuviCTRL.SharedKernel.Interfaces;
+using RuuviCTRL.StorageApi.ApiModels;
+using RuuviCTRL.StorageApi.Hubs;
 
-namespace RuuviTest.Web.Api
+namespace RuuviCTRL.StorageApi.Api
 {
     public class RuuviDataController : BaseApiController
     {

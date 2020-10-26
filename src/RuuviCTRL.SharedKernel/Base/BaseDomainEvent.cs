@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RuuviTest.SharedKernel.Base
+namespace RuuviCTRL.SharedKernel.Base
 {
     public abstract class BaseDomainEvent
     {

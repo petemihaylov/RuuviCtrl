@@ -1,4 +1,4 @@
-﻿namespace RuuviTest.Infrastructure.Settings.Interfaces
+﻿namespace RuuviCTRL.Infrastructure.Settings.Interfaces
 {
 
     public interface IMongoDbSettings

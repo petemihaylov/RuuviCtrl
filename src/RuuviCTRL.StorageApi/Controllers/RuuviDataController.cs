@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RuuviTest.Core.Entities;
-using RuuviTest.SharedKernel.Interfaces;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using RuuviCTRL.Core.Entities;
+using RuuviCTRL.SharedKernel.Interfaces;
 
-namespace RuuviTest.Web.Controllers
+namespace RuuviCTRL.StorageApi.Controllers
 {
     public class RuuviDataController : Controller
     {

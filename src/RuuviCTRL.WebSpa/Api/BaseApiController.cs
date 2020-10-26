@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace RuuviTest.WebSpa.Api
+namespace RuuviCTRL.WebSpa.Api
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.DependencyInjection;
-using RuuviTest.Core.Services;
-using RuuviTest.Core.Services.Interfaces;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RuuviCTRL.Core.Services;
+using RuuviCTRL.Core.Services.Interfaces;
 
-namespace RuuviTest.Core
+namespace RuuviCTRL.Core
 {
     public static class StartupSetup
     {

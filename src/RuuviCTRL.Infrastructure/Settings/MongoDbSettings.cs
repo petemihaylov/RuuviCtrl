@@ -1,6 +1,6 @@
-﻿using RuuviTest.Infrastructure.Settings.Interfaces;
+﻿using RuuviCTRL.Infrastructure.Settings.Interfaces;
 
-namespace RuuviTest.Infrastructure.Settings
+namespace RuuviCTRL.Infrastructure.Settings
 {
     public class MongoDbSettings : IMongoDbSettings
     {

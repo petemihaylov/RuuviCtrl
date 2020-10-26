@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RuuviTest.Infrastructure.Data.EntityFramework;
-using RuuviTest.Infrastructure.Data.MongoDB;
-using RuuviTest.Infrastructure.Settings;
-using RuuviTest.Infrastructure.Settings.Interfaces;
-using RuuviTest.SharedKernel.Interfaces;
+using RuuviCTRL.Infrastructure.Data.EntityFramework;
+using RuuviCTRL.Infrastructure.Data.MongoDB;
+using RuuviCTRL.Infrastructure.Settings;
+using RuuviCTRL.Infrastructure.Settings.Interfaces;
+using RuuviCTRL.SharedKernel.Interfaces;
 
-namespace RuuviTest.Infrastructure
+namespace RuuviCTRL.Infrastructure
 {
     public static class StartupSetup
     {

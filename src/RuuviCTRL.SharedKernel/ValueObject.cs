@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-
-
-namespace RuuviTest.SharedKernel
+namespace RuuviCTRL.SharedKernel
 {
     // source: https://github.com/jhewlett/ValueObject
     public abstract class ValueObject : IEquatable<ValueObject>

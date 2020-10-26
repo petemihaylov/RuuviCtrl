@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
-using RuuviTest.Core.Entities;
-using RuuviTest.Core.ValueObjects;
-using RuuviTest.SharedKernel.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
-using RuuviTest.Core.Dto;
-using RuuviTest.Core.Services.Interfaces;
+using RuuviCTRL.Core.Dto;
+using RuuviCTRL.Core.Entities;
+using RuuviCTRL.Core.Services.Interfaces;
+using RuuviCTRL.Core.ValueObjects;
+using RuuviCTRL.SharedKernel.Interfaces;
 
-namespace RuuviTest.Core.Services
+namespace RuuviCTRL.Core.Services
 {
     public class AssetService : IAssetService
     {

@@ -1,7 +1,7 @@
-﻿using RuuviTest.SharedKernel.Base;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using RuuviCTRL.SharedKernel.Base;
 
-namespace RuuviTest.SharedKernel.Interfaces
+namespace RuuviCTRL.SharedKernel.Interfaces
 {
     public interface IDomainEventDispatcher
     {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using RuuviTest.Core.ValueObjects;
+﻿using RuuviCTRL.Core.ValueObjects;
 
-namespace RuuviTest.Web.ApiModels
+namespace RuuviCTRL.StorageApi.ApiModels
 {
     public class LiveRuuviOutput
     {

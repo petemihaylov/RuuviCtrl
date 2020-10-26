@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
-using RuuviTest.Web.ApiModels;
+using RuuviCTRL.StorageApi.ApiModels;
 
-namespace RuuviTest.Web.Hubs
+namespace RuuviCTRL.StorageApi.Hubs
 {
     public class LiveAssetHub : Hub
     {

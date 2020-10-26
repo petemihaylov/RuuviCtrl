@@ -1,8 +1,8 @@
-﻿using RuuviTest.Core.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using RuuviCTRL.Core.Entities;
 
-namespace RuuviTest.Web.ApiModels
+namespace RuuviCTRL.StorageApi.ApiModels
 {
     public class RuuviInput
     {

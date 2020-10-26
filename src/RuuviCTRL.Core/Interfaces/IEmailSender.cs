@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace RuuviTest.Core.Interfaces
+namespace RuuviCTRL.Core.Interfaces
 {
     public interface IEmailSender
     {

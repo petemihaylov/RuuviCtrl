@@ -1,15 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using RuuviTest.Core;
-using RuuviTest.Infrastructure;
+using RuuviCTRL.Core;
+using RuuviCTRL.Infrastructure;
 
-namespace RuuviTest.WebSpa
+namespace RuuviCTRL.WebSpa
 {
     public class Startup
     {

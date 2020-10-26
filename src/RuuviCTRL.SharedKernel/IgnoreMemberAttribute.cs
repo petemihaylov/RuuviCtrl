@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RuuviTest.SharedKernel
+namespace RuuviCTRL.SharedKernel
 {
     // source: https://github.com/jhewlett/ValueObject
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]

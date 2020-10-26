@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RuuviTest.Infrastructure.Data.EntityFramework;
+using RuuviCTRL.Infrastructure.Data.EntityFramework;
 
 namespace RuuviTest.Infrastructure.Migrations
 {

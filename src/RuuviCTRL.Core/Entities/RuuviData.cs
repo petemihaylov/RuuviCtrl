@@ -1,11 +1,8 @@
-﻿
-using RuuviTest.SharedKernel.Attributes;
-using RuuviTest.SharedKernel.Base;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
+using RuuviCTRL.SharedKernel.Attributes;
+using RuuviCTRL.SharedKernel.Base;
 
-namespace RuuviTest.Core.Entities
+namespace RuuviCTRL.Core.Entities
 {
     [BsonCollection("ruuviData")]
     public class RuuviData : BaseDocument

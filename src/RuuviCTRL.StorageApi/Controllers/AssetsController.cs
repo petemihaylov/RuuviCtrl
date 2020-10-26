@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RuuviTest.Core.Entities;
-using RuuviTest.Infrastructure.Data.EntityFramework;
-using RuuviTest.SharedKernel.Interfaces;
+using RuuviCTRL.Core.Entities;
+using RuuviCTRL.SharedKernel.Interfaces;
 
-namespace RuuviTest.Web.Controllers
+namespace RuuviCTRL.StorageApi.Controllers
 {
     [Route("api/[controller]")]
     public class AssetsController : Controller

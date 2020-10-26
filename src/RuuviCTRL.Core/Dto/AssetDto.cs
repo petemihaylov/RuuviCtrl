@@ -1,7 +1,7 @@
-﻿using RuuviTest.Core.ValueObjects;
-using RuuviTest.SharedKernel.Base;
+﻿using RuuviCTRL.Core.ValueObjects;
+using RuuviCTRL.SharedKernel.Base;
 
-namespace RuuviTest.Core.Dto
+namespace RuuviCTRL.Core.Dto
 {
 
     public class AssetDto : BaseEntity

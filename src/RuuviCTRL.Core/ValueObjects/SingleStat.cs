@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RuuviTest.Core.ValueObjects
+namespace RuuviCTRL.Core.ValueObjects
 {
     public struct SingleStat
     {

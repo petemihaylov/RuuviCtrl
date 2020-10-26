@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace RuuviTest.WebSpa.Api
+namespace RuuviCTRL.WebSpa.Api
 {
     public class MetaController : BaseApiController
     {

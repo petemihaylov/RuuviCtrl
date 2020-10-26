@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 
-namespace RuuviTest.Web.Api
+namespace RuuviCTRL.StorageApi.Api
 {
     public class MetaController : BaseApiController
     {

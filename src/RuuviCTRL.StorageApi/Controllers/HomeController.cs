@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace RuuviTest.Web.Controllers
+namespace RuuviCTRL.StorageApi.Controllers
 {
     public class HomeController : Controller
     {

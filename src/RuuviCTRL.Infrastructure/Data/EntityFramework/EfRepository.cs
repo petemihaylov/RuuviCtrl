@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RuuviTest.SharedKernel.Base;
-using RuuviTest.SharedKernel.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using RuuviCTRL.SharedKernel.Base;
+using RuuviCTRL.SharedKernel.Interfaces;
 
-namespace RuuviTest.Infrastructure.Data.EntityFramework
+namespace RuuviCTRL.Infrastructure.Data.EntityFramework
 {
     public class EfRepository : IEFRepository
     {

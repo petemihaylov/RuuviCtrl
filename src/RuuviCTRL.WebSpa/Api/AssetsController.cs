@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RuuviTest.Core.Dto;
-using RuuviTest.Core.Entities;
-using RuuviTest.Core.Services.Interfaces;
-using RuuviTest.SharedKernel.Interfaces;
+using RuuviCTRL.Core.Dto;
+using RuuviCTRL.Core.Entities;
+using RuuviCTRL.Core.Services.Interfaces;
+using RuuviCTRL.SharedKernel.Interfaces;
 
-namespace RuuviTest.WebSpa.Api
+namespace RuuviCTRL.WebSpa.Api
 {
     [Route("api/[controller]")]
     public class AssetsController : Controller

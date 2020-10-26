@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace RuuviTest.SharedKernel.Interfaces
+namespace RuuviCTRL.SharedKernel.Interfaces
 {
     public interface IMongoRepository<TDocument> where TDocument : IDocument
     {

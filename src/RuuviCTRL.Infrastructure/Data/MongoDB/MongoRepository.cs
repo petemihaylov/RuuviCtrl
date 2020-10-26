@@ -1,15 +1,15 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using RuuviTest.Infrastructure.Settings.Interfaces;
-using RuuviTest.SharedKernel.Attributes;
-using RuuviTest.SharedKernel.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using RuuviCTRL.Infrastructure.Settings.Interfaces;
+using RuuviCTRL.SharedKernel.Attributes;
+using RuuviCTRL.SharedKernel.Interfaces;
 
-namespace RuuviTest.Infrastructure.Data.MongoDB
+namespace RuuviCTRL.Infrastructure.Data.MongoDB
 {
     public class MongoRepository<TDocument> : IMongoRepository<TDocument>
     where TDocument : IDocument

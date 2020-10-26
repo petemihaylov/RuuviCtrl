@@ -1,11 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RuuviTest.Core.Entities;
-using RuuviTest.Core.ValueObjects;
-using RuuviTest.SharedKernel.Interfaces;
+using RuuviCTRL.Core.Entities;
+using RuuviCTRL.SharedKernel.Interfaces;
 
-namespace RuuviTest.WebSpa.Api
+namespace RuuviCTRL.WebSpa.Api
 {
     public class RuuviDataController : BaseApiController
     {
