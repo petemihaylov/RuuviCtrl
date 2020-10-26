@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RuuviCTRL.Infrastructure.Data.EntityFramework;
 
-namespace RuuviTest.Infrastructure.Migrations
+namespace RuuviCTRL.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20200929115642_AssetInit")]
