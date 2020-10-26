@@ -27,15 +27,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const listSub = this.assetDataService.list().subscribe(res => {
       this._data.next(res);
-    });
 
-    const websocketSub = this.ruuviDataService
+      const websocketSub = this.ruuviDataService
       .retrieveMappedObject()
       .subscribe((receivedObj: RuuviWebsocket) => {
         this.addToData(receivedObj);
       });
+      this.unsubscribe.push(websocketSub);
+
+    });
     this.unsubscribe.push(listSub);
-    this.unsubscribe.push(websocketSub);
 
   }
 
