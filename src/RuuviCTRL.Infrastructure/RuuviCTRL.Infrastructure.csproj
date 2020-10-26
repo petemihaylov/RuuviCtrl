@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Sdk Name="Microsoft.Build.CentralPackageVersions" Version="2.0.46" />
+  
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Migrations\20200929075429_AssetDtoInit.cs" />
+    <Compile Remove="Migrations\20200929075429_AssetDtoInit.Designer.cs" />
+    <Compile Remove="Migrations\20200929080658_AssetDTOInit.cs" />
+    <Compile Remove="Migrations\20200929080658_AssetDTOInit.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+    <PackageReference Include="Autofac" Version="5.1.3" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Ardalis.EFCore.Extensions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" PrivateAssets="all" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+    <PackageReference Include="MongoDB.Driver" Version="2.11.2" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\RuuviCTRL.Core\RuuviCTRL.Core.csproj" />
+    <ProjectReference Include="..\RuuviCTRL.SharedKernel\RuuviCTRL.SharedKernel.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Data\EntityFramework\Config\" />
+    <Folder Include="DomainEvents\" />
+  </ItemGroup>
+</Project>
