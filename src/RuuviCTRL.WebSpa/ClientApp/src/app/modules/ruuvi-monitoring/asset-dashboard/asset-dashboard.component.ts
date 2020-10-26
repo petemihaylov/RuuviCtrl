@@ -62,21 +62,22 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
     const paramsSub = this.route.parent.params.subscribe(params => {
       const id = +params['id']; // (+) converts string 'id' to a number
 
-      const websocketSub = this.ruuviWebsocketService
+      const detailsSub = this.assetDetailService.read(id).subscribe(res => {
+        this._data.next(res);
+
+        const websocketSub = this.ruuviWebsocketService
         .retrieveMappedObject()
         .subscribe((receivedObj: RuuviWebsocket) => {
           this.addToData(receivedObj);
         });
 
-      const detailsSub = this.assetDetailService.read(id).subscribe(res => {
-        this._data.next(res);
+        this.unsubscribe.push(websocketSub);
       });
       this.unsubscribe.push(detailsSub);
-      this.unsubscribe.push(websocketSub);
     });
     this.unsubscribe.push(paramsSub);
   }
-  
+
   addToData(obj: RuuviWebsocket) {
     const nextData = this._data.getValue();
     nextData.temperature.push(obj.temperature);
