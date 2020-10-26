@@ -24,7 +24,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\RuuviTest.Infrastructure\RuuviTest.Infrastructure.csproj" />
+    <ProjectReference Include="..\RuuviCTRL.Infrastructure\RuuviCTRL.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

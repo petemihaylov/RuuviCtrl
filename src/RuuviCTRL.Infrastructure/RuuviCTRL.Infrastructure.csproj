@@ -23,6 +23,8 @@
   </ItemGroup>
   
   <ItemGroup>
+    <ProjectReference Include="..\RuuviCTRL.Core\RuuviCTRL.Core.csproj" />
+    <ProjectReference Include="..\RuuviCTRL.SharedKernel\RuuviCTRL.SharedKernel.csproj" />
     <ProjectReference Include="..\RuuviTest.Core\RuuviTest.Core.csproj" />
     <ProjectReference Include="..\RuuviTest.SharedKernel\RuuviTest.SharedKernel.csproj" />
   </ItemGroup>

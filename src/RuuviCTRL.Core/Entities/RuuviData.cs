@@ -1,4 +1,5 @@
-﻿using RuuviTest.SharedKernel.Attributes;
+﻿
+using RuuviTest.SharedKernel.Attributes;
 using RuuviTest.SharedKernel.Base;
 using System;
 using System.Collections.Generic;
