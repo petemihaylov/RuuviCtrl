@@ -18,6 +18,11 @@ const routes: Routes = [
           import('../modules/ruuvi-monitoring/ruuvi-monitoring.module').then((m) => m.RuuviMonitoringModule),
       },
       {
+        path: 'settings',
+        loadChildren: () =>
+            import('../modules/settings/settings.module').then((m) => m.SettingsModule),
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',
