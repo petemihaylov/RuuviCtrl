@@ -89,9 +89,14 @@ namespace RuuviCTRL.StorageApi
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
 
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<LiveNotificationHub>("/livenotification");
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<LiveAssetHub>("/liveasset");
+                //endpoints.MapHub<LiveNotificationHub>("/livenotification");
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });

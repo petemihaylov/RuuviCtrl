@@ -1,28 +1,25 @@
 ﻿using System.Threading.Tasks;
-using RuuviCTRL.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
-using RuuviCTRL.StorageApi.Hubs;
 using Microsoft.AspNetCore.SignalR;
+using RuuviCTRL.Core.Entities;
 using RuuviCTRL.SharedKernel.Interfaces;
+using RuuviCTRL.StorageApi.Hubs;
 
 
-namespace RuuviCTRL.StorageApi.Controllers
+namespace RuuviCTRL.StorageApi.Api
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class NotificationController : ControllerBase
+    public class NotificationsController : BaseApiController
     {
         private readonly IEFRepository _repository;
         private readonly IHubContext<LiveNotificationHub> _hubContext;
 
-        public NotificationController(IEFRepository repository, IHubContext<LiveNotificationHub> hubContext)
+        public NotificationsController(IEFRepository repository, IHubContext<LiveNotificationHub> hubContext)
         {
             this._repository = repository;
             this._hubContext = hubContext;
         }
 
-
-        // GET: api/notification
+        // GET: api/notifications
         [HttpGet]
         public async Task<IActionResult> GetNotifications()
         {
@@ -37,7 +34,6 @@ namespace RuuviCTRL.StorageApi.Controllers
             var notificationItem = await _repository.GetByIdAsync<Notification>(id);
             if (notificationItem != null)
             {
-
                 return Ok(notificationItem);
             }
             return NotFound();
@@ -45,14 +41,15 @@ namespace RuuviCTRL.StorageApi.Controllers
 
         // POST: api/notifications
         [HttpPost]
-        public async Task<IActionResult> PostAssets([FromBody]Notification message)
+        public async Task<IActionResult> Uplink(Notification message)
         {
             var notificationItem = await _repository.AddAsync(message);
 
             // SignalR event
             await _hubContext.Clients.All.SendAsync("GetNewNotification", notificationItem);
 
-            return CreatedAtRoute(nameof(GetNotificationById), new { id = notificationItem.Id }, notificationItem);
+            return Ok();
+           // return CreatedAtRoute(nameof(GetNotificationById), new { id = notificationItem.Id }, notificationItem);
         }
     }
 }
