@@ -26,6 +26,7 @@
     "@angular/router": "~10.0.5",
     "@aspnet/signalr": "^3.0.0-preview6.19307.2",
     "@fortawesome/fontawesome-free": "^5.14.0",
+    "@geoman-io/leaflet-geoman-free": "^2.7.0",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "@ngx-translate/core": "^13.0.0",
     "angular-in-memory-web-api": "^0.11.0",
