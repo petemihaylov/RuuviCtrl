@@ -9,6 +9,7 @@ namespace RuuviCTRL.Core
         public static void AddServices(this IServiceCollection services)
         {
             services.AddTransient<IAssetService, AssetService>();
+            services.AddTransient<ISLAService, SLAService>();
         }
     }
 }
