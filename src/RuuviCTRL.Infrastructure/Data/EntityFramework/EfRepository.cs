@@ -36,7 +36,10 @@ namespace RuuviCTRL.Infrastructure.Data.EntityFramework
         {
             return _dbContext.Set<T>().CountAsync(filter ?? (s => true));
         }
-
+        public Task<T> LastAsync<T, TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> orderBy) where T : BaseEntity
+        {
+            return _dbContext.Set<T>().Where(filter ?? (s => true)).OrderByDescending(orderBy).FirstOrDefaultAsync();
+        }
         public Task<T> GetByIdAsync<T>(int id) where T : BaseEntity
         {
             return _dbContext.Set<T>().SingleOrDefaultAsync(e => e.Id == id);

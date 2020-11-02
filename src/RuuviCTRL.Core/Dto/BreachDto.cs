@@ -43,5 +43,9 @@ namespace RuuviCTRL.Core.Dto
         public BreachType Type { get; set; }
 
         public DateTime CreatedAt { get; set; }
+        public bool HasEnded { get; set; }
+
+        public DateTime EndDate { get; set; }
+
     }
 }

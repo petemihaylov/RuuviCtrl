@@ -40,8 +40,20 @@ namespace RuuviCTRL.Core.Services
                         var humidityBreaches = await _eFRepository.CountAsync<Breach>(i => (i.Humidity <= i.MinHumidity || i.Humidity >= i.MaxHumidity) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= humidityDateTime);
                         var pressureBreaches = await _eFRepository.CountAsync<Breach>(i => (i.Pressure <= i.MinPressure || i.Pressure >= i.MaxPressure) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= pressureDateTime);
 
+                        var lastBreach = await _eFRepository.LastAsync<Breach, DateTime>(i => i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id, o => o.CreatedAt);
+
                         var result = slaAgreement.CheckBreach(input, tempratureBreaches, humidityBreaches,
                             pressureBreaches);
+
+                        if (lastBreach != null && lastBreach.HasEnded == false && lastBreach.Type == BreachType.Breach)
+                        {
+                            if (result == BreachType.Breach) continue;
+
+                            lastBreach.EndBreach();
+                            await _eFRepository.UpdateAsync(lastBreach);
+
+                            continue;
+                        }
 
                         if (result != BreachType.None)
                         {

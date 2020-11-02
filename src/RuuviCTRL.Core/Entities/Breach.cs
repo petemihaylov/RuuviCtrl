@@ -49,6 +49,8 @@ namespace RuuviCTRL.Core.Entities
         public BreachType Type { get; set; }
 
         public DateTime CreatedAt { get; set; }
+        public bool HasEnded { get; set; }
+        public DateTime EndDate { get; set; }
 
         public Breach()
         {
@@ -84,6 +86,15 @@ namespace RuuviCTRL.Core.Entities
             LocationBoundary = slaAgreement.LocationBoundary;
             LocationCount = slaAgreement.LocationCount;
             LocationTime = slaAgreement.LocationTime;
+        }
+
+        public void EndBreach()
+        {
+            if (EndDate == DateTime.MinValue && HasEnded == false)
+            {
+                HasEnded = true;
+                EndDate = DateTime.Now;
+            }
         }
     }
 }

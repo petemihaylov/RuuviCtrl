@@ -136,6 +136,7 @@ namespace RuuviCTRL.Core.Services
                 AssetId = s.AssetId,
                 SlaAgreementId = s.SlaAgreementId,
                 CreatedAt = s.CreatedAt,
+                EndDate = s.EndDate,
                 Temperature = s.Temperature,
                 Humidity = s.Humidity,
                 Pressure = s.Pressure,
@@ -144,6 +145,7 @@ namespace RuuviCTRL.Core.Services
                 HasTempratureBreach = s.HasTempratureBreach,
                 HasHumidityBreach = s.HasHumidityBreach,
                 HasPressureBreach = s.HasPressureBreach,
+                HasEnded = s.HasEnded
             }).ToList();
 
             return breachDtos;
