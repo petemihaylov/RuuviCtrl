@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
-import {Sla} from '../../_models/sla.model';
+import { SlaDto } from '../../_models/slaDto.model';
 
 @Component({
   selector: 'app-sla-edit',
@@ -9,9 +9,9 @@ import {Sla} from '../../_models/sla.model';
 })
 export class SlaEditComponent implements OnInit {
 
-  localSla: Sla = ({} as Sla);
+  localSla: SlaDto = ({} as SlaDto);
   @Input()
-  set sla(sla: Sla) {
+  set sla(sla: SlaDto) {
     if (sla) {
       this.correctChange.emit(sla);
       this.localSla = sla;
@@ -21,7 +21,7 @@ export class SlaEditComponent implements OnInit {
     return this.localSla;
   }
   @Output()
-  correctChange: EventEmitter<Sla> = new EventEmitter<Sla>();
+  correctChange: EventEmitter<SlaDto> = new EventEmitter<SlaDto>();
 
   time: NgbTimeStruct = {hour: 0, minute: 1, second: 0};
   seconds = true;
