@@ -51,7 +51,8 @@ export class StatsWidgetComponent implements OnChanges {
     if (this.data)
     {
       const lastIndex = this.data.length - 1;
-      this.currentValue = this.decimalPipe.transform(this.data[lastIndex].value, this.info.digitsInfo);
+      const value = this.data[lastIndex].value;
+      this.currentValue = Number.isInteger(value) ? value : this.decimalPipe.transform(value, this.info.digitsInfo);
     }
   }
 
@@ -62,6 +63,9 @@ export class StatsWidgetComponent implements OnChanges {
       const lastIndex = this.data.length - 1;
       this.currentValue = this.decimalPipe.transform(this.data[lastIndex].value, this.info.digitsInfo);
     }
+    var min = Math.min.apply(null, this.data.map((res) => res.value));
+    var max = Math.max.apply(null, this.data.map((res) => res.value));
+    console.log(`min: ${min} | max: ${max}`);
   }
 
   getChartOptions() {
@@ -69,7 +73,7 @@ export class StatsWidgetComponent implements OnChanges {
       series: [
         {
           name: this.info.title,
-          data: this.data.map(({value}) => this.decimalPipe.transform(value, this.info.digitsInfo)),
+          data: this.data.map(({value}) => Number.isInteger(value) ? value : this.decimalPipe.transform(value, this.info.digitsInfo)),
         },
       ],
       chart: {
@@ -141,8 +145,8 @@ export class StatsWidgetComponent implements OnChanges {
         },
       },
       yaxis: {
-        min: this.info.minValue,
-        max: this.info.maxValue,
+        min: Math.min.apply(null, this.data.map((res) => res.value)),
+        max: Math.max.apply(null, this.data.map((res) => res.value)),
         labels: {
           show: false,
           style: {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using RuuviCTRL.Core.Enums;
 using RuuviCTRL.SharedKernel.Base;
 
 namespace RuuviCTRL.Core.Entities
@@ -13,6 +14,10 @@ namespace RuuviCTRL.Core.Entities
         public float Temperature { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
+
+        public bool HasTempratureBreach => Temperature <= MinTemprature || Temperature >= MaxTemprature;
+        public bool HasHumidityBreach => Humidity <= MinHumidity || Humidity >= MaxHumidity;
+        public bool HasPressureBreach => Pressure <= MinPressure || Pressure >= MaxPressure;
 
 
         public float MaxTemprature { get; set; }
@@ -39,7 +44,46 @@ namespace RuuviCTRL.Core.Entities
         public TimeSpan LocationTime { get; set; }
 
         public int AssetId { get; set; }
+        public int SlaAgreementId { get; set; }
+
+        public BreachType Type { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public Breach()
+        {
+            
+        }
+        public Breach(Asset asset, RuuviData ruuviData, SLAAgreement slaAgreement, BreachType type)
+        {
+            AssetId = asset.Id;
+            SlaAgreementId = slaAgreement.Id;
+            Temperature = ruuviData.Temperature;
+            Humidity = ruuviData.Humidity;
+            Pressure = ruuviData.Pressure;
+            Longitude = ruuviData.Longitude;
+            Latitude = ruuviData.Latitude;
+            CreatedAt = ruuviData.Time;
+            Type = type;
+
+            MaxTemprature = slaAgreement.MaxTemprature;
+            MinTemprature = slaAgreement.MinTemprature;
+            TempratureCount = slaAgreement.TempratureCount;
+            TempratureTime = slaAgreement.TempratureTime;
+
+            MaxHumidity = slaAgreement.MaxHumidity;
+            MinHumidity = slaAgreement.MinHumidity;
+            HumidityCount = slaAgreement.HumidityCount;
+            HumidityTime = slaAgreement.HumidityTime;
+
+            MaxPressure = slaAgreement.MaxPressure;
+            MinPressure = slaAgreement.MinPressure;
+            PressureCount = slaAgreement.PressureCount;
+            PressureTime = slaAgreement.PressureTime;
+
+            LocationBoundary = slaAgreement.LocationBoundary;
+            LocationCount = slaAgreement.LocationCount;
+            LocationTime = slaAgreement.LocationTime;
+        }
     }
 }

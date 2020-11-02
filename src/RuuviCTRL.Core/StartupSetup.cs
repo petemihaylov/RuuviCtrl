@@ -10,6 +10,7 @@ namespace RuuviCTRL.Core
         {
             services.AddTransient<IAssetService, AssetService>();
             services.AddTransient<ISLAService, SLAService>();
+            services.AddTransient<IRuuviDataService, RuuviDataService>();
         }
     }
 }
