@@ -26,4 +26,10 @@ export class NotificationDataService {
     return this.httpClient
         .get<NotificationDto[]>(`${this.url}/${this.endpoint}`);
     }
+
+    delete(id: number) : void {
+        this.httpClient.delete(`${this.url}/${this.endpoint}/${id}`).subscribe(data => {
+            console.log(data);
+        });
+    }
 }

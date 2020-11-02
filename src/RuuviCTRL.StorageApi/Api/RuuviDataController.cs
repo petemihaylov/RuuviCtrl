@@ -19,7 +19,7 @@ namespace RuuviCTRL.StorageApi.Api
             _repository = repository;
             _hubContext = hubContext;
         }
-
+        
         // GET: api/RuuviData
         [HttpGet]
         public async Task<IActionResult> List()

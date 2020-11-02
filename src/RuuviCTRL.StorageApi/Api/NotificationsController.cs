@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using RuuviCTRL.Core.Entities;
 using RuuviCTRL.SharedKernel.Interfaces;
 using RuuviCTRL.StorageApi.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 
 namespace RuuviCTRL.StorageApi.Api
@@ -24,6 +24,7 @@ namespace RuuviCTRL.StorageApi.Api
         public async Task<IActionResult> GetNotifications()
         {
             var notifications = await _repository.ListAsync<Notification>();
+
             return Ok(notifications);
         }
 
@@ -50,6 +51,21 @@ namespace RuuviCTRL.StorageApi.Api
 
             return Ok();
            // return CreatedAtRoute(nameof(GetNotificationById), new { id = notificationItem.Id }, notificationItem);
+        }
+
+        // Delete: api/notifications/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var notificationItem = _repository.GetByIdAsync<Notification>(id).Result;
+            if (notificationItem == null)
+            {
+                return NotFound();
+            }
+
+            await _repository.DeleteAsync<Notification>(notificationItem);
+            return NoContent();
+
         }
     }
 }

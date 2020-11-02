@@ -16,7 +16,6 @@ export class QuickPanelOffcanvasComponent implements OnInit {
   
   private _data: BehaviorSubject<NotificationDto[]> = new BehaviorSubject([]);
   public Data: Observable<NotificationDto[]> = this._data.asObservable();
-
   private unsubscribe: Subscription[] = [];
 
  
@@ -27,17 +26,18 @@ export class QuickPanelOffcanvasComponent implements OnInit {
     | 'kt_quick_panel_notifications'
     | 'kt_quick_panel_settings' = 'kt_quick_panel_notifications';
 
+
   constructor(private layout: LayoutService, 
     private notificationDataService: NotificationDataService,
     private notificationWebsocketService: NotificationWebsocketService) {}
 
-
-    ngOnInit(): void {
+  ngOnInit(): void {
     this.extrasQuickPanelOffcanvasDirectionCSSClass = `offcanvas-${this.layout.getProp(
       'extras.quickPanel.offcanvas.direction'
     )}`;
 
     const listSub = this.notificationDataService.list().subscribe(res => {
+      res.reverse();
       this._data.next(res);
 
       const websocketSub = this.notificationWebsocketService
@@ -46,10 +46,10 @@ export class QuickPanelOffcanvasComponent implements OnInit {
         this.addToData(receivedObj);
       });
       this.unsubscribe.push(websocketSub);
-
     });
-    this.unsubscribe.push(listSub);
 
+    this.unsubscribe.push(listSub);
+    console.log(this.Data);
   }
 
   addToData(obj: NotificationDto) {
@@ -68,6 +68,17 @@ export class QuickPanelOffcanvasComponent implements OnInit {
 
   setActiveTabId(tabId) {
     this.activeTabId = tabId;
+  }
+
+  deleteNotification(id: any){
+    this.notificationDataService.delete(id);
+
+    const arr: NotificationDto[] = this._data.getValue();
+    arr.forEach((item, index) => {
+      if (item.id === id) { arr.splice(index, 1); }
+    });
+
+    this._data.next(arr);
   }
 
   getActiveCSSClasses(tabId) {
