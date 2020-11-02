@@ -8,11 +8,14 @@ import {NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatInputModule} from '@angular/material/input';
 import {SettingsRoutingModule} from './settings-routing.module';
 import {SettingsComponent} from './settings.component';
+import {MatSelectModule} from '@angular/material/select';
+import { SlaEditComponent } from './widgets/sla-edit/sla-edit.component';
 
 @NgModule({
     declarations: [
       SettingsComponent,
-      SlaComponent
+      SlaComponent,
+      SlaEditComponent
     ],
     imports: [
         CommonModule,
@@ -23,6 +26,7 @@ import {SettingsComponent} from './settings.component';
         FormsModule,
         NgbTimepickerModule,
         MatInputModule,
+        MatSelectModule,
     ],
     providers: [DatePipe, DecimalPipe]
   })

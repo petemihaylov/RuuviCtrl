@@ -8,16 +8,9 @@ import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 })
 export class SlaComponent implements OnInit {
 
-  time: NgbTimeStruct = {hour: 0, minute: 1, second: 0};
-  seconds = true;
-
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  toggleSeconds() {
-    this.seconds = !this.seconds;
   }
 
 }

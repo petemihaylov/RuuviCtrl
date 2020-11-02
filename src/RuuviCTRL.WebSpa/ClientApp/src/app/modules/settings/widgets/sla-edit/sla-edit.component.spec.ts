@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MapWidgetComponent } from './map-widget.component';
+import { SlaEditComponent } from './sla-edit.component';
 
-describe('MapWidgetComponent', () => {
-  let component: MapWidgetComponent;
-  let fixture: ComponentFixture<MapWidgetComponent>;
+describe('SlaEditComponent', () => {
+  let component: SlaEditComponent;
+  let fixture: ComponentFixture<SlaEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapWidgetComponent ]
+      declarations: [ SlaEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MapWidgetComponent);
+    fixture = TestBed.createComponent(SlaEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

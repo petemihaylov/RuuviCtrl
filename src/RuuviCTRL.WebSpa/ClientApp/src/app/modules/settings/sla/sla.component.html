@@ -1,55 +1,6 @@
 <div class="card card-custom card-stretch gutter-b">
     <!-- Body -->
-    <div class="card-body p-0">
-        <div
-                class="d-flex align-items-center justify-content-between card-spacer flex-grow-1"
-        >
-      <span class="symbol symbol-50 symbol-light-primary mr-2">
-        <span class="symbol-label">
-            <span
-                    [inlineSVG]="'../assets/media/svg/icons/Weather/Temperature-half.svg'"
-                    class="svg-icon svg-icon-xl svg-icon-primary"
-            ></span>
-        </span>
-      </span>
-            <div class="d-flex flex-column text-right">
-                <span class="text-dark-75 font-weight-bolder font-size-h3">Temperature</span>
-            </div>
-        </div>
-
-        <div class="p-4">
-
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Favorite food" value="Sushi">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <textarea matInput placeholder="Leave a comment"></textarea>
-            </mat-form-field>
-
-            <ngb-timepicker [(ngModel)]="time" [seconds]="true"></ngb-timepicker>
-        </div>
-    </div>
-</div>
-
-
-<div class="example-container">
-    <mat-form-field>
-        <input matInput placeholder="Input">
-    </mat-form-field>
-
-    <mat-form-field>
-        <textarea matInput placeholder="Textarea"></textarea>
-    </mat-form-field>
-</div>
-
-<div class="example-preview">
-    <div>
-        <ngb-timepicker [(ngModel)]="time" [seconds]="true"></ngb-timepicker>
-    </div>
-</div>
-<div class="separator separator-dashed my-6"></div>
-<div class="example-preview">
-    <div>
-        <pre>Selected time: {{time | json}}</pre>
+    <div class="card-body p-0 row" *ngFor="let i of [1, 2, 3,4 ,5]">
+        <app-sla-edit class="col-5"></app-sla-edit>
     </div>
 </div>
