@@ -49,7 +49,6 @@ export class QuickPanelOffcanvasComponent implements OnInit {
     });
 
     this.unsubscribe.push(listSub);
-    console.log(this.Data);
   }
 
   addToData(obj: NotificationDto) {
