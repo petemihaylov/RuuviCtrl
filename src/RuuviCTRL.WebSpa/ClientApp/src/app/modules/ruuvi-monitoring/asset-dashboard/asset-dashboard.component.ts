@@ -7,6 +7,9 @@ import { map } from 'rxjs/operators';
 import { AssetDto } from '../_models/assetDto.model';
 import { AssetDetailService } from '../_services/asset-detail.service';
 import { ActivatedRoute } from '@angular/router';
+import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @Component({
   selector: 'app-asset-dashboard',
@@ -16,6 +19,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AssetDashboardComponent implements OnInit, OnDestroy {
   _data: BehaviorSubject<AssetDto> = new BehaviorSubject(new AssetDto());
   public readonly Data: Observable<AssetDto> = this._data.asObservable();
+
 
   temperature: StatsWidget = {
     title: 'Temperature',
@@ -50,6 +54,9 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
     digitsInfo: '1.0-0'
   };
 
+  startDate: Date;
+  endDate: Date;
+
   private unsubscribe: Subscription[] = [];
 
   constructor(
@@ -59,6 +66,8 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+
+
     const paramsSub = this.route.parent.params.subscribe(params => {
       const id = +params['id']; // (+) converts string 'id' to a number
 
@@ -76,6 +85,42 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
       this.unsubscribe.push(detailsSub);
     });
     this.unsubscribe.push(paramsSub);
+  }
+
+  selectedByDate(){
+    if( this.startDate == undefined || this.endDate == undefined){
+      return;
+    }
+    var start = this.DateToString(this.startDate);
+    var end   = this.DateToString(this.endDate);
+    
+    const paramsSub = this.route.parent.params.subscribe(params => {
+      const id = +params['id']; // (+) converts string 'id' to a number
+      
+      const detailsSub = this.assetDetailService.readByDate(id,start,end).subscribe(res => {
+        this._data.next(res);
+
+        const websocketSub = this.ruuviWebsocketService
+        .retrieveMappedObject()
+        .subscribe((receivedObj: RuuviWebsocket) => {
+          this.addToData(receivedObj);
+        });
+
+        this.unsubscribe.push(websocketSub);
+      });
+      this.unsubscribe.push(detailsSub);
+    });
+    this.unsubscribe.push(paramsSub);
+  }
+  public DateStartSelected(date: any):void {
+    this.startDate = date;
+}
+public DateEndSelected(date: any):void {
+  this.endDate = date;
+}
+  private DateToString(date :Date): string {
+    var result = date.getDay() +"-" + date.getMonth() +"-" + date.getFullYear() +" 00:00:00";
+    return result;
   }
 
   addToData(obj: RuuviWebsocket) {

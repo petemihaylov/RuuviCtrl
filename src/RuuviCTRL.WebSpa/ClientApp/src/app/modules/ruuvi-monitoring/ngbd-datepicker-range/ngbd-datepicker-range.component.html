@@ -1,0 +1,24 @@
+
+  <div class="example-preview">
+    <span>
+        {{DatePickerName}}
+    </span>
+  
+    <div>
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="d22" #c2="ngModel" [(ngModel)]="model"
+              ngbDatepicker #d22="ngbDatepicker" (ngModelChange)="pickDate()">
+            <div class="input-group-append">
+              <button class="btn btn-primary" (click)="d22.toggle()" type="button">
+                <i class="la la-calendar" ></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="separator separator-dashed my-6"></div>
+      <button class="btn btn-sm btn-info" (click)="model = today" (click)="pickDate()">Select Today</button>
+    </div>
+  </div>

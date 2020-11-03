@@ -19,4 +19,9 @@ export class AssetDetailService {
     return this.httpClient
         .get<AssetDto>(`${this.url}/${this.endpoint}/${id}`);
     }
+    readByDate(id: number , start: string,end:string): Observable<AssetDto> {
+        return this.httpClient
+        .get<AssetDto>(`${this.url}/${this.endpoint}/${id}/${start}/${end}`);
+    }
+
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RuuviCTRL.Core.Dto;
 using RuuviCTRL.Core.Entities;
@@ -32,6 +33,23 @@ namespace RuuviCTRL.WebSpa.Api
         public async Task<ActionResult<AssetDto>> GetAssetById(int id)
         {
             var assetItem = await _assetService.GetAssetDtoById(id);
+            if (assetItem != null)
+            {
+                return Ok(assetItem);
+            }
+            return NotFound();
+        }
+
+        [HttpGet("{id}/{start}/{end}", Name = "GetAssetByTime")]
+        public async Task<ActionResult<AssetDto>> GetAssetByTime(int id,string start, string end)
+        {
+            DateTime startDate = DateTime.Parse(start);
+            DateTime endDate = DateTime.Parse(end);
+
+            if (startDate == null || endDate == null)
+                return NotFound();
+
+            var assetItem = await _assetService.GetAssetDtoById(id, startDate, endDate);
             if (assetItem != null)
             {
                 return Ok(assetItem);

@@ -8,9 +8,21 @@
                         <small>{{ruuviDataList.deviceId}}</small>
                     </h3>
                 </div>
-            </div>
+                        <div class="card-title">
+                            <app-ngbd-datepicker-range (onDatePicked)="DateStartSelected($event)" DatePickerName="Select Start Date"></app-ngbd-datepicker-range>
+                        </div>
+                        <div class="card-title">
+                            <app-ngbd-datepicker-range (onDatePicked)="DateEndSelected($event)" DatePickerName="Select End Date"></app-ngbd-datepicker-range>
+                        </div>
+                    </div>
+                            <div>
+                                <button class="btn btn-sm btn-info" (click)="selectedByDate()">Filter By Date</button>
+                            </div>
         </div>
     </div>
+    
+
+
     <div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.temperature != null">
         <app-stats-widget [info]="temperature" [data]="ruuviDataList.temperature"></app-stats-widget>
     </div>
