@@ -21,8 +21,7 @@ export class SlaEditComponent implements OnInit {
       console.log(params);
       const id = +params.get('id'); // (+) converts string 'id' to a number
       const detailsSub = this.slaService.read(id).subscribe(res => {
-        console.log(res);
-        // this.sla.next(res);
+        this.sla = res;
       });
       detailsSub.unsubscribe();
     });
