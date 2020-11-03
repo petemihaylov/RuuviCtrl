@@ -27,10 +27,15 @@ namespace RuuviCTRL.StorageApi.Api
             if (input.tags.Count > 0 && input.location != null)
             {
                 var structuredInput = RuuviInput.ToRuuviData(input);
-                await _ruuviDataService.AddMeasurePoint(structuredInput);
+                var notifications = await _ruuviDataService.AddMeasurePoint(structuredInput);
 
                 var liveOutput = RuuviInput.ToLiveRuuviOutput(input);
                 await _hubContext.Clients.All.SendAsync("GetNewAssetData", liveOutput);
+
+                foreach (var notification in notifications)
+                {
+                    await _hubContext.Clients.All.SendAsync("GetNewNotification", notification);
+                }
             }
             return Ok();
         }
