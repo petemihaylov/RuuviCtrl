@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
-import {Sla} from '../../_models/sla.model';
+import {SlaDto} from '../../_models/slaDto.model';
 
 @Component({
   selector: 'app-sla-edit',
@@ -9,7 +9,7 @@ import {Sla} from '../../_models/sla.model';
 })
 export class SlaEditComponent implements OnInit {
 
-  localSla: Sla = ({} as Sla);
+  localSla: SlaDto = ({} as SlaDto);
   @Input()
   // set sla(sla: Sla) {
   //   if (sla) {
@@ -23,7 +23,7 @@ export class SlaEditComponent implements OnInit {
   //   return this.Sla;
   // }
 
-  set sla(val: Sla) {
+  set sla(val: SlaDto) {
     this.slaChange.emit(val);
     this.localSla = val;
   }
@@ -32,7 +32,7 @@ export class SlaEditComponent implements OnInit {
   }
 
   @Output()
-  slaChange: EventEmitter<Sla> = new EventEmitter<Sla>();
+  slaChange: EventEmitter<SlaDto> = new EventEmitter<SlaDto>();
 
   seconds = true;
   availableCategories = [
@@ -45,28 +45,28 @@ export class SlaEditComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if (!this.localSla.time) {
-      this.localSla.time = {hour: 0, minute: 0, second: 0};
-    }
+    // if (!this.localSla.time) {
+      // this.localSla.time = {hour: 0, minute: 0, second: 0};
+    // }
   }
 
   getCategoryIcon(): string{
     let icon: string;
 
-    switch (this.localSla.category){
-      case 'Temperature':
-        icon = '../assets/media/svg/icons/Weather/Temperature-half.svg';
-        break;
-      case 'Humidity':
-        icon = '../assets/media/svg/icons/Weather/Rain5.svg';
-        break;
-      case 'Pressure':
-        icon = '../assets/media/svg/icons/Weather/Wind.svg';
-        break;
-      case 'Location':
-        icon = '../assets/media/svg/icons/Weather/Temperature-half.svg';
-        break;
-    }
+    // switch (this.localSla.category){
+    //   case 'Temperature':
+    //     icon = '../assets/media/svg/icons/Weather/Temperature-half.svg';
+    //     break;
+    //   case 'Humidity':
+    //     icon = '../assets/media/svg/icons/Weather/Rain5.svg';
+    //     break;
+    //   case 'Pressure':
+    //     icon = '../assets/media/svg/icons/Weather/Wind.svg';
+    //     break;
+    //   case 'Location':
+    //     icon = '../assets/media/svg/icons/Weather/Temperature-half.svg';
+    //     break;
+    // }
 
     return icon;
   }

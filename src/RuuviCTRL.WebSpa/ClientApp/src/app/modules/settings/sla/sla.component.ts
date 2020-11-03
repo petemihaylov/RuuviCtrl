@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalDismissReasons, NgbModal, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
-import {Sla} from '../_models/sla.model';
+import {SlaDto} from '../_models/slaDto.model';
 
 @Component({
   selector: 'app-sla',
@@ -9,14 +9,14 @@ import {Sla} from '../_models/sla.model';
 })
 export class SlaComponent implements OnInit {
   closeResult: string;
-  slaItem: Sla;
+  slaItem: SlaDto;
 
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
   }
 
-  open(content, sla = {} as Sla) {
+  open(content, sla = {} as SlaDto) {
     this.slaItem = sla;
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -25,12 +25,12 @@ export class SlaComponent implements OnInit {
     });
   }
 
-  saveSla(sla: Sla){
+  saveSla(sla: SlaDto){
     console.log(sla);
     this.modalService.dismissAll();
   }
 
-  createSla(sla: Sla) {
+  createSla(sla: SlaDto) {
     console.log(sla);
   }
 
