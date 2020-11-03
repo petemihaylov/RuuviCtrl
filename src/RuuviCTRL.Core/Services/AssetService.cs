@@ -91,18 +91,22 @@ namespace RuuviCTRL.Core.Services
             var slaDtos = slaEntities.Select(s => new SLADto
             {
                 Id = s.Id,
+                HasTempratureBoundry = s.HasTempratureBoundry,
                 MaxTemprature = s.MaxTemprature,
                 MinTemprature = s.MinTemprature,
                 TempratureCount = s.TempratureCount,
                 TempratureTime = s.TempratureTime,
+                HasHumidityBoundry = s.HasHumidityBoundry,
                 MaxHumidity = s.MaxHumidity,
                 MinHumidity = s.MinHumidity,
                 HumidityCount = s.HumidityCount,
                 HumidityTime = s.HumidityTime,
+                HasPressureBoundry = s.HasPressureBoundry,
                 MaxPressure = s.MaxPressure,
                 MinPressure = s.MinPressure,
                 PressureCount = s.PressureCount,
                 PressureTime = s.PressureTime,
+                HasLocationBoundry = s.HasLocationBoundry,
                 LocationBoundary = s.LocationBoundary,
                 LocationCount = s.LocationCount,
                 LocationTime = s.LocationTime,
@@ -145,7 +149,12 @@ namespace RuuviCTRL.Core.Services
                 HasTempratureBreach = s.HasTempratureBreach,
                 HasHumidityBreach = s.HasHumidityBreach,
                 HasPressureBreach = s.HasPressureBreach,
-                HasEnded = s.HasEnded
+                HasEnded = s.HasEnded,
+                HasTempratureBoundry = s.HasTempratureBoundry,
+                HasHumidityBoundry = s.HasHumidityBoundry,
+                HasPressureBoundry = s.HasPressureBoundry,
+                HasLocationBoundry = s.HasLocationBoundry
+
             }).ToList();
 
             return breachDtos;

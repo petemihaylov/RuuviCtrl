@@ -13,26 +13,30 @@ namespace RuuviCTRL.Core.Dto
         public float Latitude { get; set; }
         public float Longitude { get; set; }
 
+
         public bool HasTempratureBreach { get; set; }
         public bool HasHumidityBreach { get; set; }
         public bool HasPressureBreach { get; set; }
 
-
+        public bool HasTempratureBoundry { get; set; }
         public float MaxTemprature { get; set; }
         public float MinTemprature { get; set; }
         public float TempratureCount { get; set; }
         public TimeSpan TempratureTime { get; set; }
 
+        public bool HasHumidityBoundry { get; set; }
         public float MaxHumidity { get; set; }
         public float MinHumidity { get; set; }
         public float HumidityCount { get; set; }
         public TimeSpan HumidityTime { get; set; }
 
+        public bool HasPressureBoundry { get; set; }
         public float MinPressure { get; set; }
         public float MaxPressure { get; set; }
         public float PressureCount { get; set; }
         public TimeSpan PressureTime { get; set; }
 
+        public bool HasLocationBoundry { get; set; }
         public string LocationBoundary { get; set; }
         public float LocationCount { get; set; }
         public TimeSpan LocationTime { get; set; }

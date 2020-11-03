@@ -19,25 +19,28 @@ namespace RuuviCTRL.Core.Entities
         public bool HasHumidityBreach => Humidity <= MinHumidity || Humidity >= MaxHumidity;
         public bool HasPressureBreach => Pressure <= MinPressure || Pressure >= MaxPressure;
 
-
+        public bool HasTempratureBoundry { get; set; }
         public float MaxTemprature { get; set; }
         public float MinTemprature { get; set; }
         public float TempratureCount { get; set; }
         [Column(TypeName = "bigint")]
         public TimeSpan TempratureTime { get; set; }
 
+        public bool HasHumidityBoundry { get; set; }
         public float MaxHumidity { get; set; }
         public float MinHumidity { get; set; }
         public float HumidityCount { get; set; }
         [Column(TypeName = "bigint")]
         public TimeSpan HumidityTime { get; set; }
 
+        public bool HasPressureBoundry { get; set; }
         public float MinPressure { get; set; }
         public float MaxPressure { get; set; }
         public float PressureCount { get; set; }
         [Column(TypeName = "bigint")]
         public TimeSpan PressureTime { get; set; }
 
+        public bool HasLocationBoundry { get; set; }
         public string LocationBoundary { get; set; }
         public float LocationCount { get; set; }
         [Column(TypeName = "bigint")]
@@ -68,21 +71,25 @@ namespace RuuviCTRL.Core.Entities
             CreatedAt = ruuviData.Time;
             Type = type;
 
+            HasTempratureBoundry = slaAgreement.HasTempratureBoundry;
             MaxTemprature = slaAgreement.MaxTemprature;
             MinTemprature = slaAgreement.MinTemprature;
             TempratureCount = slaAgreement.TempratureCount;
             TempratureTime = slaAgreement.TempratureTime;
 
+            HasHumidityBoundry = slaAgreement.HasHumidityBoundry;
             MaxHumidity = slaAgreement.MaxHumidity;
             MinHumidity = slaAgreement.MinHumidity;
             HumidityCount = slaAgreement.HumidityCount;
             HumidityTime = slaAgreement.HumidityTime;
 
+            HasPressureBoundry = slaAgreement.HasPressureBoundry;
             MaxPressure = slaAgreement.MaxPressure;
             MinPressure = slaAgreement.MinPressure;
             PressureCount = slaAgreement.PressureCount;
             PressureTime = slaAgreement.PressureTime;
 
+            HasLocationBoundry = slaAgreement.HasLocationBoundry;
             LocationBoundary = slaAgreement.LocationBoundary;
             LocationCount = slaAgreement.LocationCount;
             LocationTime = slaAgreement.LocationTime;
