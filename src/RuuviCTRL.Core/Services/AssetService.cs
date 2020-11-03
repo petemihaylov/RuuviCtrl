@@ -153,7 +153,8 @@ namespace RuuviCTRL.Core.Services
                 HasTempratureBoundry = s.HasTempratureBoundry,
                 HasHumidityBoundry = s.HasHumidityBoundry,
                 HasPressureBoundry = s.HasPressureBoundry,
-                HasLocationBoundry = s.HasLocationBoundry
+                HasLocationBoundry = s.HasLocationBoundry,
+                Type = s.Type,
 
             }).ToList();
 

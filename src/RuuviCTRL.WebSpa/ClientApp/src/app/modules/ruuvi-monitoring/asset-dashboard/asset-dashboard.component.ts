@@ -7,6 +7,8 @@ import { map } from 'rxjs/operators';
 import { AssetDto } from '../_models/assetDto.model';
 import { AssetDetailService } from '../_services/asset-detail.service';
 import { ActivatedRoute } from '@angular/router';
+import { BreachDto } from '../_models/breachDto.model';
+import { SlaDto } from '../_models/slaDto.model';
 
 @Component({
   selector: 'app-asset-dashboard',
@@ -16,6 +18,9 @@ import { ActivatedRoute } from '@angular/router';
 export class AssetDashboardComponent implements OnInit, OnDestroy {
   _data: BehaviorSubject<AssetDto> = new BehaviorSubject(new AssetDto());
   public readonly Data: Observable<AssetDto> = this._data.asObservable();
+
+  slas$: Observable<SlaDto[]>;
+  breaches$: Observable<BreachDto[]>;
 
   temperature: StatsWidget = {
     title: 'Temperature',
@@ -62,6 +67,9 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
     const paramsSub = this.route.parent.params.subscribe(params => {
       const id = +params['id']; // (+) converts string 'id' to a number
 
+      this.breaches$ = this.assetDetailService.getBreachesForAsset(id);
+      this.slas$ = this.assetDetailService.getSlasForAsset(id);
+
       const detailsSub = this.assetDetailService.read(id).subscribe(res => {
         this._data.next(res);
 
@@ -73,6 +81,7 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
 
         this.unsubscribe.push(websocketSub);
       });
+
       this.unsubscribe.push(detailsSub);
     });
     this.unsubscribe.push(paramsSub);
