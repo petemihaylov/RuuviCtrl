@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
-import { SlaDto } from '../../_models/slaDto.model';
+import {SlaDto} from '../../_models/slaDto.model';
 
 @Component({
   selector: 'app-sla-edit',
@@ -11,19 +11,29 @@ export class SlaEditComponent implements OnInit {
 
   localSla: SlaDto = ({} as SlaDto);
   @Input()
-  set sla(sla: SlaDto) {
-    if (sla) {
-      this.correctChange.emit(sla);
-      this.localSla = sla;
-    }
+  // set sla(sla: Sla) {
+  //   if (sla) {
+  //     this.correctChange.emit(sla);
+  //     this.localSla = sla;
+  //   } else {
+  //     this.localSla = ({} as Sla);
+  //   }
+  // }
+  // get sla() {
+  //   return this.Sla;
+  // }
+
+  set sla(val: SlaDto) {
+    this.slaChange.emit(val);
+    this.localSla = val;
   }
   get sla() {
     return this.localSla;
   }
-  @Output()
-  correctChange: EventEmitter<SlaDto> = new EventEmitter<SlaDto>();
 
-  time: NgbTimeStruct = {hour: 0, minute: 1, second: 0};
+  @Output()
+  slaChange: EventEmitter<SlaDto> = new EventEmitter<SlaDto>();
+
   seconds = true;
   availableCategories = [
     'Temperature',
@@ -35,10 +45,30 @@ export class SlaEditComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    // if (!this.localSla.time) {
+      // this.localSla.time = {hour: 0, minute: 0, second: 0};
+    // }
   }
 
-  onSlaChange(){
-    this.correctChange.emit();
+  getCategoryIcon(): string{
+    let icon: string;
+
+    // switch (this.localSla.category){
+    //   case 'Temperature':
+    //     icon = '../assets/media/svg/icons/Weather/Temperature-half.svg';
+    //     break;
+    //   case 'Humidity':
+    //     icon = '../assets/media/svg/icons/Weather/Rain5.svg';
+    //     break;
+    //   case 'Pressure':
+    //     icon = '../assets/media/svg/icons/Weather/Wind.svg';
+    //     break;
+    //   case 'Location':
+    //     icon = '../assets/media/svg/icons/Weather/Temperature-half.svg';
+    //     break;
+    // }
+
+    return icon;
   }
 
 }
