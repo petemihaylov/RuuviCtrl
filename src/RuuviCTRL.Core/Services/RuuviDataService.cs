@@ -20,8 +20,10 @@ namespace RuuviCTRL.Core.Services
             _repository = repository;
             _eFRepository = eFRepository;
         }
-        public async Task AddMeasurePoint(RuuviData input)
+        public async Task<List<Notification>> AddMeasurePoint(RuuviData input)
         {
+            var output = new List<Notification>();
+
             await _repository.InsertOneAsync(input);
 
             var asset = await _eFRepository.FindAsync<Asset>(i => i.DeviceId == input.DeviceId);
@@ -59,10 +61,20 @@ namespace RuuviCTRL.Core.Services
                         {
                             var breach = new Breach(asset, input, slaAgreement, result);
                             await _eFRepository.AddAsync(breach);
+
+                            if (breach.Type == BreachType.Breach)
+                            {
+                                var notification = new Notification(breach.Type.ToString(), slaAgreement.AssetId.ToString(), "Warning", breach.CreatedAt);
+                                var notificationItem = await _eFRepository.AddAsync(notification);
+
+                                output.Add(notificationItem);
+                                // SignalR event
+                            }
                         }
                     }
                 }
             }
+            return output;
         }
     }
 }
