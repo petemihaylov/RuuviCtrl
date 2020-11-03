@@ -28,3 +28,15 @@
         <app-map-widget [routeHistory]="ruuviDataList.route"></app-map-widget>
     </div>
 </div>
+
+<div class="row" *ngIf="breaches$ | async as breaches">
+    <div *ngFor="let breach of breaches">
+        <p>{{breach.type == 1 ? 'warning' : 'breach'}}</p>
+    </div>
+</div>
+
+<div class="row" *ngIf="slas$ | async as slas">
+    <div *ngFor="let sla of slas">
+        <h3>{{sla.id}} | {{sla.hasTempratureBoundry}} | {{sla.hasHumidityBoundry}} | {{sla.hasPressureBoundry}}</h3>
+    </div>
+</div>
