@@ -30,7 +30,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\modules\ruuvi-monitoring\_models\BreachModels\HumidityBreach.model.ts" />
+    <None Remove="ClientApp\src\app\modules\ruuvi-monitoring\_models\BreachModels\locationBreach.model.ts" />
+    <None Remove="ClientApp\src\app\modules\ruuvi-monitoring\_models\BreachModels\PressureBreach.model.ts" />
+    <None Remove="ClientApp\src\app\modules\ruuvi-monitoring\_models\BreachModels\TemperatureBreach.model.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RuuviCTRL.Infrastructure\RuuviCTRL.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\modules\ruuvi-monitoring\_models\BreachModels\pressureBreach.model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\modules\ruuvi-monitoring\_models\BreachModels\humidityBreach.model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\modules\ruuvi-monitoring\_models\BreachModels\locationBreach.model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\modules\ruuvi-monitoring\_models\BreachModels\temperatureBreach.model.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

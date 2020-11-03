@@ -1,7 +1,7 @@
 export class BreachDto {
     id: number;
 
-    temprature: number;
+    temperature: number;
     humidity: number;
     pressure: number;
     latitude: number;
