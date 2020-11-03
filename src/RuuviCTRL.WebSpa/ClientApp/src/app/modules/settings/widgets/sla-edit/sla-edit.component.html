@@ -1,0 +1,51 @@
+<!--    <div class="card-body p-0">-->
+<!--        <div class="d-flex align-items-center justify-content-between card-spacer flex-grow-1">-->
+<!--            <span class="symbol symbol-50 symbol-light-primary mr-2">-->
+<!--                <span class="symbol-label">-->
+<!--                    <span-->
+<!--                            *ngIf="getCategoryIcon()"-->
+<!--                            [inlineSVG]="getCategoryIcon()"-->
+<!--                            class="svg-icon svg-icon-xl svg-icon-primary"-->
+<!--                    ></span>-->
+<!--                </span>-->
+<!--            </span>-->
+<!--            <div class="d-flex flex-column text-right">-->
+<!--                <span class="text-dark-75 font-weight-bolder font-size-h3">{{localSla.name}}</span>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="p-4">-->
+
+<!--            <div class="row">-->
+<!--                <mat-form-field class="col-md-6 example-full-width">-->
+<!--                    <input matInput placeholder="SLA Name" [name]="localSla.name" [(ngModel)]="localSla.name">-->
+<!--                </mat-form-field>-->
+<!--                <mat-form-field class="col-md-6 example-full-width">-->
+<!--                    <mat-select matInput placeholder="SLA Category" [name]="localSla.category" [(ngModel)]="localSla.category">-->
+<!--                        <mat-option *ngFor="let Category of availableCategories" [value]="Category">-->
+<!--                            {{ Category }}-->
+<!--                        </mat-option>-->
+<!--                    </mat-select>-->
+<!--                </mat-form-field>-->
+<!--            </div>-->
+
+<!--            <div class="row">-->
+<!--                <mat-form-field class="col-md-6 example-full-width">-->
+<!--                    <input type="number" matInput placeholder="Min value until violation" [max]="localSla.max" [name]="localSla.min" [(ngModel)]="localSla.min">-->
+<!--                </mat-form-field>-->
+<!--                <mat-form-field class="col-md-6 example-full-width">-->
+<!--                    <input type="number" matInput placeholder="Max value until violation" [min]="localSla.min" [name]="localSla.max" [(ngModel)]="localSla.max">-->
+<!--                </mat-form-field>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;            <mat-form-field class="example-full-width">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <textarea matInput placeholder="Leave a comment"></textarea>&ndash;&gt;-->
+<!--            &lt;!&ndash;            </mat-form-field>&ndash;&gt;-->
+<!--            &lt;!&ndash;            <mat-form-field class="example-full-width">&ndash;&gt;-->
+<!--            <span>Time (Hour: Minute: Second)</span>-->
+<!--            <ngb-timepicker [name]="localSla.time" [(ngModel)]="localSla.time" [seconds]="true"></ngb-timepicker>-->
+<!--            &lt;!&ndash;            </mat-form-field>&ndash;&gt;-->
+<!--            <mat-form-field class="example-full-width">-->
+<!--                <input type="number" matInput placeholder="Amount of violations till breach" [name]="localSla.amount" [(ngModel)]="localSla.amount">-->
+<!--            </mat-form-field>-->
+<!--        </div>-->
+<!--    </div>-->

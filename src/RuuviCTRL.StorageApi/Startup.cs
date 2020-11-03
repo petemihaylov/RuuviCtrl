@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using RuuviCTRL.Core;
 using RuuviCTRL.Infrastructure;
 using RuuviCTRL.StorageApi.Hubs;
 
@@ -32,7 +33,8 @@ namespace RuuviCTRL.StorageApi
             });
 
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
+            
+            services.AddServices();
             services.AddDbContext(connectionString);
             services.AddMongoDb(Configuration);
 
@@ -88,10 +90,19 @@ namespace RuuviCTRL.StorageApi
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
-
+            
+            
+            /*
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<LiveNotificationHub>("/livenotification");
+            });
+            */
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<LiveAssetHub>("/liveasset");
+                endpoints.MapHub<LiveNotificationHub>("/livenotification");
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });

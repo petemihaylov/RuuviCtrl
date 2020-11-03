@@ -14,6 +14,7 @@ export class Subheader1Component implements OnInit {
   subheaderMobileToggle = false;
   subheaderDisplayDesc = false;
   subheaderDisplayDaterangepicker = false;
+  objDate: number = Date.now();
   title$: Observable<string>;
   breadcrumbs$: Observable<BreadcrumbItemModel[]>;
   breadcrumbs: BreadcrumbItemModel[] = [];

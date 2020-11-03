@@ -19,6 +19,7 @@ import { UserOffcanvasComponent } from './offcanvas/user-offcanvas/user-offcanva
 import { CoreModule } from '../../../core';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { NotificationWebsocketService } from './offcanvas/quick-panel-offcanvas/_sevices/notification-websocket.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -47,6 +48,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
+    NotificationWebsocketService
   ],
   exports: [
     SearchDropdownInnerComponent,

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using RuuviCTRL.Core.Entities;
+using RuuviCTRL.Core.ValueObjects;
+using System;
 using System.Collections.Generic;
-using RuuviCTRL.Core.Entities;
 
 namespace RuuviCTRL.StorageApi.ApiModels
 {
@@ -28,6 +29,24 @@ namespace RuuviCTRL.StorageApi.ApiModels
                 Pressure = input.tags[0].pressure,
                 Temperature = input.tags[0].temperature,
                 Time = input.time
+            };
+        }
+
+        public static LiveRuuviOutput ToLiveRuuviOutput(RuuviInput input)
+        {
+            return new LiveRuuviOutput()
+            {
+                Temperature = new SingleStat { Value = input.tags[0].temperature, Time = input.time },
+                BatteryLevel =
+                    new SingleStat { Value = input.batteryLevel, Time = input.time },
+                Humidity = new SingleStat { Value = input.tags[0].humidity, Time = input.time },
+                Pressure = new SingleStat { Value = input.tags[0].pressure, Time = input.time },
+                Route = new LocationStat
+                {
+                    Latitude = input.location.latitude,
+                    Longitude = input.location.longitude,
+                    Time = input.time
+                }
             };
         }
 
