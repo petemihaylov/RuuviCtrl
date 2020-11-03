@@ -1,20 +1,20 @@
 <div class="p-4">
             <div>
                 <h3 class="w-100">Temperature</h3>
-                <mat-checkbox [(ngModel)]="localSla.hasTempratureBoundry">Enable Temperature</mat-checkbox>
+                <mat-checkbox [(ngModel)]="localSla.hasTempratureBoundry" (ngModelChange)="isValid()">Enable Temperature</mat-checkbox>
                     <section class="row" *ngIf="localSla.hasTempratureBoundry">
                     <mat-form-field class="col-md-6 example-full-width">
-                        <input type="number" matInput placeholder="Min value until violation" [max]="localSla.maxTemprature" [name]="localSla.minTemprature" [(ngModel)]="localSla.minTemprature">
+                        <input type="number" matInput placeholder="Min value until violation" [max]="localSla.maxTemprature" [name]="localSla.minTemprature" [(ngModel)]="localSla.minTemprature" (ngModelChange)="isValid()">
                     </mat-form-field>
                     <mat-form-field class="col-md-6 example-full-width">
-                        <input type="number" matInput placeholder="Max value until violation" [min]="localSla.minTemprature" [name]="localSla.maxTemprature" [(ngModel)]="localSla.maxTemprature">
+                        <input type="number" matInput placeholder="Max value until violation" [min]="localSla.minTemprature" [name]="localSla.maxTemprature" [(ngModel)]="localSla.maxTemprature" (ngModelChange)="isValid()">
                     </mat-form-field>
                     <div class="col-md-12 example-full-width">
                         <span>Time (Hour: Minute: Second)</span>
-                        <ngb-timepicker [name]="localSla.tempratureTime" [(ngModel)]="localSla.tempratureTime" [seconds]="true"></ngb-timepicker>
+                        <ngb-timepicker [name]="localSla.tempratureTime" [(ngModel)]="timeTemperature" (ngModelChange)="isValid()" [seconds]="true"></ngb-timepicker>
                     </div>
                     <mat-form-field class="col-md-12 example-full-width">
-                        <input type="number" matInput placeholder="Amount of violations till breach" [name]="localSla.tempratureCount" [(ngModel)]="localSla.tempratureCount">
+                        <input type="number" matInput placeholder="Amount of violations till breach" [name]="localSla.tempratureCount" [(ngModel)]="localSla.tempratureCount" (ngModelChange)="isValid()">
                     </mat-form-field>
                 </section>
             </div>
@@ -23,20 +23,20 @@
 
             <div>
                 <h3 class="w-100">Humidity</h3>
-                <mat-checkbox [(ngModel)]="localSla.hasHumidityBoundry">Enable Humidity</mat-checkbox>
+                <mat-checkbox [(ngModel)]="localSla.hasHumidityBoundry" (ngModelChange)="isValid()">Enable Humidity</mat-checkbox>
                 <section class="row" *ngIf="localSla.hasHumidityBoundry">
                     <mat-form-field class="col-sm-6 example-full-width">
-                        <input type="number" matInput placeholder="Min value until violation" [max]="localSla.maxHumidity" [name]="localSla.minHumidity" [(ngModel)]="localSla.minHumidity">
+                        <input type="number" matInput placeholder="Min value until violation" [max]="localSla.maxHumidity" [name]="localSla.minHumidity" [(ngModel)]="localSla.minHumidity" (ngModelChange)="isValid()">
                     </mat-form-field>
                     <mat-form-field class="col-sm-6 example-full-width">
-                        <input type="number" matInput placeholder="Max value until violation" [min]="localSla.minHumidity" [name]="localSla.maxHumidity" [(ngModel)]="localSla.maxHumidity">
+                        <input type="number" matInput placeholder="Max value until violation" [min]="localSla.minHumidity" [name]="localSla.maxHumidity" [(ngModel)]="localSla.maxHumidity" (ngModelChange)="isValid()">
                     </mat-form-field>
                     <div class="col-sm-12 example-full-width">
                         <span>Time (Hour: Minute: Second)</span>
-                        <ngb-timepicker [name]="localSla.humidityTime" [(ngModel)]="localSla.humidityTime" [seconds]="true"></ngb-timepicker>
+                        <ngb-timepicker [name]="localSla.humidityTime" [(ngModel)]="timeHumidity" (ngModelChange)="isValid()" [seconds]="true"></ngb-timepicker>
                     </div>
                     <mat-form-field class="col-sm-12 example-full-width">
-                        <input type="number" matInput placeholder="Amount of violations till breach" [name]="localSla.humidityCount" [(ngModel)]="localSla.humidityCount">
+                        <input type="number" matInput placeholder="Amount of violations till breach" [name]="localSla.humidityCount" [(ngModel)]="localSla.humidityCount" (ngModelChange)="isValid()">
                     </mat-form-field>
                 </section>
             </div>
@@ -45,20 +45,20 @@
 
             <div>
                 <h3 class="w-100">Pressure</h3>
-                <mat-checkbox [(ngModel)]="localSla.hasPressureBoundry">Enable Pressure</mat-checkbox>
+                <mat-checkbox [(ngModel)]="localSla.hasPressureBoundry" (ngModelChange)="isValid()">Enable Pressure</mat-checkbox>
                 <section class="row" *ngIf="localSla.hasPressureBoundry">
                     <mat-form-field class="col-sm-6 example-full-width">
-                        <input type="number" matInput placeholder="Min value until violation" [max]="localSla.maxPressure" [name]="localSla.minPressure" [(ngModel)]="localSla.minPressure">
+                        <input type="number" matInput placeholder="Min value until violation" [max]="localSla.maxPressure" [name]="localSla.minPressure" [(ngModel)]="localSla.minPressure" (ngModelChange)="isValid()">
                     </mat-form-field>
                     <mat-form-field class="col-sm-6 example-full-width">
-                        <input type="number" matInput placeholder="Max value until violation" [min]="localSla.minPressure" [name]="localSla.maxPressure" [(ngModel)]="localSla.maxPressure">
+                        <input type="number" matInput placeholder="Max value until violation" [min]="localSla.minPressure" [name]="localSla.maxPressure" [(ngModel)]="localSla.maxPressure" (ngModelChange)="isValid()">
                     </mat-form-field>
                     <div class="col-sm-12 example-full-width">
                         <span>Time (Hour: Minute: Second)</span>
-                        <ngb-timepicker [name]="localSla.pressureTime" [(ngModel)]="localSla.pressureTime" [seconds]="true"></ngb-timepicker>
+                        <ngb-timepicker [name]="localSla.pressureTime" [(ngModel)]="timePressure" (ngModelChange)="isValid()" [seconds]="true"></ngb-timepicker>
                     </div>
                     <mat-form-field class="col-sm-12 example-full-width">
-                        <input type="number" matInput placeholder="Amount of violations till breach" [name]="localSla.pressureCount" [(ngModel)]="localSla.pressureCount">
+                        <input type="number" matInput placeholder="Amount of violations till breach" [name]="localSla.pressureCount" [(ngModel)]="localSla.pressureCount" (ngModelChange)="isValid()">
                     </mat-form-field>
                 </section>
             </div>
@@ -67,15 +67,15 @@
 
             <div>
                 <h3 class="w-100">Location</h3>
-                <mat-checkbox [(ngModel)]="localSla.hasLocationBoundry">Enable Pressure</mat-checkbox>
+                <mat-checkbox [(ngModel)]="localSla.hasLocationBoundry" (ngModelChange)="isValid()">Enable Pressure</mat-checkbox>
                 <section class="row" *ngIf="localSla.hasLocationBoundry">
                     <app-sla-map class="col-sm-12"></app-sla-map>
                     <div class="col-sm-12 example-full-width">
                         <span>Time (Hour: Minute: Second)</span>
-                        <ngb-timepicker [name]="localSla.locationTime" [(ngModel)]="localSla.locationTime" [seconds]="true"></ngb-timepicker>
+                        <ngb-timepicker [name]="localSla.locationTime" [(ngModel)]="timeLocation" (ngModelChange)="isValid()" [seconds]="true"></ngb-timepicker>
                     </div>
                     <mat-form-field class="col-sm-12 example-full-width">
-                        <input type="number" matInput placeholder="Amount of violations till breach" [name]="localSla.locationCount" [(ngModel)]="localSla.locationCount">
+                        <input type="number" matInput placeholder="Amount of violations till breach" [name]="localSla.locationCount" [(ngModel)]="localSla.locationCount" (ngModelChange)="isValid()">
                     </mat-form-field>
                 </section>
             </div>

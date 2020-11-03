@@ -13,6 +13,7 @@ import {Subscription} from 'rxjs';
 export class SlaEditComponent implements OnInit {
 
   sla: SlaDto = {} as SlaDto;
+  isValid: boolean;
 
   constructor(private slaService: SlaService, private route: ActivatedRoute) { }
 
@@ -30,9 +31,11 @@ export class SlaEditComponent implements OnInit {
 
   editSla(){
     console.log(this.sla);
-    this.slaService.post(this.sla).subscribe(res => {
-      console.log(res);
-    });
+    if (this.isValid) {
+      this.slaService.post(this.sla).subscribe(res => {
+        console.log(res);
+      });
+    }
   }
 
 }

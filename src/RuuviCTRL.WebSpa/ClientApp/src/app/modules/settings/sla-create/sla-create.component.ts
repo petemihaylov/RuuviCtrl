@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class SlaCreateComponent implements OnInit {
 
   sla: SlaDto = {} as SlaDto;
+  isValid = false;
 
   constructor(private slaService: SlaService, private router: Router) { }
 
@@ -18,11 +19,14 @@ export class SlaCreateComponent implements OnInit {
   }
 
   createSla(){
-    console.log(this.sla);
-    this.sla.assetId = 1;
-    this.slaService.post(this.sla).subscribe(res => {
-      this.router.navigate(['/settings/overview']);
-    });
+    console.log(this.isValid);
+    if (this.isValid) {
+      this.sla.assetId = 1;
+      this.slaService.post(this.sla).subscribe(res => {
+        this.router.navigate(['/settings/overview']);
+      });
+    }
+
   }
 
 }
