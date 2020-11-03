@@ -1,42 +1,8 @@
-<ng-template #create let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title">Create new SLA</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <app-sla-edit [(sla)]="slaItem"></app-sla-edit>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="createSla(slaItem)">Create SLA</button>
-    </div>
-</ng-template>
-
-<ng-template #edit let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title">Edit SLA</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <app-sla-edit [(sla)]="slaItem"></app-sla-edit>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="saveSla(slaItem)">Save SLA</button>
-    </div>
-</ng-template>
-
-
-
 <div class="card card-custom card-stretch gutter-b">
 
     <!-- Body -->
     <div class="card-body">
-        <button class="btn btn-primary mb-4" (click)="open(create)">Create SLA</button>
+        <a class="btn btn-primary mb-4" routerLink="../create">Create SLA</a>
         <table class="table table-head-custom table-head-bg table-borderless table-vertical-center">
             <thead>
             <tr class="text-left text-uppercase">
@@ -52,7 +18,7 @@
             <tr>
                 <td>
                     <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-<!--                        {{sla.name}}-->
+                      test
                     </span>
                 </td>
                 <td>
@@ -61,7 +27,7 @@
                     </span>
                 </td>
                 <td>
-                    <button class="btn btn-light btn-hover-primary btn-sm" (click)="open(edit, null)">Edit SLA</button>
+                    <button class="btn btn-light btn-hover-primary btn-sm" routerLink="../1/edit">Edit SLA</button>
                 </td>
             </tr>
             </tbody>

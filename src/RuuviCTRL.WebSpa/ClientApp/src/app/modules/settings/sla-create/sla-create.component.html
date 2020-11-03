@@ -1,0 +1,21 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image">
+            <button class="w-100 h-100 btn" routerLink="../overview">
+                    <span
+                            [inlineSVG]="'../assets/media/svg/icons/Text/Undo.svg'"
+                            cacheSVG="true"
+                            class="svg-icon menu-icon"
+                    ></span>
+            </button>
+        </div>
+        <mat-card-title>Create SLA</mat-card-title>
+        <mat-card-subtitle>Creating a new SLA</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <app-sla-form [(sla)]="sla"></app-sla-form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="btn btn-primary" (click)="createSla()">Create SLA</button>
+    </mat-card-actions>
+</mat-card>
