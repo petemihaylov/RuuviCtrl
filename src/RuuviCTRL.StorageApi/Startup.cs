@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using RuuviCTRL.Core;
 using RuuviCTRL.Infrastructure;
 using RuuviCTRL.StorageApi.Hubs;
 
@@ -32,7 +33,8 @@ namespace RuuviCTRL.StorageApi
             });
 
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
+            
+            services.AddServices();
             services.AddDbContext(connectionString);
             services.AddMongoDb(Configuration);
 

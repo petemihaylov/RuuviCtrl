@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RuuviCTRL.Infrastructure.Data.EntityFramework;
 
 namespace RuuviCTRL.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201102211150_add hasended to breach")]
+    partial class addhasendedtobreach
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,18 +56,6 @@ namespace RuuviCTRL.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("HasEnded")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasHumidityBoundry")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasLocationBoundry")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasPressureBoundry")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasTempratureBoundry")
                         .HasColumnType("bit");
 
                     b.Property<float>("Humidity")
@@ -153,18 +143,6 @@ namespace RuuviCTRL.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("HasHumidityBoundry")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasLocationBoundry")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasPressureBoundry")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasTempratureBoundry")
-                        .HasColumnType("bit");
 
                     b.Property<float>("HumidityCount")
                         .HasColumnType("real");

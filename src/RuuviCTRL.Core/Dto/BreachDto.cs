@@ -1,12 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using RuuviCTRL.Core.Enums;
 
 namespace RuuviCTRL.Core.Dto
 {
-    public class SLADto
+    public class BreachDto
     {
-        public int Id { get; set; }
+        public float Humidity { get; set; }
+        public float Pressure { get; set; }
+        public float Temperature { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
+
+
+        public bool HasTempratureBreach { get; set; }
+        public bool HasHumidityBreach { get; set; }
+        public bool HasPressureBreach { get; set; }
+
         public bool HasTempratureBoundry { get; set; }
         public float MaxTemprature { get; set; }
         public float MinTemprature { get; set; }
@@ -31,7 +42,14 @@ namespace RuuviCTRL.Core.Dto
         public TimeSpan LocationTime { get; set; }
 
         public int AssetId { get; set; }
+        public int SlaAgreementId { get; set; }
+
+        public BreachType Type { get; set; }
 
         public DateTime CreatedAt { get; set; }
+        public bool HasEnded { get; set; }
+
+        public DateTime EndDate { get; set; }
+
     }
 }

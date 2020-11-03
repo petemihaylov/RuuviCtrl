@@ -7,6 +7,7 @@ using RuuviCTRL.Core.Services.Interfaces;
 using RuuviCTRL.Core.ValueObjects;
 using RuuviCTRL.SharedKernel.Interfaces;
 
+
 namespace RuuviCTRL.Core.Services
 {
     public class AssetService : IAssetService
@@ -35,11 +36,12 @@ namespace RuuviCTRL.Core.Services
                 Id = asset.Id,
                 DeviceId = asset.DeviceId,
                 Name = asset.Name,
-                Temperature  = ruuviData.Select(c => new SingleStat { Value = c.Temperature, Time = c.Time }).ToArray(),
-                BatteryLevel = ruuviData.Select(c => new SingleStat { Value = c.BatteryLevel, Time = c.Time }).ToArray(),
-                Humidity = ruuviData.Select(c => new SingleStat { Value = c.Humidity, Time = c.Time }).ToArray(),
-                Pressure = ruuviData.Select(c => new SingleStat { Value = c.Pressure, Time = c.Time }).ToArray(),
-                Route = ruuviData.Select(c => new LocationStat { Latitude = c.Latitude, Longitude = c.Longitude, Time = c.Time }).ToArray()
+                Temperature = ruuviData.Select(c => new SingleStat {Value = c.Temperature, Time = c.Time}).ToArray(),
+                BatteryLevel = ruuviData.Select(c => new SingleStat {Value = c.BatteryLevel, Time = c.Time}).ToArray(),
+                Humidity = ruuviData.Select(c => new SingleStat {Value = c.Humidity, Time = c.Time}).ToArray(),
+                Pressure = ruuviData.Select(c => new SingleStat {Value = c.Pressure, Time = c.Time}).ToArray(),
+                Route = ruuviData.Select(c => new LocationStat
+                    {Latitude = c.Latitude, Longitude = c.Longitude, Time = c.Time}).ToArray()
             };
 
             return assetDto;
@@ -59,21 +61,104 @@ namespace RuuviCTRL.Core.Services
                             Id = asset.Id,
                             DeviceId = asset.DeviceId,
                             Name = asset.Name,
-                            Temperature = new []{ ruuviData.Select(c => new SingleStat { Value = c.Temperature, Time = c.Time }).Last()},
-                            BatteryLevel = new []{ ruuviData.Select(c => new SingleStat { Value = c.BatteryLevel, Time = c.Time }).Last()},
-                            Humidity = new []{ ruuviData.Select(c => new SingleStat { Value = c.Humidity, Time = c.Time }).Last()},
-                            Pressure = new []{ ruuviData.Select(c => new SingleStat { Value = c.Pressure, Time = c.Time }).Last()},
-                            Route = new[]{ ruuviData.Select(c => new LocationStat { Latitude = c.Latitude, Longitude = c.Longitude, Time = c.Time }).Last()}
+                            Temperature = new[]
+                                {ruuviData.Select(c => new SingleStat {Value = c.Temperature, Time = c.Time}).Last()},
+                            BatteryLevel = new[]
+                                {ruuviData.Select(c => new SingleStat {Value = c.BatteryLevel, Time = c.Time}).Last()},
+                            Humidity = new[]
+                                {ruuviData.Select(c => new SingleStat {Value = c.Humidity, Time = c.Time}).Last()},
+                            Pressure = new[]
+                                {ruuviData.Select(c => new SingleStat {Value = c.Pressure, Time = c.Time}).Last()},
+                            Route = new[]
+                            {
+                                ruuviData.Select(c => new LocationStat
+                                    {Latitude = c.Latitude, Longitude = c.Longitude, Time = c.Time}).Last()
+                            }
                         };
 
                         resultDtos.Add(assetDto);
                     }
                 }
-                
-                );
+
+            );
 
             return resultDtos;
         }
 
+        public async Task<List<SLADto>> GetSlasByAssetId(int id)
+        {
+            var slaEntities = await _eFRepository.WhereToListAsync<SLAAgreement>(a => a.AssetId == id);
+            var slaDtos = slaEntities.Select(s => new SLADto
+            {
+                Id = s.Id,
+                HasTempratureBoundry = s.HasTempratureBoundry,
+                MaxTemprature = s.MaxTemprature,
+                MinTemprature = s.MinTemprature,
+                TempratureCount = s.TempratureCount,
+                TempratureTime = s.TempratureTime,
+                HasHumidityBoundry = s.HasHumidityBoundry,
+                MaxHumidity = s.MaxHumidity,
+                MinHumidity = s.MinHumidity,
+                HumidityCount = s.HumidityCount,
+                HumidityTime = s.HumidityTime,
+                HasPressureBoundry = s.HasPressureBoundry,
+                MaxPressure = s.MaxPressure,
+                MinPressure = s.MinPressure,
+                PressureCount = s.PressureCount,
+                PressureTime = s.PressureTime,
+                HasLocationBoundry = s.HasLocationBoundry,
+                LocationBoundary = s.LocationBoundary,
+                LocationCount = s.LocationCount,
+                LocationTime = s.LocationTime,
+                AssetId = s.AssetId,
+                CreatedAt = s.CreatedAt
+            }).ToList();
+
+            return slaDtos;
+        }
+
+        public async Task<List<BreachDto>> GetBreachesByAssetId(int id)
+        {
+            var breachesEntities = await _eFRepository.WhereToListAsync<Breach>(a => a.AssetId == id);
+            var breachDtos = breachesEntities.Select(s => new BreachDto()
+            {
+                MaxTemprature = s.MaxTemprature,
+                MinTemprature = s.MinTemprature,
+                TempratureCount = s.TempratureCount,
+                TempratureTime = s.TempratureTime,
+                MaxHumidity = s.MaxHumidity,
+                MinHumidity = s.MinHumidity,
+                HumidityCount = s.HumidityCount,
+                HumidityTime = s.HumidityTime,
+                MaxPressure = s.MaxPressure,
+                MinPressure = s.MinPressure,
+                PressureCount = s.PressureCount,
+                PressureTime = s.PressureTime,
+                LocationBoundary = s.LocationBoundary,
+                LocationCount = s.LocationCount,
+                LocationTime = s.LocationTime,
+                AssetId = s.AssetId,
+                SlaAgreementId = s.SlaAgreementId,
+                CreatedAt = s.CreatedAt,
+                EndDate = s.EndDate,
+                Temperature = s.Temperature,
+                Humidity = s.Humidity,
+                Pressure = s.Pressure,
+                Latitude = s.Latitude,
+                Longitude = s.Longitude,
+                HasTempratureBreach = s.HasTempratureBreach,
+                HasHumidityBreach = s.HasHumidityBreach,
+                HasPressureBreach = s.HasPressureBreach,
+                HasEnded = s.HasEnded,
+                HasTempratureBoundry = s.HasTempratureBoundry,
+                HasHumidityBoundry = s.HasHumidityBoundry,
+                HasPressureBoundry = s.HasPressureBoundry,
+                HasLocationBoundry = s.HasLocationBoundry
+
+            }).ToList();
+
+            return breachDtos;
+        }
     }
+
 }
