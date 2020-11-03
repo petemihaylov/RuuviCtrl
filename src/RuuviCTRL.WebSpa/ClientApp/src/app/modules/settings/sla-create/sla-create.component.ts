@@ -19,6 +19,7 @@ export class SlaCreateComponent implements OnInit {
 
   createSla(){
     console.log(this.sla);
+    this.sla.assetId = 1;
     this.slaService.post(this.sla).subscribe(res => {
       console.log(res);
     });

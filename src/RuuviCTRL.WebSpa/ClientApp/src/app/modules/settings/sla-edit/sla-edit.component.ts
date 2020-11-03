@@ -17,9 +17,9 @@ export class SlaEditComponent implements OnInit {
   constructor(private slaService: SlaService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const paramsSub = this.route.parent.params.subscribe(params => {
+    const paramsSub = this.route.paramMap.subscribe(params => {
       console.log(params);
-      const id = +params['id']; // (+) converts string 'id' to a number
+      const id = +params.get('id'); // (+) converts string 'id' to a number
       const detailsSub = this.slaService.read(id).subscribe(res => {
         console.log(res);
         // this.sla.next(res);

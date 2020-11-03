@@ -9,18 +9,12 @@ import {BehaviorSubject, Observable} from 'rxjs';
   styleUrls: ['./sla.component.scss']
 })
 export class SlaComponent implements OnInit {
-  _data: BehaviorSubject<SlaDto> = new BehaviorSubject(new SlaDto());
-  public readonly Data: Observable<SlaDto> = this._data.asObservable();
+
+  slas$: Observable<SlaDto[]>;
 
   constructor(private slaService: SlaService) { }
 
   ngOnInit(): void {
-
-    const listSub = this.slaService.list().subscribe(res => {
-      console.log(res);
-      // this._data.next(res);
-    });
-    listSub.unsubscribe();
+    this.slas$ = this.slaService.list();
   }
-
 }

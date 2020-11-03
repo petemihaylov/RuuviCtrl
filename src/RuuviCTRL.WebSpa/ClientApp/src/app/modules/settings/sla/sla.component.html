@@ -3,7 +3,7 @@
     <!-- Body -->
     <div class="card-body">
         <a class="btn btn-primary mb-4" routerLink="../create">Create SLA</a>
-        <table class="table table-head-custom table-head-bg table-borderless table-vertical-center">
+        <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" *ngIf="slas$ | async as slas">
             <thead>
             <tr class="text-left text-uppercase">
                 <th style="min-width: 250px;" class="pl-7">
@@ -15,10 +15,10 @@
             </thead>
             <tbody>
 
-            <tr>
+            <tr *ngFor="let sla of slas">
                 <td>
                     <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      test
+                      {{sla.id}}
                     </span>
                 </td>
                 <td>
@@ -27,7 +27,7 @@
                     </span>
                 </td>
                 <td>
-                    <button class="btn btn-light btn-hover-primary btn-sm" routerLink="../1/edit">Edit SLA</button>
+                <button class="btn btn-light btn-hover-primary btn-sm" [routerLink]="['..', sla.id, 'edit']">Edit SLA</button>
                 </td>
             </tr>
             </tbody>

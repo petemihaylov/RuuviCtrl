@@ -22,6 +22,10 @@ namespace RuuviCTRL.Core.Services
         public async Task<SLADto> GetSLADtoById(int id)
         {
             var slaEntitie = await _eFRepository.GetByIdAsync<SLAAgreement>(id);
+
+            if (slaEntitie == null)
+                return null;
+
             var slaDto = new SLADto
             {
                 Id = slaEntitie.Id,
