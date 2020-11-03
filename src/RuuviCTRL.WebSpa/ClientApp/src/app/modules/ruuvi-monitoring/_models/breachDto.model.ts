@@ -1,5 +1,13 @@
-export class SlaDto {
+export class BreachDto {
     id: number;
+
+    temprature: number;
+    humidity: number;
+    pressure: number;
+    latitude: number;
+    longitude: number;
+
+
     hasTempratureBoundry: boolean;
     maxTemprature: number;
     minTemprature: number;
@@ -24,6 +32,18 @@ export class SlaDto {
     locationTime: string;
 
     assetId: number;
+    slaAgreementId: number;
+
+    type: BreachType;
 
     createdAt: Date;
+
+    hasEnded: boolean;
+    endDate: Date;
+}
+
+export enum BreachType {
+    None,
+    Warning,
+    Breach
 }
