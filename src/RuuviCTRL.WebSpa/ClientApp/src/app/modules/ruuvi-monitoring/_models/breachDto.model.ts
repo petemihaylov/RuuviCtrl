@@ -7,6 +7,10 @@ export class BreachDto {
     latitude: number;
     longitude: number;
 
+    hasHumidityBreach: boolean;
+    hasTempratureBreach: boolean;
+    hasPressureBreach: boolean;
+
 
     hasTempratureBoundry: boolean;
     maxTemprature: number;
