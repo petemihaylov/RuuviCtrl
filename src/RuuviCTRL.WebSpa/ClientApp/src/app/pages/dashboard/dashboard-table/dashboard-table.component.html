@@ -1,3 +1,4 @@
+
 <!--begin::Dashboard Table Widget-->
 <div class="card card-custom card-stretch gutter-b">
     <div class="card-header border-0 py-5">
@@ -33,20 +34,20 @@
                                 {{item.deviceId}}
                             </span>
                         </td>
-                        <td>
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                        <td > 
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg" >
                                 {{item.temperature[item.temperature.length - 1].value}} °C
                             </span>
                         </td>
-                        <td>
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                {{item.pressure[item.pressure.length - 1].value}} Pa
+                        <td >
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg" >
+                                {{item.pressure[item.pressure.length - 1].value | number:'5.0-0'}} Pa
                             </span>
-                        </td>
-                        <td>
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                {{item.humidity[item.humidity.length - 1].value}} %
-                            </span>
+                         </td>
+                        <td >
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg" >
+                                {{item.humidity[item.humidity.length - 1].value | number:'1.1-2'}} %
+                            </span> 
                         </td>
                         <td>
                             <a [routerLink]="['/asset', item.id]" class="btn btn-light btn-hover-primary btn-sm">

@@ -11,6 +11,7 @@ namespace RuuviCTRL.Infrastructure.Data.EntityFramework
         { }
 
         public DbSet<Asset> Assets { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
         public DbSet<Breach> Breaches { get; set; }
         public DbSet<SLAAgreement> SlaAgreements { get; set; }
 

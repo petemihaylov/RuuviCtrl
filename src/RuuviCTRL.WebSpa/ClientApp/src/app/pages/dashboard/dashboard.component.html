@@ -1,1 +1,12 @@
+<div [hidden]="isShow" *ngFor="let item of Notifications | async" class="alert alert-warning row" role="alert">
+    <div class="col-md-8 d-flex align-items-center">
+      <div class="mr-2">[ {{item.createdAt | date:'medium'}} ]</div> : <div class="ml-2">{{item.title}}</div><div class="mx-auto">  {{item.description}}</div>
+    </div>
+    <div class="col-md-4 d-flex flex-row-reverse">
+        <button class="btn btn-xs btn-icon btn-light" type="button" (click)="deleteNotification()">
+            <i class="ki ki-close icon-xs text-muted"></i>
+        </button>
+    </div>
+</div>
+
 <app-dashboard-table [assetData]="Data"></app-dashboard-table>

@@ -6,6 +6,7 @@ import { WidgetsModule } from '../../_metronic/partials/content/widgets/widgets.
 import { DashboardTableComponent } from './dashboard-table/dashboard-table.component';
 import { HttpClient } from '@angular/common/http';
 import { RuuviWebsocketService } from './_services/ruuvi-websocket.service';
+import { NotificationWebsocketService } from './_services/notification-websocket.service';
 
 @NgModule({
   declarations: [DashboardComponent, DashboardTableComponent],
@@ -19,6 +20,6 @@ import { RuuviWebsocketService } from './_services/ruuvi-websocket.service';
       },
     ]),
   ],
-  providers: [HttpClient, RuuviWebsocketService]
+  providers: [HttpClient, RuuviWebsocketService, NotificationWebsocketService]
 })
 export class DashboardModule {}

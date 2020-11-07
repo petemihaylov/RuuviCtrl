@@ -1,4 +1,5 @@
 <!--begin::Topbar-->
+
 <ng-container *ngIf="extraSearchDisplay">
   <ng-container *ngIf="extrasSearchLayout === 'offcanvas'">
     <!--begin::Search-->
@@ -51,9 +52,29 @@
   </ng-container>
 </ng-container>
 
+<!-- Notifications button -->
+<ng-container
+    *ngIf="extrasQuickPanelDisplay">
+    <!--begin::Quick panel-->
+    <div class="topbar-item">
+        <div class="btn btn-icon btn-clean btn-lg mr-1 pulse pulse-primary" id="kt_quick_panel_toggle">
+            <span [inlineSVG]="'./assets/media/svg/icons/General/Notifications1.svg'" cachesvg="true" class="svg-icon svg-icon-xl svg-icon-primary"></span>
+            <span class="pulse-ring"></span>
+        </div>
+    </div>
+    <!--end::Quick panel-->
+</ng-container>
+
+<!--end::Topbar-->
+
+
+
+
+
+<!-- 
 <ng-container *ngIf="extrasNotificationsDisplay">
   <ng-container *ngIf="extrasNotificationsLayout === 'offcanvas'">
-    <!--begin::Notifications-->
+    // begin::Notifications
     <div class="topbar-item">
       <div
         class="btn btn-icon btn-icon-mobile btn-clean btn-lg mr-1 pulse pulse-primary"
@@ -67,13 +88,13 @@
         <span class="pulse-ring"></span>
       </div>
     </div>
-    <!--end::Notifications-->
+    // end::Notifications
   </ng-container>
 
   <ng-container *ngIf="extrasNotificationsLayout === 'dropdown'">
-    <!--begin::Notifications-->
+    // begin::Notifications
     <div class="dropdown" ngbDropdown placement="bottom">
-      <!--begin::Toggle-->
+      // begin::Toggle
       <div
         class="topbar-item"
         data-toggle="dropdown"
@@ -91,9 +112,9 @@
           <span class="pulse-ring"></span>
         </div>
       </div>
-      <!--end::Toggle-->
+      // end::Toggle
 
-      <!--begin::Dropdown-->
+      // begin::Dropdown 
       <div
         ngbDropdownMenu
         class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-lg"
@@ -102,15 +123,18 @@
           <app-notifications-dropdown-inner></app-notifications-dropdown-inner>
         </form>
       </div>
-      <!--end::Dropdown-->
+      // end::Dropdown
     </div>
-    <!--end::Notifications-->
+    // end::Notifications
   </ng-container>
-</ng-container>
+</ng-container> 
+-->
 
-<ng-container *ngIf="extrasQuickActionsDisplay">
+<!-- 
+  <ng-container *ngIf="extrasQuickActionsDisplay">
+
   <ng-container *ngIf="extrasQuickActionsLayout === 'offcanvas'">
-    <!--begin::Quick Actions-->
+    // begin::Quick Actions
     <div class="topbar-item">
       <div
         class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1"
@@ -123,12 +147,13 @@
         ></span>
       </div>
     </div>
-    <!--end::Quick Actions-->
+    //-end::Quick Actions
   </ng-container>
+
   <ng-container *ngIf="extrasQuickActionsLayout === 'dropdown'">
-    <!--begin::Quick Actions-->
+    // begin::Quick Actions
     <div class="dropdown" ngbDropdown placement="bottom">
-      <!--begin::Toggle-->
+       // begin::Toggle 
       <div
         class="topbar-item"
         data-toggle="dropdown"
@@ -143,23 +168,26 @@
           ></span>
         </div>
       </div>
-      <!--end::Toggle-->
-      <!--begin::Dropdown-->
+      // end::Toggle 
+      // begin::Dropdown 
       <div
         class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-lg"
         ngbDropdownMenu
       >
         <app-quick-actions-dropdown-inner></app-quick-actions-dropdown-inner>
       </div>
-      <!--end::Dropdown-->
+      // end::Dropdown
     </div>
-    <!--end::Quick Actions-->
+    // end::Quick Actions
   </ng-container>
-</ng-container>
 
-<ng-container *ngIf="extrasCartDisplay">
+</ng-container> 
+-->
+
+<!--
+  <ng-container *ngIf="extrasCartDisplay">
   <ng-container *ngIf="extrasCartLayout === 'offcanvas'">
-    <!--begin::Cart-->
+    // begin::Cart
     <div class="topbar-item">
       <div
         class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1"
@@ -172,12 +200,12 @@
         ></span>
       </div>
     </div>
-    <!--end::Cart-->
+     // end::Cart 
   </ng-container>
   <ng-container *ngIf="extrasCartLayout === 'dropdown'">
-    <!--begin::Cart-->
+    // begin::Cart
     <div class="dropdown" ngbDropdown placement="bottom">
-      <!--begin::Toggle-->
+      // begin::Toggle
       <div
         class="topbar-item"
         data-toggle="dropdown"
@@ -192,8 +220,9 @@
           ></span>
         </div>
       </div>
-      <!--end::Toggle-->
-      <!--begin::Dropdown-->
+      // end::Toggle
+
+      // begin::Dropdown
       <div
         ngbDropdownMenu
         class="dropdown-menu p-0 m-0 dropdown-menu-xl dropdown-menu-anim-up"
@@ -202,34 +231,25 @@
           <app-cart-dropdown-inner></app-cart-dropdown-inner>
         </form>
       </div>
-      <!--end::Dropdown-->
+      // end::Dropdown 
     </div>
-    <!--end::Cart-->
+    // end::Cart
   </ng-container>
 </ng-container>
 
-<ng-container *ngIf="extrasQuickPanelDisplay">
-  <!--begin::Quick panel-->
-  <div class="topbar-item">
-    <div class="btn btn-icon btn-clean btn-lg mr-1" id="kt_quick_panel_toggle">
-      <span
-        [inlineSVG]="'./assets/media/svg/icons/Layout/Layout-4-blocks.svg'"
-        cacheSVG="true"
-        class="svg-icon svg-icon-xl svg-icon-primary"
-      ></span>
-    </div>
-  </div>
-  <!--end::Quick panel-->
-</ng-container>
+-->
 
+<!--
 <ng-container *ngIf="extrasLanguagesDisplay">
   <app-language-selector style="margin-top: 10px;"></app-language-selector>
 </ng-container>
+-->
 
+<!--
 <ng-container *ngIf="extrasUserDisplay">
   <ng-container *ngIf="extrasUserLayout === 'offcanvas'">
     <ng-container *ngIf="user$ | async as _user">
-      <!--begin::User-->
+      
       <div class="topbar-item">
         <div
           class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
@@ -250,12 +270,12 @@
           </span>
         </div>
       </div>
-      <!--end::User-->
+
     </ng-container>
   </ng-container>
 
   <ng-container *ngIf="extrasUserLayout === 'dropdown'">
-    <!--begin::User-->
+    
     <ng-container *ngIf="user$ | async as _user">
       <div class="dropdown" ngbDropdown placement="bottom-right">
         <div
@@ -282,8 +302,6 @@
             </span>
           </div>
         </div>
-        <!--end::Toggle-->
-        <!--begin::Dropdown-->
         <div
           ngbDropdownMenu
           class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg p-0"
@@ -291,10 +309,7 @@
           <app-user-dropdown-inner></app-user-dropdown-inner>
         </div>
       </div>
-      <!--end::Dropdown-->
     </ng-container>
-    <!--end::User-->
   </ng-container>
 </ng-container>
-
-<!--end::Topbar-->
+-->
