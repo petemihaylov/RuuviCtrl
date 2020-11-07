@@ -29,4 +29,9 @@ export class SlaService {
         return this.httpClient
             .post<SlaDto>(`${this.url}/${this.endpoint}`, sla);
     }
+
+    update(sla: SlaDto): Observable<SlaDto> {
+        return this.httpClient
+            .put<SlaDto>(`${this.url}/${this.endpoint}/${sla.id}`, sla);
+    }
 }

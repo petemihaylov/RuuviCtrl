@@ -12,12 +12,14 @@ namespace RuuviCTRL.StorageApi.Api
 {
     public class RuuviDataController : BaseApiController
     {
-        private readonly IHubContext<LiveAssetHub> _hubContext;
+        private readonly IHubContext<LiveAssetHub> _assetHubContext;
+        private readonly IHubContext<LiveNotificationHub> _notificationHubContext;
         private readonly IRuuviDataService _ruuviDataService;
 
-        public RuuviDataController(IHubContext<LiveAssetHub> hubContext, IRuuviDataService ruuviDataService)
+        public RuuviDataController(IHubContext<LiveAssetHub> assetHubContext, IHubContext<LiveNotificationHub> notificationHubContext, IRuuviDataService ruuviDataService)
         {
-            _hubContext = hubContext;
+            _assetHubContext = assetHubContext;
+            _notificationHubContext = notificationHubContext;
             _ruuviDataService = ruuviDataService;
         }
 
@@ -30,11 +32,11 @@ namespace RuuviCTRL.StorageApi.Api
                 var notifications = await _ruuviDataService.AddMeasurePoint(structuredInput);
 
                 var liveOutput = RuuviInput.ToLiveRuuviOutput(input);
-                await _hubContext.Clients.All.SendAsync("GetNewAssetData", liveOutput);
+                await _assetHubContext.Clients.All.SendAsync("GetNewAssetData", liveOutput);
 
                 foreach (var notification in notifications)
                 {
-                    await _hubContext.Clients.All.SendAsync("GetNewNotification", notification);
+                    await _notificationHubContext.Clients.All.SendAsync("GetNewNotification", notification);
                 }
             }
             return Ok();

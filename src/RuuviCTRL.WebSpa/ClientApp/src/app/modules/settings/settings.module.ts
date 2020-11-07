@@ -9,16 +9,23 @@ import {MatInputModule} from '@angular/material/input';
 import {SettingsRoutingModule} from './settings-routing.module';
 import {SettingsComponent} from './settings.component';
 import {MatSelectModule} from '@angular/material/select';
-import { SlaEditComponent } from './widgets/sla-edit/sla-edit.component';
+import { SlaEditComponent } from './sla-edit/sla-edit.component';
 import { SlaMapComponent } from './widgets/sla-map/sla-map.component';
 import { SlaService } from './_services/sla.service';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {SlaFormComponent} from './widgets/sla-form/sla-form.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
+import { SlaCreateComponent } from './sla-create/sla-create.component';
 
 @NgModule({
     declarations: [
       SettingsComponent,
       SlaComponent,
       SlaEditComponent,
-      SlaMapComponent
+      SlaMapComponent,
+      SlaFormComponent,
+      SlaCreateComponent
     ],
     imports: [
         CommonModule,
@@ -30,6 +37,9 @@ import { SlaService } from './_services/sla.service';
         NgbTimepickerModule,
         MatInputModule,
         MatSelectModule,
+        MatCheckboxModule,
+        MatToolbarModule,
+        MatCardModule,
     ],
     providers: [DatePipe, DecimalPipe, SlaService]
   })
