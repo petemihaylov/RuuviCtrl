@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Core.Enums;
 
 namespace RuuviCTRL.Core.Dto
@@ -43,6 +44,8 @@ namespace RuuviCTRL.Core.Dto
 
         public int AssetId { get; set; }
         public int SlaAgreementId { get; set; }
+        public string SlaTitle { get; set; }
+
 
         public BreachType Type { get; set; }
 
@@ -50,6 +53,47 @@ namespace RuuviCTRL.Core.Dto
         public bool HasEnded { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        public BreachDto()
+        {
+            
+        }
+        public BreachDto(Breach breach)
+        {
+            MaxTemprature = breach.MaxTemprature;
+            MinTemprature = breach.MinTemprature;
+            TempratureCount = breach.TempratureCount;
+            TempratureTime = breach.TempratureTime;
+            MaxHumidity = breach.MaxHumidity;
+            MinHumidity = breach.MinHumidity;
+            HumidityCount = breach.HumidityCount;
+            HumidityTime = breach.HumidityTime;
+            MaxPressure = breach.MaxPressure;
+            MinPressure = breach.MinPressure;
+            PressureCount = breach.PressureCount;
+            PressureTime = breach.PressureTime;
+            LocationBoundary = breach.LocationBoundary;
+            LocationCount = breach.LocationCount;
+            LocationTime = breach.LocationTime;
+            AssetId = breach.AssetId;
+            SlaAgreementId = breach.SlaAgreementId;
+            CreatedAt = breach.CreatedAt;
+            EndDate = breach.EndDate;
+            Temperature = breach.Temperature;
+            Humidity = breach.Humidity;
+            Pressure = breach.Pressure;
+            Latitude = breach.Latitude;
+            Longitude = breach.Longitude;
+            HasTempratureBreach = breach.HasTempratureBreach;
+            HasHumidityBreach = breach.HasHumidityBreach;
+            HasPressureBreach = breach.HasPressureBreach;
+            HasEnded = breach.HasEnded;
+            HasTempratureBoundry = breach.HasTempratureBoundry;
+            HasHumidityBoundry = breach.HasHumidityBoundry;
+            HasPressureBoundry = breach.HasPressureBoundry;
+            HasLocationBoundry = breach.HasLocationBoundry;
+            Type = breach.Type;
+        }
 
     }
 }

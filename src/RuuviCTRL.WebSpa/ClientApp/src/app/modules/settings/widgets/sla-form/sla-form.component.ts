@@ -20,9 +20,11 @@ export class SlaFormComponent implements OnInit {
 
   @Input()
   set sla(sla: SlaDto) {
+    console.log(sla);
     if (sla) {
       this.slaChange.emit(sla);
       this.localSla = sla;
+      this.setTimeStringsToArrays();
     } else {
       this.localSla = ({} as SlaDto);
     }
@@ -50,7 +52,6 @@ export class SlaFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.setTimeStringsToArrays();
   }
 
   private dateToString = (time) => `${(time.hour <= 9) ? '0' + time.hour : time.hour}:${(time.minute <= 9) ? '0' + time.minute : time.minute}:${(time.second <= 9) ? '0' + time.second : time.second}`;
@@ -83,6 +84,9 @@ export class SlaFormComponent implements OnInit {
     this.setTimeStringsToArrays();
     let valid = true;
 
+    if(this.localSla.title == null || this.localSla.title.length === 0){
+      valid = false;
+    }
     if ( this.localSla.hasTempratureBoundry ) {
       if (this.localSla.tempratureTime === '00:00:00') {
         valid = false;

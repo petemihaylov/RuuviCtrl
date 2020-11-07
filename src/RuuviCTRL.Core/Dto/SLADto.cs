@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using RuuviCTRL.Core.Entities;
 
 namespace RuuviCTRL.Core.Dto
 {
     public class SLADto
     {
         public int Id { get; set; }
+
+        public string Title { get; set; }
         public bool HasTempratureBoundry { get; set; }
         public float MaxTemprature { get; set; }
         public float MinTemprature { get; set; }
@@ -33,5 +36,37 @@ namespace RuuviCTRL.Core.Dto
         public int AssetId { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public SLADto()
+        {
+            
+        }
+
+        public SLADto(SLAAgreement sla)
+        {
+            Id = sla.Id;
+            Title = sla.Title;
+            HasTempratureBoundry = sla.HasTempratureBoundry;
+            MaxTemprature = sla.MaxTemprature;
+            MinTemprature = sla.MinTemprature;
+            TempratureCount = sla.TempratureCount;
+            TempratureTime = sla.TempratureTime;
+            HasHumidityBoundry = sla.HasHumidityBoundry;
+            MaxHumidity = sla.MaxHumidity;
+            MinHumidity = sla.MinHumidity;
+            HumidityCount = sla.HumidityCount;
+            HumidityTime = sla.HumidityTime;
+            HasPressureBoundry = sla.HasPressureBoundry;
+            MaxPressure = sla.MaxPressure;
+            MinPressure = sla.MinPressure;
+            PressureCount = sla.PressureCount;
+            PressureTime = sla.PressureTime;
+            HasLocationBoundry = sla.HasLocationBoundry;
+            LocationBoundary = sla.LocationBoundary;
+            LocationCount = sla.LocationCount;
+            LocationTime = sla.LocationTime;
+            AssetId = sla.AssetId;
+            CreatedAt = sla.CreatedAt;
+        }
     }
 }

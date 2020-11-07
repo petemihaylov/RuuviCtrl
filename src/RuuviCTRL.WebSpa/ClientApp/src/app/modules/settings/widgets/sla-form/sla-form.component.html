@@ -1,4 +1,7 @@
 <div class="p-4">
+        <mat-form-field class="col-md-6 example-full-width">
+                <input type="text" matInput placeholder="SLA Title" [name]="localSla.title" [(ngModel)]="localSla.title" (ngModelChange)="isValid()">
+            </mat-form-field>
             <div>
                 <h3 class="w-100">Temperature</h3>
                 <mat-checkbox [(ngModel)]="localSla.hasTempratureBoundry" (ngModelChange)="isValid()">Enable Temperature</mat-checkbox>

@@ -26,31 +26,7 @@ namespace RuuviCTRL.Core.Services
             if (slaEntitie == null)
                 return null;
 
-            var slaDto = new SLADto
-            {
-                Id = slaEntitie.Id,
-                HasTempratureBoundry = slaEntitie.HasTempratureBoundry,
-                MaxTemprature = slaEntitie.MaxTemprature,
-                MinTemprature = slaEntitie.MinTemprature,
-                TempratureCount = slaEntitie.TempratureCount,
-                TempratureTime = slaEntitie.TempratureTime,
-                HasHumidityBoundry = slaEntitie.HasHumidityBoundry,
-                MaxHumidity = slaEntitie.MaxHumidity,
-                MinHumidity = slaEntitie.MinHumidity,
-                HumidityCount = slaEntitie.HumidityCount,
-                HumidityTime = slaEntitie.HumidityTime,
-                HasPressureBoundry = slaEntitie.HasPressureBoundry,
-                MaxPressure = slaEntitie.MaxPressure,
-                MinPressure = slaEntitie.MinPressure,
-                PressureCount = slaEntitie.PressureCount,
-                PressureTime = slaEntitie.PressureTime,
-                HasLocationBoundry = slaEntitie.HasLocationBoundry,
-                LocationBoundary = slaEntitie.LocationBoundary,
-                LocationCount = slaEntitie.LocationCount,
-                LocationTime = slaEntitie.LocationTime,
-                AssetId = slaEntitie.AssetId,
-                CreatedAt = slaEntitie.CreatedAt
-            };
+            var slaDto = new SLADto(slaEntitie);
 
             return slaDto;
         }
@@ -58,31 +34,7 @@ namespace RuuviCTRL.Core.Services
         public async Task<List<SLADto>> GetSLADtos()
         {
             var slaEntities = await _eFRepository.ListAsync<SLAAgreement>();
-            var slaDtos = slaEntities.Select(s => new SLADto
-            {
-                Id = s.Id,
-                HasTempratureBoundry = s.HasTempratureBoundry,
-                MaxTemprature = s.MaxTemprature,
-                MinTemprature = s.MinTemprature,
-                TempratureCount = s.TempratureCount,
-                TempratureTime = s.TempratureTime,
-                HasHumidityBoundry = s.HasHumidityBoundry,
-                MaxHumidity = s.MaxHumidity,
-                MinHumidity = s.MinHumidity,
-                HumidityCount = s.HumidityCount,
-                HumidityTime = s.HumidityTime,
-                HasPressureBoundry = s.HasPressureBoundry,
-                MaxPressure = s.MaxPressure,
-                MinPressure = s.MinPressure,
-                PressureCount = s.PressureCount,
-                PressureTime = s.PressureTime,
-                HasLocationBoundry = s.HasLocationBoundry,
-                LocationBoundary = s.LocationBoundary,
-                LocationCount = s.LocationCount,
-                LocationTime = s.LocationTime,
-                AssetId = s.AssetId,
-                CreatedAt = s.CreatedAt
-            }).ToList();
+            var slaDtos = slaEntities.Select(s => new SLADto(s)).ToList();
 
             return slaDtos;
         }

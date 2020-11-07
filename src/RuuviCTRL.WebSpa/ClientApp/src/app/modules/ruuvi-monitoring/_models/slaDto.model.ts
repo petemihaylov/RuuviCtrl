@@ -1,5 +1,6 @@
 export class SlaDto {
     id: number;
+    title: string;
     hasTempratureBoundry: boolean;
     maxTemprature: number;
     minTemprature: number;
