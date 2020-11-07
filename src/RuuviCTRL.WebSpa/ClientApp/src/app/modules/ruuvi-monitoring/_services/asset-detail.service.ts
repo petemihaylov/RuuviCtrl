@@ -31,4 +31,9 @@ export class AssetDetailService {
         return this.httpClient
             .get<SlaDto[]>(`${this.url}/${this.endpoint}/${id}/slas`);
     }
+    readByDate(id: number , start: string, end:string): Observable<AssetDto> {
+        return this.httpClient
+        .get<AssetDto>(`${this.url}/${this.endpoint}/byTime?id=${id}&start=${start}&end=${end}`);
+    }
+
 }

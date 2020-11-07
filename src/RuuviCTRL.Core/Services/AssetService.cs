@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RuuviCTRL.Core.Dto;
@@ -23,19 +24,27 @@ namespace RuuviCTRL.Core.Services
 
         public async Task<AssetDto> GetAssetDtoById(int id)
         {
+            var assetDto = await GetAssetDtoById(id, DateTime.MinValue, DateTime.MaxValue);
+            return assetDto;
+        }
+
+        public async Task<AssetDto> GetAssetDtoById(int id, DateTime startDate, DateTime endDate)
+        {
             var asset = await _eFRepository.GetByIdAsync<Asset>(id);
             if (asset == null)
                 return null;
 
             var ruuviData = _repository.FilterBy(s => s.DeviceId == asset.DeviceId).ToList();
-            if (ruuviData.Count == 0)
+
+            var selectedRuuviData = ruuviData.Where(x => x.Time.Date >= startDate.Date && x.Time.Date <= endDate).ToList();
+
+            if (selectedRuuviData.Count == 0)
                 return null;
 
-            var assetDto = new AssetDto(asset, ruuviData);
+            var assetDto = new AssetDto(asset, selectedRuuviData);
 
             return assetDto;
         }
-
         public async Task<List<AssetDto>> GetAssetDtos()
         {
             var assets = await _eFRepository.ListAsync<Asset>();

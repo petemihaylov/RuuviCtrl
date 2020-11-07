@@ -65,7 +65,6 @@ export class StatsWidgetComponent implements OnChanges {
     }
     var min = Math.min.apply(null, this.data.map((res) => res.value));
     var max = Math.max.apply(null, this.data.map((res) => res.value));
-    console.log(`min: ${min} | max: ${max}`);
   }
 
   getChartOptions() {
