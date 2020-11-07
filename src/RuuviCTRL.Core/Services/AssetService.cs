@@ -41,7 +41,7 @@ namespace RuuviCTRL.Core.Services
             if (selectedRuuviData.Count == 0)
                 return null;
 
-            var assetDto = new AssetDto(asset, ruuviData);
+            var assetDto = new AssetDto(asset, selectedRuuviData);
 
             return assetDto;
         }

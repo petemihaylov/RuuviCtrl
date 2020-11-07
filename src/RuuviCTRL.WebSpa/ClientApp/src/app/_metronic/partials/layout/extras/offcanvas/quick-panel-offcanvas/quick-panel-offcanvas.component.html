@@ -1,12 +1,14 @@
 <!--begin::Quick Panel-->
-<div
-    id="kt_quick_panel" class="offcanvas pt-5 pb-10" [ngClass]="extrasQuickPanelOffcanvasDirectionCSSClass">
+<div id="kt_quick_panel" class="offcanvas pt-5 pb-10" [ngClass]="extrasQuickPanelOffcanvasDirectionCSSClass">
     <!--begin::Header-->
     <div class="offcanvas-header offcanvas-header-navs d-flex align-items-center justify-content-between mb-5">
-        <ul class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x nav-tabs-primary flex-grow-1 px-10" role="tablist">
+        <ul class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x nav-tabs-primary flex-grow-1 px-10"
+            role="tablist">
 
             <li class="nav-item">
-                <a class="nav-link cursor-pointer" data-toggle="tab" [ngClass]="getActiveCSSClasses('kt_quick_panel_notifications')" (click)="setActiveTabId('kt_quick_panel_notifications')">Notifications</a>
+                <a class="nav-link cursor-pointer" data-toggle="tab"
+                    [ngClass]="getActiveCSSClasses('kt_quick_panel_notifications')"
+                    (click)="setActiveTabId('kt_quick_panel_notifications')">Notifications</a>
             </li>
             <!-- 
                                                                                                                                                                                                                                                                                                       <li class="nav-item">
@@ -41,15 +43,13 @@
 
     <!--begin::Content-->
     <div class="offcanvas-content px-10">
-        <div
-            class="tab-content">
+        <div class="tab-content">
 
             <!--begin::Tabpane-->
-            <div
-                class="tab-pane fade pt-2 pr-5 mr-n5" id="kt_quick_panel_notifications" [ngClass]="getActiveCSSClasses('kt_quick_panel_notifications')" role="tabpanel">
+            <div class="tab-pane fade pt-2 pr-5 mr-n5" id="kt_quick_panel_notifications"
+                [ngClass]="getActiveCSSClasses('kt_quick_panel_notifications')" role="tabpanel">
                 <!--begin::Nav-->
-                <div
-                    class="navi navi-icon-circle navi-spacer-x-0">
+                <div class="navi navi-icon-circle navi-spacer-x-0">
 
                     <!--begin::Item-->
                     <div class="navi-item" *ngFor="let item of Data | async">
@@ -57,7 +57,7 @@
                         <div class="navi-link rounded">
                             <div class="symbol symbol-50 mr-3">
                                 <div class="symbol-label">
-                                    <i class="flaticon-bell text-warning icon-lg"></i>
+                                    <i class="flaticon-bell text-danger icon-lg"></i>
                                 </div>
                             </div>
                             <div class="navi-text">
@@ -69,7 +69,8 @@
                                 </div>
                             </div>
                             <div class="mt-n1 pr-5">
-                                <button class="btn btn-xs btn-icon btn-light btn-hover-danger" type="button" (click)="deleteNotification(item.id)">
+                                <button class="btn btn-xs btn-icon btn-light btn-hover-danger" type="button"
+                                    (click)="deleteNotification(item.id)">
                                     <i class="ki ki-minus icon-xs text-muted"></i>
                                 </button>
                             </div>
@@ -87,8 +88,8 @@
 
 
             <!--begin::Tabpane-->
-            <div
-                class="tab-pane fade pt-3 pr-5 mr-n5" id="kt_quick_panel_logs" [ngClass]="getActiveCSSClasses('kt_quick_panel_logs')" role="tabpanel">
+            <div class="tab-pane fade pt-3 pr-5 mr-n5" id="kt_quick_panel_logs"
+                [ngClass]="getActiveCSSClasses('kt_quick_panel_logs')" role="tabpanel">
                 <!--begin::Section-->
                 <div class="mb-15">
                     <h5 class="font-weight-bold mb-5">System Messages</h5>
@@ -96,11 +97,13 @@
                     <div class="d-flex align-items-center flex-wrap mb-5">
                         <div class="symbol symbol-50 symbol-light mr-5">
                             <span class="symbol-label">
-                                <span [inlineSVG]="'./assets/media/svg/misc/006-plurk.svg'" cacheSVG="true" class="svg-icon h-50 align-self-center"></span>
+                                <span [inlineSVG]="'./assets/media/svg/misc/006-plurk.svg'" cacheSVG="true"
+                                    class="svg-icon h-50 align-self-center"></span>
                             </span>
                         </div>
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">Top Authors</a>
+                            <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">Top
+                                Authors</a>
                             <span class="text-muted font-weight-bold">Most Successful Fellas</span>
                         </div>
                         <span class="btn btn-sm btn-light font-weight-bolder py-1 my-lg-0 my-2 text-dark-50">+82$</span>
@@ -111,14 +114,18 @@
                     <div class="d-flex align-items-center flex-wrap mb-5">
                         <div class="symbol symbol-50 symbol-light mr-5">
                             <span class="symbol-label">
-                                <span [inlineSVG]="'./assets/media/svg/misc/015-telegram.svg'" cacheSVG="true" class="svg-icon h-50 align-self-center"></span>
+                                <span [inlineSVG]="'./assets/media/svg/misc/015-telegram.svg'" cacheSVG="true"
+                                    class="svg-icon h-50 align-self-center"></span>
                             </span>
                         </div>
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">Popular Authors</a>
+                            <a href="#"
+                                class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">Popular
+                                Authors</a>
                             <span class="text-muted font-weight-bold">Most Successful Fellas</span>
                         </div>
-                        <span class="btn btn-sm btn-light font-weight-bolder my-lg-0 my-2 py-1 text-dark-50">+280$</span>
+                        <span
+                            class="btn btn-sm btn-light font-weight-bolder my-lg-0 my-2 py-1 text-dark-50">+280$</span>
                     </div>
                     <!--end: Item-->
 
@@ -126,14 +133,17 @@
                     <div class="d-flex align-items-center flex-wrap mb-5">
                         <div class="symbol symbol-50 symbol-light mr-5">
                             <span class="symbol-label">
-                                <span [inlineSVG]="'./assets/media/svg/misc/003-puzzle.svg'" cacheSVG="true" class="svg-icon h-50 align-self-center"></span>
+                                <span [inlineSVG]="'./assets/media/svg/misc/003-puzzle.svg'" cacheSVG="true"
+                                    class="svg-icon h-50 align-self-center"></span>
                             </span>
                         </div>
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">New Users</a>
+                            <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">New
+                                Users</a>
                             <span class="text-muted font-weight-bold">Most Successful Fellas</span>
                         </div>
-                        <span class="btn btn-sm btn-light font-weight-bolder my-lg-0 my-2 py-1 text-dark-50">+4500$</span>
+                        <span
+                            class="btn btn-sm btn-light font-weight-bolder my-lg-0 my-2 py-1 text-dark-50">+4500$</span>
                     </div>
                     <!--end: Item-->
 
@@ -141,14 +151,18 @@
                     <div class="d-flex align-items-center flex-wrap mb-5">
                         <div class="symbol symbol-50 symbol-light mr-5">
                             <span class="symbol-label">
-                                <span [inlineSVG]="'./assets/media/svg/misc/005-bebo.svg'" cacheSVG="true" class="svg-icon h-50 align-self-center"></span>
+                                <span [inlineSVG]="'./assets/media/svg/misc/005-bebo.svg'" cacheSVG="true"
+                                    class="svg-icon h-50 align-self-center"></span>
                             </span>
                         </div>
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">Active Customers</a>
+                            <a href="#"
+                                class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">Active
+                                Customers</a>
                             <span class="text-muted font-weight-bold">Most Successful Fellas</span>
                         </div>
-                        <span class="btn btn-sm btn-light font-weight-bolder my-lg-0 my-2 py-1 text-dark-50">+4500$</span>
+                        <span
+                            class="btn btn-sm btn-light font-weight-bolder my-lg-0 my-2 py-1 text-dark-50">+4500$</span>
                     </div>
                     <!--end: Item-->
 
@@ -156,14 +170,18 @@
                     <div class="d-flex align-items-center flex-wrap">
                         <div class="symbol symbol-50 symbol-light mr-5">
                             <span class="symbol-label">
-                                <span [inlineSVG]="'./assets/media/svg/misc/014-kickstarter.svg'" cacheSVG="true" class="svg-icon h-50 align-self-center"></span>
+                                <span [inlineSVG]="'./assets/media/svg/misc/014-kickstarter.svg'" cacheSVG="true"
+                                    class="svg-icon h-50 align-self-center"></span>
                             </span>
                         </div>
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">Bestseller Theme</a>
+                            <a href="#"
+                                class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">Bestseller
+                                Theme</a>
                             <span class="text-muted font-weight-bold">Most Successful Fellas</span>
                         </div>
-                        <span class="btn btn-sm btn-light font-weight-bolder my-lg-0 my-2 py-1 text-dark-50">+4500$</span>
+                        <span
+                            class="btn btn-sm btn-light font-weight-bolder my-lg-0 my-2 py-1 text-dark-50">+4500$</span>
                     </div>
                     <!--end: Item-->
                 </div>
@@ -176,11 +194,14 @@
                     <!--begin: Item-->
                     <div class="d-flex align-items-center bg-light-warning rounded p-5 mb-5">
                         <span class="svg-icon svg-icon-warning mr-5">
-                            <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon svg-icon-lg"></span>
+                            <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true"
+                                class="svg-icon svg-icon-lg"></span>
                         </span>
 
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1">Another purpose persuade</a>
+                            <a href="#"
+                                class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1">Another
+                                purpose persuade</a>
                             <span class="text-muted font-size-sm">Due in 2 Days</span>
                         </div>
 
@@ -191,10 +212,13 @@
                     <!--begin: Item-->
                     <div class="d-flex align-items-center bg-light-success rounded p-5 mb-5">
                         <span class="svg-icon svg-icon-success mr-5">
-                            <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true" class="svg-icon svg-icon-lg"></span>
+                            <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                                class="svg-icon svg-icon-lg"></span>
                         </span>
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1">Would be to people</a>
+                            <a href="#"
+                                class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1">Would be to
+                                people</a>
                             <span class="text-muted font-size-sm">Due in 2 Days</span>
                         </div>
 
@@ -205,12 +229,16 @@
                     <!--begin: Item-->
                     <div class="d-flex align-items-center bg-light-danger rounded p-5 mb-5">
                         <span class="svg-icon svg-icon-danger mr-5">
-                            <span [inlineSVG]="
+                            <span
+                                [inlineSVG]="
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   './assets/media/svg/icons/Communication/Group-chat.svg'
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                " cacheSVG="true" class="svg-icon svg-icon-lg"></span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
+                                cacheSVG="true" class="svg-icon svg-icon-lg"></span>
                         </span>
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1">Purpose would be to persuade</a>
+                            <a href="#"
+                                class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1">Purpose
+                                would be to persuade</a>
                             <span class="text-muted font-size-sm">Due in 2 Days</span>
                         </div>
 
@@ -221,11 +249,13 @@
                     <!--begin: Item-->
                     <div class="d-flex align-items-center bg-light-info rounded p-5">
                         <span class="svg-icon svg-icon-info mr-5">
-                            <span [inlineSVG]="'./assets/media/svg/icons/General/Attachment2.svg'" cacheSVG="true" class="svg-icon svg-icon-lg"></span>
+                            <span [inlineSVG]="'./assets/media/svg/icons/General/Attachment2.svg'" cacheSVG="true"
+                                class="svg-icon svg-icon-lg"></span>
                         </span>
 
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1">The best product</a>
+                            <a href="#" class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1">The
+                                best product</a>
                             <span class="text-muted font-size-sm">Due in 2 Days</span>
                         </div>
 
@@ -239,9 +269,9 @@
             <!--end::Tabpane-->
 
             <!--begin::Tabpane-->
-            <div class="tab-pane fade pt-3 pr-5 mr-n5" id="kt_quick_panel_settings" [ngClass]="getActiveCSSClasses('kt_quick_panel_settings')" role="tabpanel">
-                <form
-                    class="form">
+            <div class="tab-pane fade pt-3 pr-5 mr-n5" id="kt_quick_panel_settings"
+                [ngClass]="getActiveCSSClasses('kt_quick_panel_settings')" role="tabpanel">
+                <form class="form">
                     <!--begin::Section-->
                     <div>
                         <h5 class="font-weight-bold mb-3">Customer Care</h5>
@@ -250,7 +280,7 @@
                             <div class="col-4 d-flex justify-content-end">
                                 <span class="switch switch-success switch-sm">
                                     <label>
-                                        <input type="checkbox" checked="checked" name="select"/>
+                                        <input type="checkbox" checked="checked" name="select" />
                                         <span></span>
                                     </label>
                                 </span>
@@ -261,7 +291,7 @@
                             <div class="col-4 d-flex justify-content-end">
                                 <span class="switch switch-success switch-sm">
                                     <label>
-                                        <input type="checkbox" name="quick_panel_notifications_2"/>
+                                        <input type="checkbox" name="quick_panel_notifications_2" />
                                         <span></span>
                                     </label>
                                 </span>
@@ -272,7 +302,7 @@
                             <div class="col-4 d-flex justify-content-end">
                                 <span class="switch switch-success switch-sm">
                                     <label>
-                                        <input type="checkbox" checked="checked" name="select"/>
+                                        <input type="checkbox" checked="checked" name="select" />
                                         <span></span>
                                     </label>
                                 </span>
@@ -291,7 +321,7 @@
                             <div class="col-4 d-flex justify-content-end">
                                 <span class="switch switch-sm switch-danger">
                                     <label>
-                                        <input type="checkbox" checked="checked" name="select"/>
+                                        <input type="checkbox" checked="checked" name="select" />
                                         <span></span>
                                     </label>
                                 </span>
@@ -302,7 +332,7 @@
                             <div class="col-4 d-flex justify-content-end">
                                 <span class="switch switch-sm switch-danger">
                                     <label>
-                                        <input type="checkbox" name="select"/>
+                                        <input type="checkbox" name="select" />
                                         <span></span>
                                     </label>
                                 </span>
@@ -313,7 +343,7 @@
                             <div class="col-4 d-flex justify-content-end">
                                 <span class="switch switch-sm switch-danger">
                                     <label>
-                                        <input type="checkbox" checked="checked" name="select"/>
+                                        <input type="checkbox" checked="checked" name="select" />
                                         <span></span>
                                     </label>
                                 </span>
@@ -332,7 +362,7 @@
                             <div class="col-4 d-flex justify-content-end">
                                 <span class="switch switch-sm switch-primary">
                                     <label>
-                                        <input type="checkbox" checked="checked" name="select"/>
+                                        <input type="checkbox" checked="checked" name="select" />
                                         <span></span>
                                     </label>
                                 </span>
@@ -343,7 +373,7 @@
                             <div class="col-4 d-flex justify-content-end">
                                 <span class="switch switch-sm switch-primary">
                                     <label>
-                                        <input type="checkbox" name="select"/>
+                                        <input type="checkbox" name="select" />
                                         <span></span>
                                     </label>
                                 </span>
@@ -354,7 +384,7 @@
                             <div class="col-4 d-flex justify-content-end">
                                 <span class="switch switch-sm switch-primary">
                                     <label>
-                                        <input type="checkbox" checked="checked" name="select"/>
+                                        <input type="checkbox" checked="checked" name="select" />
                                         <span></span>
                                     </label>
                                 </span>

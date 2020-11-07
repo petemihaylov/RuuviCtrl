@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using RuuviCTRL.Core.Dto;
 using RuuviCTRL.Core.Entities;
@@ -8,6 +9,7 @@ using RuuviCTRL.SharedKernel.Interfaces;
 
 namespace RuuviCTRL.WebSpa.Api
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class AssetsController : Controller
     {
@@ -40,16 +42,13 @@ namespace RuuviCTRL.WebSpa.Api
             return NotFound();
         }
 
-        [HttpGet("{id}/{start}/{end}", Name = "GetAssetByTime")]
-        public async Task<ActionResult<AssetDto>> GetAssetByTime(int id,string start, string end)
+        [HttpGet("byTime", Name = "GetAssetByTime")]
+        public async Task<ActionResult<AssetDto>> GetAssetByTime(int? id, DateTime? start, DateTime? end)
         {
-            DateTime startDate = DateTime.Parse(start);
-            DateTime endDate = DateTime.Parse(end);
-
-            if (startDate == null || endDate == null)
+            if (id == null || start == null || end == null)
                 return NotFound();
 
-            var assetItem = await _assetService.GetAssetDtoById(id, startDate, endDate);
+            var assetItem = await _assetService.GetAssetDtoById(id.Value, start.Value, end.Value);
             if (assetItem != null)
             {
                 return Ok(assetItem);
