@@ -1,0 +1,37 @@
+<div class="card card-custom card-stretch gutter-b">
+
+    <!-- Body -->
+    <div class="card-body">
+        <a class="btn btn-primary mb-4" routerLink="../create">Create SLA</a>
+        <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" *ngIf="slas$ | async as slas">
+            <thead>
+            <tr class="text-left text-uppercase">
+                <th style="min-width: 250px;" class="pl-7">
+                    <span class="text-dark-75">Name</span>
+                </th>
+                <th style="min-width: 100px;">Category</th>
+                <th style="min-width: 100px;">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let sla of slas">
+                <td>
+                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                      {{sla.title}}
+                    </span>
+                </td>
+                <td>
+                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+<!--                        {{sla.category}}-->
+                    </span>
+                </td>
+                <td>
+                <button class="btn btn-light btn-hover-primary btn-sm" [routerLink]="['..', sla.id, 'edit']">Edit SLA</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

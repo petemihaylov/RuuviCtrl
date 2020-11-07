@@ -56,6 +56,29 @@ namespace RuuviCTRL.WebSpa.Api
             }
             return NotFound();
         }
+        //GET api/assets/{id}/breaches
+        [HttpGet("{id}/breaches")]
+        public async Task<ActionResult<AssetDto>> GetBreachesByAssetId(int id)
+        {
+            var breachDtos = await _assetService.GetBreachesByAssetId(id);
+            if (breachDtos != null)
+            {
+                return Ok(breachDtos);
+            }
+            return NotFound();
+        }
+
+        //GET api/assets/{id}/slas
+        [HttpGet("{id}/slas")]
+        public async Task<ActionResult<AssetDto>> GetSlasByAssetId(int id)
+        {
+            var slaDtos = await _assetService.GetSlasByAssetId(id);
+            if (slaDtos != null)
+            {
+                return Ok(slaDtos);
+            }
+            return NotFound();
+        }
 
         // POST: api/assets
         [HttpPost]

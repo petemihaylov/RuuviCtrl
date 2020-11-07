@@ -8,6 +8,7 @@ using RuuviCTRL.Core.Services.Interfaces;
 using RuuviCTRL.Core.ValueObjects;
 using RuuviCTRL.SharedKernel.Interfaces;
 
+
 namespace RuuviCTRL.Core.Services
 {
     public class AssetService : IAssetService
@@ -40,17 +41,7 @@ namespace RuuviCTRL.Core.Services
             if (selectedRuuviData.Count == 0)
                 return null;
 
-            var assetDto = new AssetDto
-            {
-                Id = asset.Id,
-                DeviceId = asset.DeviceId,
-                Name = asset.Name,
-                Temperature = selectedRuuviData.Select(c => new SingleStat { Value = c.Temperature, Time = c.Time }).ToArray(),
-                BatteryLevel = selectedRuuviData.Select(c => new SingleStat { Value = c.BatteryLevel, Time = c.Time }).ToArray(),
-                Humidity = selectedRuuviData.Select(c => new SingleStat { Value = c.Humidity, Time = c.Time }).ToArray(),
-                Pressure = selectedRuuviData.Select(c => new SingleStat { Value = c.Pressure, Time = c.Time }).ToArray(),
-                Route = selectedRuuviData.Select(c => new LocationStat { Latitude = c.Latitude, Longitude = c.Longitude, Time = c.Time }).ToArray()
-            };
+            var assetDto = new AssetDto(asset, ruuviData);
 
             return assetDto;
         }
@@ -63,26 +54,32 @@ namespace RuuviCTRL.Core.Services
                     var ruuviData = _repository.FilterBy(s => s.DeviceId == asset.DeviceId).ToList();
                     if (ruuviData.Count != 0)
                     {
-                        var assetDto = new AssetDto
-                        {
-                            Id = asset.Id,
-                            DeviceId = asset.DeviceId,
-                            Name = asset.Name,
-                            Temperature = new []{ ruuviData.Select(c => new SingleStat { Value = c.Temperature, Time = c.Time }).Last()},
-                            BatteryLevel = new []{ ruuviData.Select(c => new SingleStat { Value = c.BatteryLevel, Time = c.Time }).Last()},
-                            Humidity = new []{ ruuviData.Select(c => new SingleStat { Value = c.Humidity, Time = c.Time }).Last()},
-                            Pressure = new []{ ruuviData.Select(c => new SingleStat { Value = c.Pressure, Time = c.Time }).Last()},
-                            Route = new[]{ ruuviData.Select(c => new LocationStat { Latitude = c.Latitude, Longitude = c.Longitude, Time = c.Time }).Last()}
-                        };
+                        var assetDto = new AssetDto(asset, ruuviData);
 
                         resultDtos.Add(assetDto);
                     }
                 }
-                
-                );
+
+            );
 
             return resultDtos;
         }
 
+        public async Task<List<SLADto>> GetSlasByAssetId(int id)
+        {
+            var slaEntities = await _eFRepository.WhereToListAsync<SLAAgreement>(a => a.AssetId == id);
+            var slaDtos = slaEntities.Select(s => new SLADto(s)).ToList();
+
+            return slaDtos;
+        }
+
+        public async Task<List<BreachDto>> GetBreachesByAssetId(int id)
+        {
+            var breachesEntities = await _eFRepository.WhereToListAsync<Breach>(a => a.AssetId == id);
+            var breachDtos = breachesEntities.Select(b => new BreachDto(b)).ToList();
+
+            return breachDtos;
+        }
     }
+
 }

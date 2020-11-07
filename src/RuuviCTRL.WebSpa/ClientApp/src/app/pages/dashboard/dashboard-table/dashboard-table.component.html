@@ -41,12 +41,12 @@
                         </td>
                         <td >
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg" >
-                                {{item.pressure[item.pressure.length - 1].value}} Pa
+                                {{item.pressure[item.pressure.length - 1].value | number:'5.0-0'}} Pa
                             </span>
                          </td>
                         <td >
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg" >
-                                {{item.humidity[item.humidity.length - 1].value}} %
+                                {{item.humidity[item.humidity.length - 1].value | number:'1.1-2'}} %
                             </span> 
                         </td>
                         <td>

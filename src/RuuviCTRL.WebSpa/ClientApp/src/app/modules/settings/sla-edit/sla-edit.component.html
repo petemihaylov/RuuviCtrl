@@ -1,0 +1,29 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image">
+            <button class="w-100 h-100 btn" routerLink="../overview">
+                    <span
+                    [inlineSVG]="'../assets/media/svg/icons/Text/Undo.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                    ></span>
+            </button>
+        </div>
+        <mat-card-title>Edit SLA</mat-card-title>
+        <mat-card-subtitle>Editing SLA</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content *ngIf="sla != null">
+        <app-sla-form [(sla)]="sla" [(valid)]="isValid"></app-sla-form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="btn btn-primary" (click)="editSla()">Edit SLA</button>
+    </mat-card-actions>
+</mat-card>
+
+<!--<div class="card card-custom card-stretch gutter-b">-->
+<!--    &lt;!&ndash; Body &ndash;&gt;-->
+<!--    <div class="card-body">-->
+<!--        <app-sla-form [(sla)]="sla"></app-sla-form>-->
+<!--        <button class="btn-primary btn">Create SLA</button>-->
+<!--    </div>-->
+<!--</div>-->

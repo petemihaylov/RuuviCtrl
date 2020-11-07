@@ -1,42 +1,124 @@
 <div class="row" *ngIf="Data | async as ruuviDataList">
-    <div class="col-lg-12">
-        <div class="card card-custom card-stretch gutter-b">
-            <div class="card-header">
-                <div class="card-title">
-                    <h3 class="card-label">
-                        {{ruuviDataList.name}}
-                        <small>{{ruuviDataList.deviceId}}</small>
-                    </h3>
-                </div>
-                        <div class="card-title">
-                            <app-ngbd-datepicker-range (onDatePicked)="DateStartSelected($event)" DatePickerName="Select Start Date"></app-ngbd-datepicker-range>
-                        </div>
-                        <div class="card-title">
-                            <app-ngbd-datepicker-range (onDatePicked)="DateEndSelected($event)" DatePickerName="Select End Date"></app-ngbd-datepicker-range>
-                        </div>
-                    </div>
-                            <div>
-                                <button class="btn btn-sm btn-info" (click)="selectedByDate()">Filter By Date</button>
-                            </div>
-        </div>
-    </div>
-    
+	<div class="col-lg-12">
+		<div class="card card-custom card-stretch gutter-b">
+			<div class="card-header">
+				<div class="card-title">
+					<h3 class="card-label">
+						{{ruuviDataList.name}}
+						<small>{{ruuviDataList.deviceId}}</small>
+					</h3>
+				</div>
+				<div class="card-title">
+					<app-ngbd-datepicker-range (onDatePicked)="DateStartSelected($event)"
+						DatePickerName="Select Start Date"></app-ngbd-datepicker-range>
+				</div>
+				<div class="card-title">
+					<app-ngbd-datepicker-range (onDatePicked)="DateEndSelected($event)"
+						DatePickerName="Select End Date"></app-ngbd-datepicker-range>
+				</div>
+			</div>
+			<div>
+				<button class="btn btn-sm btn-info" (click)="selectedByDate()">Filter By Date</button>
+			</div>
+		</div>
+	</div>
 
 
-    <div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.temperature != null">
-        <app-stats-widget [info]="temperature" [data]="ruuviDataList.temperature"></app-stats-widget>
-    </div>
 
-    <div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.pressure != null">
-        <app-stats-widget [info]="pressure" [data]="ruuviDataList.pressure"></app-stats-widget>
-    </div>
-    <div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.humidity != null">
-        <app-stats-widget [info]="humidity" [data]="ruuviDataList.humidity"></app-stats-widget>
-    </div>
-    <div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.batteryLevel != null">
-        <app-stats-widget [info]="batteryLevel" [data]="ruuviDataList.batteryLevel"></app-stats-widget>
-    </div>
-    <div class="col-lg-12" *ngIf="ruuviDataList.route != null">
-        <app-map-widget [routeHistory]="ruuviDataList.route"></app-map-widget>
-    </div>
+	<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.temperature != null">
+		<app-stats-widget [info]="temperature" [data]="ruuviDataList.temperature"></app-stats-widget>
+	</div>
+
+	<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.pressure != null">
+		<app-stats-widget [info]="pressure" [data]="ruuviDataList.pressure"></app-stats-widget>
+	</div>
+	<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.humidity != null">
+		<app-stats-widget [info]="humidity" [data]="ruuviDataList.humidity"></app-stats-widget>
+	</div>
+	<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.batteryLevel != null">
+		<app-stats-widget [info]="batteryLevel" [data]="ruuviDataList.batteryLevel"></app-stats-widget>
+	</div>
+	<div class="col-lg-12" *ngIf="ruuviDataList.route != null">
+		<app-map-widget [routeHistory]="ruuviDataList.route"></app-map-widget>
+	</div>
+</div>
+
+<div>
+	<h1>Total breaches:</h1>
+
+	<div class="card">
+		<h3>Temperature Breaches:</h3>
+		<p style="padding-left: 10px">amount: {{temperatureBreach?.length}}</p>
+		<div class="card-stretch">
+			<table>
+				<thead>
+					<tr>
+						<td>Temperature </td>
+						<td>Min</td>
+						<td>Max</td>
+						<td>Breach type</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let breach of temperatureBreach">
+						<th>{{breach.temperature}}</th>
+						<th>{{breach.minTemprature}}</th>
+						<th>{{breach.maxTemprature}}</th>
+						<th>{{breach.type}}</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<br />
+	<div class="card">
+		<h3>Humidity Breaches:</h3>
+		<p style="padding-left: 10px">amount: {{humidityBreach?.length}}</p>
+		<div class="card-stretch">
+			<table>
+				<thead>
+					<tr>
+						<td>Humidity </td>
+						<td>Min</td>
+						<td>Max</td>
+						<td>Breach type</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let breach of humidityBreach">
+						<th>{{breach.humidity}}</th>
+						<th>{{breach.minHumidity}}</th>
+						<th>{{breach.maxHumidity}}</th>
+						<th>{{breach.type}}</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<br />
+	<div class="card">
+		<h3>Pressure Breaches:</h3>
+		<p style="padding-left: 10px">amount: {{pressureBreach?.length}}</p>
+		<div class="card-stretch">
+			<table>
+				<thead>
+					<tr>
+						<td>Pressure </td>
+						<td>Min</td>
+						<td>Max</td>
+						<td>Breach type</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let breach of pressureBreach">
+						<th>{{breach.pressure}}</th>
+						<th>{{breach.minPressure}}</th>
+						<th>{{breach.maxPressure}}</th>
+						<th>{{breach.type}}</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<br />
 </div>

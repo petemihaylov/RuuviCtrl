@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RuuviCTRL.Core;
 using RuuviCTRL.Infrastructure;
+using RuuviCTRL.StorageApi.Hubs;
 
 namespace RuuviCTRL.WebSpa
 {
@@ -30,6 +31,9 @@ namespace RuuviCTRL.WebSpa
 
             services.AddControllersWithViews().AddNewtonsoftJson();
 
+
+            services.AddSignalR();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -66,6 +70,8 @@ namespace RuuviCTRL.WebSpa
 
             app.UseRouting();
 
+
+            
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -77,6 +83,8 @@ namespace RuuviCTRL.WebSpa
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+
+                endpoints.MapHub<LiveNotificationHub>("/livenotification");
             });
 
             app.UseSpa(spa =>
