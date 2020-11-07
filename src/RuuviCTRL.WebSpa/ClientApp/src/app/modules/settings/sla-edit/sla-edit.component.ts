@@ -13,6 +13,7 @@ import {Subscription} from 'rxjs';
 export class SlaEditComponent implements OnInit {
 
   sla: SlaDto = {} as SlaDto;
+  isValid: boolean;
 
   constructor(private slaService: SlaService, private route: ActivatedRoute) { }
 
@@ -21,8 +22,7 @@ export class SlaEditComponent implements OnInit {
       console.log(params);
       const id = +params.get('id'); // (+) converts string 'id' to a number
       const detailsSub = this.slaService.read(id).subscribe(res => {
-        console.log(res);
-        // this.sla.next(res);
+        this.sla = res;
       });
       detailsSub.unsubscribe();
     });
@@ -31,9 +31,11 @@ export class SlaEditComponent implements OnInit {
 
   editSla(){
     console.log(this.sla);
-    this.slaService.post(this.sla).subscribe(res => {
-      console.log(res);
-    });
+    if (this.isValid) {
+      this.slaService.post(this.sla).subscribe(res => {
+        console.log(res);
+      });
+    }
   }
 
 }

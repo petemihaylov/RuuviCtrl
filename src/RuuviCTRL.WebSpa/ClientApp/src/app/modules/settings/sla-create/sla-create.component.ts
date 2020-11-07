@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SlaDto} from '../_models/slaDto.model';
 import {SlaService} from '../_services/sla.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-sla-create',
@@ -11,18 +11,22 @@ import {ActivatedRoute} from '@angular/router';
 export class SlaCreateComponent implements OnInit {
 
   sla: SlaDto = {} as SlaDto;
+  isValid = false;
 
-  constructor(private slaService: SlaService) { }
+  constructor(private slaService: SlaService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   createSla(){
-    console.log(this.sla);
-    this.sla.assetId = 1;
-    this.slaService.post(this.sla).subscribe(res => {
-      console.log(res);
-    });
+    console.log(this.isValid);
+    if (this.isValid) {
+      this.sla.assetId = 1;
+      this.slaService.post(this.sla).subscribe(res => {
+        this.router.navigate(['/settings/overview']);
+      });
+    }
+
   }
 
 }
