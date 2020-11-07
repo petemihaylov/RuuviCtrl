@@ -70,7 +70,7 @@
 
             <div>
                 <h3 class="w-100">Location</h3>
-                <mat-checkbox [(ngModel)]="localSla.hasLocationBoundry" (ngModelChange)="isValid()">Enable Pressure</mat-checkbox>
+                <mat-checkbox [(ngModel)]="localSla.hasLocationBoundry" (ngModelChange)="isValid()">Enable Location</mat-checkbox>
                 <section class="row" *ngIf="localSla.hasLocationBoundry">
                     <app-sla-map class="col-sm-12"></app-sla-map>
                     <div class="col-sm-12 example-full-width">

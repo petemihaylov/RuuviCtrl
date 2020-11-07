@@ -1,11 +1,15 @@
 export class BreachDto {
     id: number;
 
-    temprature: number;
+    temperature: number;
     humidity: number;
     pressure: number;
     latitude: number;
     longitude: number;
+
+    hasHumidityBreach: boolean;
+    hasTempratureBreach: boolean;
+    hasPressureBreach: boolean;
 
 
     hasTempratureBoundry: boolean;
