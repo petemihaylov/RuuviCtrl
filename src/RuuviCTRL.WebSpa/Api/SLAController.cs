@@ -49,5 +49,19 @@ namespace RuuviCTRL.WebSpa.Api
             var slaAgreement = await _repository.AddAsync(sla);
             return CreatedAtRoute(nameof(GetSLAById), new { id = slaAgreement.Id }, slaAgreement);
         }
+
+        // POST: api/slas
+        [HttpPut("{id}", Name = "UpdateSLA")]
+        public async Task<IActionResult> UpdateSLA(int id, [FromBody] SLAAgreement sla)
+        {
+            var slaEntity = await _repository.GetByIdAsync<SLAAgreement>(id);
+            if (slaEntity == null)
+                return BadRequest();
+
+            slaEntity.UpdateSla(sla);
+
+            await _repository.UpdateAsync(slaEntity);
+            return Ok(sla);
+        }
     }
 }

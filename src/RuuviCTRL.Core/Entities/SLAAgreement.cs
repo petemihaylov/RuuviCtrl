@@ -9,6 +9,7 @@ namespace RuuviCTRL.Core.Entities
 {
     public class SLAAgreement : BaseEntity
     {
+        public string Title { get; set; }
         public bool HasTempratureBoundry { get; set; }
         public float MaxTemprature { get; set; }
         public float MinTemprature { get; set; }
@@ -40,6 +41,7 @@ namespace RuuviCTRL.Core.Entities
 
         public DateTime CreatedAt { get; set; }
 
+
         public BreachType CheckBreach(RuuviData ruuviData, int tempratureCount, int humidityCount, int pressureCount)
         {
             bool hasTempratureBreach = ValueOutOfRange(ruuviData.Temperature, MinTemprature, MaxTemprature);
@@ -70,6 +72,31 @@ namespace RuuviCTRL.Core.Entities
         private bool ValueOutOfRange(float value, float min, float max)
         {
             return value <= min || value >= max;
+        }
+
+        public void UpdateSla(SLAAgreement next)
+        {
+            Title = next.Title;
+            HasTempratureBoundry = next.HasTempratureBoundry;
+            MaxTemprature = next.MaxTemprature;
+            MinTemprature = next.MinTemprature;
+            TempratureCount = next.TempratureCount;
+            TempratureTime = next.TempratureTime;
+            HasHumidityBoundry = next.HasHumidityBoundry;
+            MaxHumidity = next.MaxHumidity;
+            MinHumidity = next.MinHumidity;
+            HumidityCount = next.HumidityCount;
+            HumidityTime = next.HumidityTime;
+            HasPressureBoundry = next.HasPressureBoundry;
+            MaxPressure = next.MaxPressure;
+            MinPressure = next.MinPressure;
+            PressureCount = next.PressureCount;
+            PressureTime = next.PressureTime;
+            HasLocationBoundry = next.HasLocationBoundry;
+            LocationBoundary = next.LocationBoundary;
+            LocationCount = next.LocationCount;
+            LocationTime = next.LocationTime;
+            AssetId = next.AssetId;
         }
     }
 }

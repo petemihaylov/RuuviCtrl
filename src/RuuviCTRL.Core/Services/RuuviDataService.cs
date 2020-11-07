@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using RuuviCTRL.Core.Entities;
@@ -38,9 +39,10 @@ namespace RuuviCTRL.Core.Services
                         var tempratureDateTime = DateTime.Now.Subtract(slaAgreement.TempratureTime);
                         var humidityDateTime = DateTime.Now.Subtract(slaAgreement.HumidityTime);
                         var pressureDateTime = DateTime.Now.Subtract(slaAgreement.PressureTime);
-                        var tempratureBreaches = await _eFRepository.CountAsync<Breach>(i => (i.Temperature <= i.MinTemprature || i.Temperature >= i.MaxTemprature) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= tempratureDateTime);
-                        var humidityBreaches = await _eFRepository.CountAsync<Breach>(i => (i.Humidity <= i.MinHumidity || i.Humidity >= i.MaxHumidity) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= humidityDateTime);
-                        var pressureBreaches = await _eFRepository.CountAsync<Breach>(i => (i.Pressure <= i.MinPressure || i.Pressure >= i.MaxPressure) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= pressureDateTime);
+
+                        var tempratureBreaches = await _eFRepository.CountAsync<Breach>(i => !i.HasEnded && (i.Temperature <= i.MinTemprature || i.Temperature >= i.MaxTemprature) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= tempratureDateTime);
+                        var humidityBreaches = await _eFRepository.CountAsync<Breach>(i => !i.HasEnded && (i.Humidity <= i.MinHumidity || i.Humidity >= i.MaxHumidity) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= humidityDateTime);
+                        var pressureBreaches = await _eFRepository.CountAsync<Breach>(i => !i.HasEnded && (i.Pressure <= i.MinPressure || i.Pressure >= i.MaxPressure) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= pressureDateTime);
 
                         var lastBreach = await _eFRepository.LastAsync<Breach, DateTime>(i => i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id, o => o.CreatedAt);
 
@@ -64,7 +66,24 @@ namespace RuuviCTRL.Core.Services
 
                             if (breach.Type == BreachType.Breach)
                             {
-                                var notification = new Notification(breach.Type.ToString(), slaAgreement.AssetId.ToString(), "Warning", breach.CreatedAt);
+                                if (breach.HasTempratureBreach)
+                                {
+                                    await EndWarningsThatCausedBreach(i =>
+                                        !i.HasEnded &&
+                                        (i.Temperature <= i.MinTemprature || i.Temperature >= i.MaxTemprature) &&
+                                        i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id &&
+                                        i.CreatedAt >= tempratureDateTime);
+                                }
+                                if (breach.HasHumidityBreach)
+                                {
+                                    await EndWarningsThatCausedBreach(i => !i.HasEnded && (i.Humidity <= i.MinHumidity || i.Humidity >= i.MaxHumidity) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= humidityDateTime);
+                                }
+                                if (breach.HasPressureBreach)
+                                {
+                                    await EndWarningsThatCausedBreach(i => !i.HasEnded && (i.Pressure <= i.MinPressure || i.Pressure >= i.MaxPressure) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= pressureDateTime);
+                                }
+
+                                var notification = new Notification($"Sla: {breach.SlaTitle}, has been breached on", asset.Name, "Warning", breach.CreatedAt);
                                 var notificationItem = await _eFRepository.AddAsync(notification);
 
                                 output.Add(notificationItem);
@@ -75,6 +94,16 @@ namespace RuuviCTRL.Core.Services
                 }
             }
             return output;
+        }
+
+        private async Task EndWarningsThatCausedBreach(Expression<Func<Breach, bool>> predecate)
+        {
+            var warnings = await _eFRepository.WhereToListAsync(predecate);
+            foreach (var warning in warnings)
+            {
+                warning.EndBreach();
+                await _eFRepository.UpdateAsync(warning);
+            }
         }
     }
 }

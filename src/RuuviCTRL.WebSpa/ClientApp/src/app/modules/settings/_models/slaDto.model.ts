@@ -1,29 +1,30 @@
 export class SlaDto {
-    Id: number;
-    HasTempratureBoundry: boolean;
-    MaxTemprature: number;
-    MinTemprature: number;
-    TempratureCount: number;
-    TempratureTime: string;
+    id: number;
+    title: string;
+    hasTempratureBoundry: boolean;
+    maxTemprature: number;
+    minTemprature: number;
+    tempratureCount: number;
+    tempratureTime: string;
 
-    HasHumidityBoundry: boolean;
-    MaxHumidity: number;
-    MinHumidity: number;
-    HumidityCount: number;
-    HumidityTime: string;
+    hasHumidityBoundry: boolean;
+    maxHumidity: number;
+    minHumidity: number;
+    humidityCount: number;
+    humidityTime: string;
 
-    HasPressureBoundry: boolean;
-    MaxPressure: number;
-    MinPressure: number;
-    PressureCount: number;
-    PressureTime: string;
+    hasPressureBoundry: boolean;
+    maxPressure: number;
+    minPressure: number;
+    pressureCount: number;
+    pressureTime: string;
 
-    HasLocationBoundry: boolean;
-    LocationBoundary: string;
-    LocationCount: number;
-    LocationTime: string;
+    hasLocationBoundry: boolean;
+    locationBoundary: string;
+    locationCount: number;
+    locationTime: string;
 
-    AssetId: number;
+    assetId: number;
 
-    CreatedAt: Date;
+    createdAt: Date;
 }

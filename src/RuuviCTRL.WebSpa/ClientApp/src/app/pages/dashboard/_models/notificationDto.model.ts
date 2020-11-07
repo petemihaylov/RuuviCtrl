@@ -3,5 +3,5 @@ export class NotificationDto {
     title: string;
     description: string;
     type: string;
-    createAt: Date;
+    createdAt: Date;
 }

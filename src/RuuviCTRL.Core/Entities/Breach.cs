@@ -48,6 +48,7 @@ namespace RuuviCTRL.Core.Entities
 
         public int AssetId { get; set; }
         public int SlaAgreementId { get; set; }
+        public string SlaTitle { get; set; }
 
         public BreachType Type { get; set; }
 
@@ -63,6 +64,7 @@ namespace RuuviCTRL.Core.Entities
         {
             AssetId = asset.Id;
             SlaAgreementId = slaAgreement.Id;
+            SlaTitle = slaAgreement.Title;
             Temperature = ruuviData.Temperature;
             Humidity = ruuviData.Humidity;
             Pressure = ruuviData.Pressure;
