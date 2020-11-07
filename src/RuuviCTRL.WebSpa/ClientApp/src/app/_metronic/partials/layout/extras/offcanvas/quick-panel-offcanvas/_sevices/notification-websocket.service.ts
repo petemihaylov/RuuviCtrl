@@ -7,7 +7,7 @@ import { NotificationDto } from '../_models/notificationDto.model';
 
 @Injectable()
 export class NotificationWebsocketService {
-  private url = environment.apiUrl;
+  private url = environment.websocketUrl;
 
   // Set the endpoint to a proper one
   private endpoint = 'livenotification';

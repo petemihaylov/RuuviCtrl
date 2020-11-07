@@ -8,6 +8,7 @@ export const environment = {
   USERDATA_KEY: "authf649fc9a5f55",
   isMockEnabled: true,
   apiUrl: "https://localhost:44322",
+  websocketUrl: 'https://ruuvitest.jordihuntjens.nl',
 };
 
 /*

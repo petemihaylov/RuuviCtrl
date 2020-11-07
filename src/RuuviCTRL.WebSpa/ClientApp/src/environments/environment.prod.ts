@@ -3,6 +3,7 @@ export const environment = {
   appVersion: 'v711demo1',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
-  apiUrl: 'https://ruuvitest.jordihuntjens.nl'
+  apiUrl: 'https://ruuvispa.jordihuntjens.nl',
+  websocketUrl: 'https://ruuvitest.jordihuntjens.nl',
   // apiUrl: 'mysite.com/api'
 };

@@ -83,7 +83,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       nextData[0].title = obj.title;
       nextData[0].description = obj.description;
       nextData[0].type = obj.type;
-      nextData[0].createAt = obj.createAt;
+      nextData[0].createdAt = obj.createdAt;
       this._notifications.next(nextData);
     }
   }

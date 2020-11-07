@@ -74,7 +74,7 @@ namespace RuuviCTRL.StorageApi
             app.UseRouting();
 
             app.UseCors(builder => builder
-                .WithOrigins("https://localhost:44322", "https://ruuvitest.jordihuntjens.nl")
+                .WithOrigins("https://localhost:44322", "https://ruuvispa.jordihuntjens.nl")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()
