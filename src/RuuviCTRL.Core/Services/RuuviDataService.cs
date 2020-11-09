@@ -31,7 +31,7 @@ namespace RuuviCTRL.Core.Services
             if (asset != null)
             {
                 var slas = await _eFRepository.WhereToListAsync<SLAAgreement>(i => i.AssetId == asset.Id);
-                
+
                 if (slas.Count > 0)
                 {
                     foreach (var slaAgreement in slas)
@@ -70,17 +70,31 @@ namespace RuuviCTRL.Core.Services
                                 {
                                     await EndWarningsThatCausedBreach(i =>
                                         !i.HasEnded &&
+                                        i.Type == BreachType.Warning &&
                                         (i.Temperature <= i.MinTemprature || i.Temperature >= i.MaxTemprature) &&
-                                        i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id &&
+                                        i.AssetId == asset.Id &&
+                                        i.SlaAgreementId == slaAgreement.Id &&
                                         i.CreatedAt >= tempratureDateTime);
                                 }
                                 if (breach.HasHumidityBreach)
                                 {
-                                    await EndWarningsThatCausedBreach(i => !i.HasEnded && (i.Humidity <= i.MinHumidity || i.Humidity >= i.MaxHumidity) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= humidityDateTime);
+                                    await EndWarningsThatCausedBreach(i =>
+                                        !i.HasEnded &&
+                                        i.Type == BreachType.Warning &&
+                                        (i.Humidity <= i.MinHumidity || i.Humidity >= i.MaxHumidity) &&
+                                        i.AssetId == asset.Id &&
+                                        i.SlaAgreementId == slaAgreement.Id &&
+                                        i.CreatedAt >= humidityDateTime);
                                 }
                                 if (breach.HasPressureBreach)
                                 {
-                                    await EndWarningsThatCausedBreach(i => !i.HasEnded && (i.Pressure <= i.MinPressure || i.Pressure >= i.MaxPressure) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= pressureDateTime);
+                                    await EndWarningsThatCausedBreach(i =>
+                                        !i.HasEnded &&
+                                        i.Type == BreachType.Warning &&
+                                        (i.Pressure <= i.MinPressure || i.Pressure >= i.MaxPressure) &&
+                                        i.AssetId == asset.Id &&
+                                        i.SlaAgreementId == slaAgreement.Id &&
+                                        i.CreatedAt >= pressureDateTime);
                                 }
 
                                 var notification = new Notification($"Sla: {breach.SlaTitle}, has been breached on", asset.Name, "Warning", breach.CreatedAt);
