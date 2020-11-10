@@ -43,7 +43,7 @@
     "ngx-clipboard": "^13.0.1",
     "ngx-highlightjs": "3.0.3",
     "ngx-perfect-scrollbar": "^9.0.0",
-    "object-path": "^0.11.4",
+    "object-path": "^0.11.5",
     "perfect-scrollbar": "^1.5.0",
     "rxjs": "~6.5.5",
     "socicon": "^3.0.5",
@@ -51,7 +51,7 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1000.4",
+    "@angular-devkit/build-angular": "^0.1002.0",
     "@angular/cli": "~10.0.4",
     "@angular/compiler-cli": "~10.0.5",
     "@types/jasmine": "~3.5.0",

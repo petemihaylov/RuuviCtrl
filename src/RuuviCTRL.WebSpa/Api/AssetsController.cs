@@ -79,6 +79,18 @@ namespace RuuviCTRL.WebSpa.Api
             return NotFound();
         }
 
+        //GET api/assets/{id}/locations
+        [HttpGet("{id}/locations")]
+        public async Task<ActionResult<AssetDto>> GetLocationByAssetId(int id)
+        {
+            var locationsDtos = await _assetService.GetSlasByAssetId(id);
+            if (locationsDtos != null)
+            {
+                return Ok(locationsDtos);
+            }
+            return NotFound();
+        }
+
         // POST: api/assets
         [HttpPost]
         public async Task<IActionResult> PostAssets([FromBody]Asset asset)

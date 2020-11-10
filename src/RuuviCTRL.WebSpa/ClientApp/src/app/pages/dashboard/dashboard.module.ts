@@ -7,9 +7,11 @@ import { DashboardTableComponent } from './dashboard-table/dashboard-table.compo
 import { HttpClient } from '@angular/common/http';
 import { RuuviWebsocketService } from './_services/ruuvi-websocket.service';
 import { NotificationWebsocketService } from './_services/notification-websocket.service';
+import { DashboardMapComponent } from './dashboard-map/dashboard-map.component';
+import { LeafletWidgetComponent } from './_widgets/leaflet-widget/leaflet-widget.component';
 
 @NgModule({
-  declarations: [DashboardComponent, DashboardTableComponent],
+  declarations: [DashboardComponent, DashboardTableComponent, DashboardMapComponent, LeafletWidgetComponent],
   imports: [
     CommonModule,
     WidgetsModule,
