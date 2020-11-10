@@ -9,19 +9,25 @@ import { AssetDashboardComponent } from './asset-dashboard/asset-dashboard.compo
 import { MapWidgetComponent } from './widgets/map-widget/map-widget.component';
 import {RuuviWebsocketService} from './_services/ruuvi-websocket.service';
 import { AssetDetailService } from './_services/asset-detail.service';
+import { NgbdDatepickerRangeComponent } from './ngbd-datepicker-range/ngbd-datepicker-range.component';
+import {FormsModule} from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [
       RuuviMonitoringComponent,
       StatsWidgetComponent,
       AssetDashboardComponent,
-      MapWidgetComponent
+      MapWidgetComponent,
+      NgbdDatepickerRangeComponent
+      
     ],
     imports: [
       CommonModule,
       InlineSVGModule,
       NgApexchartsModule,
       RuuviMonitoringRoutingModule,
+      FormsModule, NgbModule
     ],
     providers: [AssetDetailService, RuuviWebsocketService, DatePipe, DecimalPipe]
   })

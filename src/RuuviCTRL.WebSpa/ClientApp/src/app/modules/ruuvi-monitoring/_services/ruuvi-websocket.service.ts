@@ -3,13 +3,13 @@ import { Subject, Observable } from 'rxjs';
 import * as signalR from '@aspnet/signalr';
 import { RuuviWebsocket } from '../_models/ruuvi-websocket.model';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RuuviWebsocketService {
-  private url = environment.apiUrl;
+  private url = environment.websocketUrl;
   private endpoint = 'liveasset';
 
   private receivedMessageObject: RuuviWebsocket = new RuuviWebsocket();
