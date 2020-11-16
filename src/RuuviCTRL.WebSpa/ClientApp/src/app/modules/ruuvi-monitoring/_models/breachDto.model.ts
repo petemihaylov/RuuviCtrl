@@ -1,5 +1,6 @@
 export class BreachDto {
     id: number;
+    slaTitle: string;
 
     temperature: number;
     humidity: number;
