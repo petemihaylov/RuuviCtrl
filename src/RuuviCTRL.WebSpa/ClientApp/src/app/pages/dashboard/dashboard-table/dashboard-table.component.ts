@@ -23,12 +23,11 @@ export class DashboardTableComponent implements OnInit {
   //humidityBreach;
 
     constructor(private assetdetailService: AssetDetailService) {
+        //Add for loop for each ruuvi tag for multiple support
         this.slaData = this.assetdetailService.getSlasForAsset(1);
     }
 
     ngOnInit(): void {
-        console.log(this.assetData);
-        console.log(this.slaData);
     }
 
     getTextColor(value: number, type: String) {
