@@ -67,7 +67,6 @@ export class DashboardTableComponent implements OnInit {
         return this.textcolor;
     }
 
-    @Injectable()
     getBoundary(type: String) {
         this.boundaries = '';
 
