@@ -37,7 +37,7 @@ namespace RuuviCTRL.Core.Entities
         [Column(TypeName = "bigint")]
         public TimeSpan LocationTime { get; set; }
 
-        public int AssetId { get; set; }
+        public ICollection<AssetSLAAgreement> AssetSlaAgreements { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -96,7 +96,7 @@ namespace RuuviCTRL.Core.Entities
             LocationBoundary = next.LocationBoundary;
             LocationCount = next.LocationCount;
             LocationTime = next.LocationTime;
-            AssetId = next.AssetId;
+            AssetSlaAgreements = next.AssetSlaAgreements;
         }
     }
 }

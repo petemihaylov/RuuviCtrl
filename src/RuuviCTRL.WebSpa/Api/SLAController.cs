@@ -42,6 +42,18 @@ namespace RuuviCTRL.WebSpa.Api
             return NotFound();
         }
 
+        //GET api/sla/{id}/assets
+        [HttpGet("{id}/assets", Name = "GetSLAById")]
+        public async Task<ActionResult<List<AssetDto>>> GetAssetsBySlaId(int id)
+        {
+            var assetDtos = await _slaService.GetAssetsForSla(id);
+            if (assetDtos != null)
+            {
+                return Ok(assetDtos);
+            }
+            return NotFound();
+        }
+
         // POST: api/slas
         [HttpPost]
         public async Task<IActionResult> PostSLA([FromBody] SLAAgreement sla)

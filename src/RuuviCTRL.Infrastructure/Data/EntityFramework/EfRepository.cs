@@ -44,12 +44,10 @@ namespace RuuviCTRL.Infrastructure.Data.EntityFramework
         {
             return _dbContext.Set<T>().SingleOrDefaultAsync(e => e.Id == id);
         }
-
         public Task<List<T>> ListAsync<T>() where T : BaseEntity
         {
             return  _dbContext.Set<T>().ToListAsync();
         }
-
         public async Task<T> AddAsync<T>(T entity) where T : BaseEntity
         {
             await _dbContext.Set<T>().AddAsync(entity);
