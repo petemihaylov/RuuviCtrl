@@ -250,6 +250,7 @@ export class StatsWidgetComponent implements OnChanges {
             label: {
               borderColor: '#F64E60',
               offsetY: 19,
+              offsetX: -7,
               style: {
                 color: '#fff',
                 background: '#F64E60'
@@ -398,6 +399,7 @@ export class StatsWidgetComponent implements OnChanges {
             borderColor: '#F64E60',
             label: {
               borderColor: '#F64E60',
+              offsetX: -7,
               style: {
                 color: '#fff',
                 background: '#F64E60'
@@ -545,6 +547,7 @@ export class StatsWidgetComponent implements OnChanges {
             borderColor: '#F64E60',
             label: {
               borderColor: '#F64E60',
+              offsetX: -7,
               style: {
                 color: '#fff',
                 background: '#F64E60'
@@ -556,6 +559,7 @@ export class StatsWidgetComponent implements OnChanges {
             borderColor: '#F64E60',
             label: {
               borderColor: '#F64E60',
+              offsetX: -7,
               offsetY: 19,
               style: {
                 color: '#fff',
