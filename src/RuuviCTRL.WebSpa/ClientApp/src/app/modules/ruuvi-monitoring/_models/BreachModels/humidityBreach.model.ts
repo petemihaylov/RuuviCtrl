@@ -1,4 +1,6 @@
-﻿export class HumidityBreachModel {
+﻿import { BreachType } from './BreachType.enum';
+
+export class HumidityBreachModel {
     humidity: number;
 
     maxHumidity: number;
@@ -12,10 +14,4 @@
 
     hasEnded: boolean;
     endDate: Date;
-}
-
-export enum BreachType {
-    None,
-    Warning,
-    Breach
 }

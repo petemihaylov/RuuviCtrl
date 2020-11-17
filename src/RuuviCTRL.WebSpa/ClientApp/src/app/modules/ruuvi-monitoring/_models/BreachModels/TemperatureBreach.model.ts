@@ -1,4 +1,6 @@
-﻿export class TemperatureBreachModel {
+﻿import { BreachType } from './BreachType.enum';
+
+export class TemperatureBreachModel {
     temperature: number;
 
     maxTemprature: number;
@@ -14,8 +16,3 @@
     endDate: Date;
 }
 
-export enum BreachType {
-    None,
-    Warning,
-    Breach
-}

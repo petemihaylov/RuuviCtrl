@@ -1,4 +1,5 @@
-﻿export class PressureBreachModel {
+﻿import { BreachType } from './BreachType.enum';
+export class PressureBreachModel {
     pressure: number;
 
     maxPressure: number;
@@ -14,8 +15,3 @@
     endDate: Date;
 }
 
-export enum BreachType {
-    None,
-    Warning,
-    Breach
-}

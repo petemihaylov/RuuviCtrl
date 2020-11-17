@@ -1,4 +1,5 @@
-﻿export class LocationBreachModel  {
+﻿import { BreachType } from './BreachType.enum';
+export class LocationBreachModel  {
     latitude: number;
     longitude: number;
 
@@ -15,8 +16,3 @@
     endDate: Date;
 }
 
-export enum BreachType {
-    None,
-    Warning,
-    Breach
-}
