@@ -2,6 +2,10 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import {SlaDto} from '../../_models/slaDto.model';
 import {Time} from '../_models/Time.model';
+import {AssetsService} from '../../_services/assets.service';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {AssetDto} from '../../../../pages/dashboard/_models/assetDto.model';
+import {RuuviWebsocket} from '../../../../pages/dashboard/_models/ruuvi-websocket.model';
 
 @Component({
   selector: 'app-sla-form',
@@ -49,9 +53,16 @@ export class SlaFormComponent implements OnInit {
 
   seconds = true;
 
-  constructor() { }
+  private _assets: BehaviorSubject<AssetDto[]> = new BehaviorSubject([]);
+  public Assets: Observable<AssetDto[]> = this._assets.asObservable();
+
+  constructor(private assetsService: AssetsService) { }
 
   ngOnInit(): void {
+    const listSub = this.assetsService.list().subscribe(res => {
+      console.log(res);
+      this._assets.next(res);
+    });
   }
 
   private dateToString = (time) => `${(time.hour <= 9) ? '0' + time.hour : time.hour}:${(time.minute <= 9) ? '0' + time.minute : time.minute}:${(time.second <= 9) ? '0' + time.second : time.second}`;
