@@ -37,6 +37,7 @@
     "leaflet": "^1.7.1",
     "leaflet-routing-machine": "^3.2.12",
     "leaflet-timedimension": "^1.1.1",
+    "leaflet.smooth_marker_bouncing": "^2.0.1",
     "moment": "^2.27.0",
     "ng-apexcharts": "^1.5.1",
     "ng-inline-svg": "^10.1.0",

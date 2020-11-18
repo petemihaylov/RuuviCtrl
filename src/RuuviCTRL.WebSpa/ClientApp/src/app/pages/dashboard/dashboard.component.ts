@@ -51,6 +51,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const websocketAlerts = this.notificationWebsocketService
       .retrieveMappedObject()
       .subscribe((receivedObj: NotificationDto) => {
+        console.log("message");
         this.addToNotifications(receivedObj);
       });
     this.subscription.add(websocketAlerts);
