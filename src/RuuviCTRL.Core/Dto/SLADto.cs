@@ -66,7 +66,9 @@ namespace RuuviCTRL.Core.Dto
             LocationBoundary = sla.LocationBoundary;
             LocationCount = sla.LocationCount;
             LocationTime = sla.LocationTime;
-            Assets = sla.AssetSlaAgreements.Select(a => a.Asset).ToArray();
+            Assets = sla.AssetSlaAgreements != null
+                ? sla.AssetSlaAgreements.Select(a => a.Asset).ToArray()
+                : new Asset[]{};
             CreatedAt = sla.CreatedAt;
         }
     }
