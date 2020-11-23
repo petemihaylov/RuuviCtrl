@@ -13,7 +13,6 @@ namespace RuuviCTRL.SharedKernel.Interfaces
         Task<T> FindAsync<T>(Expression<Func<T, bool>> filter = null) where T : BaseEntity;
         Task<List<T>> WhereToListAsync<T>(Expression<Func<T, bool>> filter = null) where T : BaseEntity;
         Task<int> CountAsync<T>(Expression<Func<T, bool>> filter = null) where T : BaseEntity;
-
         Task<T> LastAsync<T, TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> orderBy)
             where T : BaseEntity;
         

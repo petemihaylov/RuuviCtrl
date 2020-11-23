@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using RuuviCTRL.Core.Entities;
 
@@ -33,7 +34,7 @@ namespace RuuviCTRL.Core.Dto
         public float LocationCount { get; set; }
         public TimeSpan LocationTime { get; set; }
 
-        public int AssetId { get; set; }
+        public Asset[] Assets { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -65,7 +66,7 @@ namespace RuuviCTRL.Core.Dto
             LocationBoundary = sla.LocationBoundary;
             LocationCount = sla.LocationCount;
             LocationTime = sla.LocationTime;
-            AssetId = sla.AssetId;
+            Assets = sla.AssetSlaAgreements.Select(a => a.Asset).ToArray();
             CreatedAt = sla.CreatedAt;
         }
     }
