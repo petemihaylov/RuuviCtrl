@@ -43,7 +43,7 @@ namespace RuuviCTRL.WebSpa.Api
         }
 
         //GET api/sla/{id}/assets
-        [HttpGet("{id}/assets", Name = "GetSLAById")]
+        [HttpGet("{id}/assets", Name = "GetAssetsFromSLAById")]
         public async Task<ActionResult<List<AssetDto>>> GetAssetsBySlaId(int id)
         {
             var assetDtos = await _slaService.GetAssetsForSla(id);
