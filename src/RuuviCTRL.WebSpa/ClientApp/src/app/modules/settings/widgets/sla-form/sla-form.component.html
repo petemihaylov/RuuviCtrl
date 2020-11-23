@@ -87,16 +87,4 @@
                     </mat-form-field>
                 </section>
             </div>
-            <hr>
-
-            <div>
-                <h3 class="w-100">Location</h3>
-                <mat-form-field>
-                    <mat-select placeholder="Toppings" [(ngModel)]="toppings" multiple>
-                        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                {{toppings}}
-            </div>
         </div>

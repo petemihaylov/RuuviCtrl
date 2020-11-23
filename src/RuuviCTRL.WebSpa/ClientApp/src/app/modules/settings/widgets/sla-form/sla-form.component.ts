@@ -6,6 +6,7 @@ import {AssetsService} from '../../_services/assets.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {AssetDto} from '../../../../pages/dashboard/_models/assetDto.model';
 import {RuuviWebsocket} from '../../../../pages/dashboard/_models/ruuvi-websocket.model';
+import {SlaAssetsService} from '../../_services/slaAssets.service';
 
 @Component({
   selector: 'app-sla-form',
@@ -56,12 +57,16 @@ export class SlaFormComponent implements OnInit {
   private _assets: BehaviorSubject<AssetDto[]> = new BehaviorSubject([]);
   public Assets: Observable<AssetDto[]> = this._assets.asObservable();
 
-  constructor(private assetsService: AssetsService) { }
+  constructor(private assetsService: AssetsService, private slaAssets: SlaAssetsService ) { }
 
   ngOnInit(): void {
     const listSub = this.assetsService.list().subscribe(res => {
       console.log(res);
       this._assets.next(res);
+    });
+
+    this.slaAssets.ActiveAssets(this.sla.id).subscribe(res => {
+
     });
   }
 
