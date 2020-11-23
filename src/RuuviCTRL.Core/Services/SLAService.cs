@@ -40,6 +40,16 @@ namespace RuuviCTRL.Core.Services
             return assetEntities.Select(a => new AssetDto(a)).ToList();
         }
 
+        public async Task<AssetSLAAgreement> AddAssetToSla(int slaId, int assetId)
+        {
+            return await _assetSlaRepository.AddAsync(new AssetSLAAgreement(slaId, assetId));
+        }
+
+        public async Task RemoveAssetFromSla(int slaId, int assetId)
+        {
+            await _assetSlaRepository.DeleteAsync(new AssetSLAAgreement(slaId, assetId));
+        }
+
         public async Task<List<SLADto>> GetSLADtos()
         {
             var slaEntities = await _eFRepository.ListAsync<SLAAgreement>();

@@ -10,5 +10,16 @@ namespace RuuviCTRL.Core.Entities
         public Asset Asset { get; set; }
         public int SlaAgreementId { get; set; }
         public SLAAgreement SlaAgreement { get; set; }
+
+        public AssetSLAAgreement()
+        {
+            
+        }
+
+        public AssetSLAAgreement(int slaId, int assetId)
+        {
+            SlaAgreementId = slaId;
+            AssetId = assetId;
+        }
     }
 }

@@ -75,5 +75,21 @@ namespace RuuviCTRL.WebSpa.Api
             await _repository.UpdateAsync(slaEntity);
             return Ok(sla);
         }
+
+        // POST: api/slas/{id}/add/{assetId}
+        [HttpPost("{id}/add/{assetId}", Name = "AddAssetToSla")]
+        public async Task<IActionResult> AddAssetToSla(int id, int assetId)
+        {
+            var sla = await _slaService.AddAssetToSla(id, assetId);
+            return Ok(sla);
+        }
+
+        // POST: api/slas/{id}/remove/{assetId}
+        [HttpPost("{id}/remove/{assetId}", Name = "RemoveAssetFromSla")]
+        public async Task<IActionResult> RemoveAssetFromSla(int id, int assetId)
+        {
+            await _slaService.RemoveAssetFromSla(id, assetId);
+            return Ok();
+        }
     }
 }
