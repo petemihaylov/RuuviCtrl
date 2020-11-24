@@ -2,6 +2,7 @@ import { BreachType } from './BreachModels/BreachType.enum';
 
 export class BreachDto {
     id: number;
+    slaTitle: string;
 
     temperature: number;
     humidity: number;

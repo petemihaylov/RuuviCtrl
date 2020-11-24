@@ -72,6 +72,9 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
     digitsInfo: "1.0-0"
   };
 
+  warningClass = '';
+  dangerClass = '';
+
   private unsubscribe: Subscription[] = [];
 
   constructor(
@@ -166,9 +169,12 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
 
   PushBreachModel() {
     this.breaches$.subscribe((breach: BreachDto[]) => {
+      console.log(breach);
       breach.forEach(detail => {
         this.data.push(detail);
       });
+      console.log(this.data);
+
       for (let i = 0; i < this.data.length; i++) {
         if (this.data[i].hasHumidityBreach) {
           this.humidityBreach.push(this.data[i]);
@@ -187,5 +193,27 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  selectBreachClass(breach: BreachDto){
+    if (
+        ((breach.hasTempratureBreach && breach.hasTempratureBoundry) ||
+        (breach.hasHumidityBreach && breach.hasHumidityBoundry) ||
+        (breach.hasPressureBreach && breach.hasTempratureBoundry))  &&
+        !breach.hasEnded
+    ) {
+      switch (breach.type) {
+        case 1:
+          return 'text-warning';
+          break;
+        case 2:
+          return 'text-danger';
+          break;
+        default:
+          return '';
+          break;
+      }
+    }
+    return '';
   }
 }
