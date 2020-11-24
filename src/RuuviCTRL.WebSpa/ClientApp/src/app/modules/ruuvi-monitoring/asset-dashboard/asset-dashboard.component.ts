@@ -27,7 +27,7 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
   private dataSubject: BehaviorSubject<AssetDto>;
   public readonly Data$: Observable<AssetDto>;
 
-  slas$: Observable<SlaDto[]>;
+  public slas$: Observable<SlaDto[]>;
   breaches$: Observable<BreachDto[]>;
 
   assetId: number;
@@ -35,9 +35,9 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
   data: BreachDto[] = [];
 
   temperatureBreach: TemperatureBreachModel[] = [];
-  humidityBreach: HumidityBreachModel[] = [];
-  pressureBreach: PressureBreachModel[] = [];
-  locationBreach: LocationBreachModel[] = [];
+  humidityBreach:    HumidityBreachModel[] = [];
+  pressureBreach:    PressureBreachModel[] = [];
+  locationBreach:    LocationBreachModel[] = [];
 
   temperature: StatsWidget = {
     title: "Temperature",
@@ -117,6 +117,8 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
     this.unsubscribe.push(paramsSub);
 
     this.PushBreachModel();
+
+    console.log(this.data);
   }
 
   addToData(obj: RuuviWebsocket) {

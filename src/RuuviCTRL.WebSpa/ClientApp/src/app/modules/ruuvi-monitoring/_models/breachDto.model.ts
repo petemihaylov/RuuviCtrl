@@ -1,3 +1,5 @@
+import { BreachType } from './BreachModels/BreachType.enum';
+
 export class BreachDto {
     id: number;
 
@@ -10,7 +12,6 @@ export class BreachDto {
     hasHumidityBreach: boolean;
     hasTempratureBreach: boolean;
     hasPressureBreach: boolean;
-
 
     hasTempratureBoundry: boolean;
     maxTemprature: number;
@@ -46,8 +47,3 @@ export class BreachDto {
     endDate: Date;
 }
 
-export enum BreachType {
-    None,
-    Warning,
-    Breach
-}
