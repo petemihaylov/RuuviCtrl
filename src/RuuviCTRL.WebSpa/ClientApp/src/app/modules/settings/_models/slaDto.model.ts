@@ -1,4 +1,3 @@
-import {SlaAssetDto} from './slaAssetDto.model';
 
 export class SlaDto {
     id: number;
@@ -28,7 +27,7 @@ export class SlaDto {
 
     assetId: number;
 
-    assets: number[];
+    assets?: number[];
 
     createdAt: Date;
 }
