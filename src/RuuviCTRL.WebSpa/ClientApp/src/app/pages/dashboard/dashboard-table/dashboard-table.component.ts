@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AssetData } from '../_models/asset-data.model';
 import { AssetDto } from '../_models/assetDto.model';
@@ -18,7 +18,9 @@ export class DashboardTableComponent implements OnInit {
     @Input('assetData') assetData: Observable<AssetDto[]>;
     slaData: Observable<SlaDto[]>;
 
+    //Issue 62-63
     private textcolor: String;
+    private boundaries: String;
     private data: SlaDto;
 
     //tempBreach;
@@ -63,5 +65,29 @@ export class DashboardTableComponent implements OnInit {
                 break;
         }
         return this.textcolor;
+    }
+
+    getBoundary(type: String) {
+        this.boundaries = '';
+
+        switch (type) {
+            case 'Temperature':
+                if (this.data.hasTempratureBoundry) {
+                    this.boundaries = this.data.minTemprature + ' - ' + this.data.maxTemprature;
+                }
+                break;
+            case 'Pressure':
+                if (this.data.hasPressureBoundry) {
+                    this.boundaries = this.data.minPressure + ' - ' + this.data.maxPressure;
+                }
+                break;
+            case 'Humidity':
+                if (this.data.hasHumidityBoundry) {
+                    this.boundaries = this.data.minHumidity + ' - ' + this.data.maxHumidity;
+                }
+                break;
+        }
+
+        return this.boundaries;
     }
 }
