@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RuuviCTRL.Core.Interfaces;
 using RuuviCTRL.Infrastructure.Data.EntityFramework;
 using RuuviCTRL.Infrastructure.Data.MongoDB;
 using RuuviCTRL.Infrastructure.Settings;
@@ -18,6 +19,7 @@ namespace RuuviCTRL.Infrastructure
                 options.UseSqlServer(connectionString)); // will be created in web project root
 
             services.AddScoped(typeof(IEFRepository), typeof(EfRepository));
+            services.AddScoped(typeof(IAssetSlaRepository), typeof(AssetSlaRepository));
         }
 
         public static void AddMongoDb(this IServiceCollection services, IConfiguration configuration)
