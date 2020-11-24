@@ -32,7 +32,6 @@ export class SlaAssetsService {
   }
 
   RemoveAsset(slaId: number, assetId: number){
-    return this.httpClient
-        .post<AssetDto[]>(`${this.url}/api/sla/${slaId}/remove/${assetId}`);
+    return this.httpClient.post(`${this.url}/api/sla/${slaId}/remove/${assetId}`, []);
   }
 }
