@@ -28,7 +28,7 @@ export class SlaDto {
 
     assetId: number;
 
-    assets: SlaAssetDto[];
+    assets: number[];
 
     createdAt: Date;
 }
