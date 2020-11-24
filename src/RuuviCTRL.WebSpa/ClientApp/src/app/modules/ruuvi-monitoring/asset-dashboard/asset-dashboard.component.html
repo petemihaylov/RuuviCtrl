@@ -69,9 +69,9 @@
 						</td>
 						<th>{{(breach.slaTitle)?breach.slaTitle: 'SLA ' + breach.slaAgreementId}}</th>
 						<td>{{breach.createdAt | date: 'dd-MM-yyyy hh:mm'}}</td>
-						<td [class]="selectBreachClass(breach)"><span placement="top" ngbTooltip="Min: {{breach.minTemprature}} | Max: {{breach.maxTemprature}}">{{breach.temperature}}</span></td>
-						<td [class]="selectBreachClass(breach)"><span placement="top" ngbTooltip="Min: {{breach.minHumidity}} | Max: {{breach.maxHumidity}}">{{breach.humidity}}</span></td>
-						<td [class]="selectBreachClass(breach)"><span placement="top" ngbTooltip="Min: {{breach.minPressure}} | Max: {{breach.maxPressure}}">{{breach.pressure}}</span></td>
+						<td [class.text-danger]="breach.hasTempratureBreach"><span placement="top" ngbTooltip="Min: {{breach.minTemprature}} | Max: {{breach.maxTemprature}}">{{breach.temperature}}</span></td>
+						<td [class.text-danger]="breach.hasHumidityBreach"><span placement="top" ngbTooltip="Min: {{breach.minHumidity}} | Max: {{breach.maxHumidity}}">{{breach.humidity}}</span></td>
+						<td [class.text-danger]="breach.hasPressureBreach"><span placement="top" ngbTooltip="Min: {{breach.minPressure}} | Max: {{breach.maxPressure}}">{{breach.pressure}}</span></td>
 						<td [ngSwitch]="breach.type">
 							<div *ngSwitchCase="1"><span class="label label-sm label-pill label-inline label-warning w-100">Warning</span></div>
 							<div *ngSwitchCase="2"><span class="label label-sm label-pill label-inline label-danger w-100">Breach</span></div>

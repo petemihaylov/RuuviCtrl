@@ -35,6 +35,7 @@
     "clipboard": "^2.0.6",
     "highlight.js": "^9.17.1",
     "leaflet": "^1.7.1",
+    "leaflet-draw": "^1.0.4",
     "leaflet-routing-machine": "^3.2.12",
     "leaflet-timedimension": "^1.1.1",
     "leaflet.smooth_marker_bouncing": "^2.0.1",

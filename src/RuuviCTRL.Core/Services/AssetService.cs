@@ -78,7 +78,7 @@ namespace RuuviCTRL.Core.Services
         public async Task<List<BreachDto>> GetBreachesByAssetId(int id)
         {
             var breachesEntities = await _eFRepository.WhereToListAsync<Breach>(a => a.AssetId == id);
-            var breachDtos = breachesEntities.Select(b => new BreachDto(b)).ToList();
+            var breachDtos = breachesEntities.OrderByDescending(c => c.CreatedAt).Select(b => new BreachDto(b)).ToList();
 
             return breachDtos;
         }
