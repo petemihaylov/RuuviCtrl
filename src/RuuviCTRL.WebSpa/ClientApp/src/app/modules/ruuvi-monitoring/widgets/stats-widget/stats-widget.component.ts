@@ -24,8 +24,8 @@ export class StatsWidgetComponent implements OnChanges {
 
   @Input() info: StatsWidget;
   @Input() data: any;
-  @Input() min: number = undefined;
-  @Input() max: number = undefined;
+  @Input() min: number = 0;
+  @Input() max: number = 100;
 
   constructor(private layout: LayoutService, private datePipe: DatePipe, private decimalPipe: DecimalPipe) {
     this.fontFamily = this.layout.getProp('js.fontFamily');
