@@ -24,9 +24,8 @@ export class NotificationWebsocketService {
     this.connection.onclose(async () => {
       await this.start();
     });
-      this.connection.on('GetNewNotification', output => {
+    this.connection.on('GetNewNotification', output => {
           this.mapReceivedMessage(output);
-          console.log(output + "got it");
     });
     this.start();
   }
