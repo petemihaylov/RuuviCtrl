@@ -13,6 +13,7 @@ export class MapWidgetComponent implements AfterViewInit {
   private map;
 
   @Input() routeHistory: LocationStat[];
+  @Input() geoJson: string;
 
   private routeHistoryLayer;
   private routeHistoryTimeLayer;
@@ -28,6 +29,9 @@ export class MapWidgetComponent implements AfterViewInit {
     this.initMap();
     if (this.routeHistory != null) {
       this.addRouteHistory();
+    }
+    if (this.geoJson != null){
+      this.addBoundary();
     }
   }
 
@@ -54,7 +58,7 @@ export class MapWidgetComponent implements AfterViewInit {
         currentTime: lastRouteHistory.time
       },
       timeDimension: true,
-      zoom: 16
+      zoom: 14
     });
 
     const tiles = L.tileLayer(
@@ -67,6 +71,12 @@ export class MapWidgetComponent implements AfterViewInit {
     );
 
     tiles.addTo(this.map);
+  }
+
+  private addBoundary() {
+    L.geoJSON(JSON.parse(this.geoJson), {
+      style: {color: "#F64E60"}
+    }).addTo(this.map);
   }
 
   private dataToGeoJson(): any {

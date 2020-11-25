@@ -77,7 +77,7 @@
                 <h3 class="w-100">Location</h3>
                 <mat-checkbox [(ngModel)]="localSla.hasLocationBoundry" (ngModelChange)="isValid()">Enable Location</mat-checkbox>
                 <section class="row" *ngIf="localSla.hasLocationBoundry">
-                    <app-sla-map class="col-sm-12" [(ngModel)]="localSla.locationBoundary"></app-sla-map>4
+                    <app-sla-map class="col-sm-12" [value]="localSla.locationBoundary" [(ngModel)]="localSla.locationBoundary"></app-sla-map>4
                     <div class="col-sm-12 example-full-width">
                         <span>Time (Hour: Minute: Second)</span>
                         <ngb-timepicker [name]="localSla.locationTime" [(ngModel)]="timeLocation" (ngModelChange)="isValid()" [seconds]="true"></ngb-timepicker>

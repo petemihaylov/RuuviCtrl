@@ -1,8 +1,9 @@
-import { Component, Input, AfterViewInit, OnChanges, OnDestroy } from '@angular/core';
+import { Component, Input, AfterViewInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-draw';
 import { LocationStat } from 'src/app/pages/dashboard/_models/location-stat.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-sla-map',
@@ -16,15 +17,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
-export class SlaMapComponent implements AfterViewInit, ControlValueAccessor {
+export class SlaMapComponent implements OnChanges, AfterViewInit, ControlValueAccessor {
 
   private onChange: Function;
 
-  constructor() {}
+  constructor() { }
   private map;
   private drawnItems;
 
-  @Input() value: string | Array<string>;
+  @Input() value: string;
 
   @Input() routeHistory: LocationStat[];
 
@@ -35,8 +36,12 @@ export class SlaMapComponent implements AfterViewInit, ControlValueAccessor {
     this.initMap();
   }
 
-  getGeoJson(){
-    return this.drawnItems.toGeoJSON();
+  ngOnChanges(changes: SimpleChanges) {
+
+  }
+
+  getGeoJson() {
+    return JSON.stringify(this.drawnItems.toGeoJSON());
   }
 
   private initMap(): void {
@@ -47,18 +52,23 @@ export class SlaMapComponent implements AfterViewInit, ControlValueAccessor {
     });
 
     this.drawnItems = new L.FeatureGroup();
+    if (this.value !== null) {
+      const geojsonLayer = L.geoJson(JSON.parse(this.value));
+      this.drawnItems.addLayer(geojsonLayer);
+    }
     this.map.addLayer(this.drawnItems);
 
     console.log(this.drawnItems);
 
-    var drawControl = new L.Control.Draw({
+    const drawControl = new L.Control.Draw({
       draw: {
         polyline: false,
         marker: false,
         circlemarker: false,
+        circle: false,
       },
       edit: {
-          featureGroup: this.drawnItems
+        featureGroup: this.drawnItems
       }
     });
     this.map.addControl(drawControl);
@@ -67,7 +77,7 @@ export class SlaMapComponent implements AfterViewInit, ControlValueAccessor {
       var layer = event.layer;
       layer.addTo(this.drawnItems);
       this.onChange(this.getGeoJson());
-  }.bind(this));
+    }.bind(this));
 
     const tiles = L.tileLayer(
       "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -82,7 +92,9 @@ export class SlaMapComponent implements AfterViewInit, ControlValueAccessor {
   }
 
   writeValue(obj: any): void {
-    this.value = obj;
+    if(obj !== null){
+      this.value = obj;
+    }
   }
   registerOnChange(fn: any): void {
     this.onChange = fn;

@@ -31,7 +31,7 @@
 		<app-stats-widget [info]="batteryLevel" [data]="ruuviDataList.batteryLevel"></app-stats-widget>
 	</div>
 	<div class="col-lg-12" *ngIf="ruuviDataList.route != null">
-		<app-map-widget [routeHistory]="ruuviDataList.route"></app-map-widget>
+		<app-map-widget [routeHistory]="ruuviDataList.route" [geoJson]="slaDataList[0].locationBoundary"></app-map-widget>
 	</div>
 </ng-container>
 
