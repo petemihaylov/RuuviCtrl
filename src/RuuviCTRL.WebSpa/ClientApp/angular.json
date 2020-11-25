@@ -35,7 +35,7 @@
               "src/assets",
               {
                   "glob": "**/*",
-                  "input": "node_modules/leaflet/dist/images/",
+                  "input": "src/assets/media/logos/",
                   "output": "./assets/"
               }
             ],
