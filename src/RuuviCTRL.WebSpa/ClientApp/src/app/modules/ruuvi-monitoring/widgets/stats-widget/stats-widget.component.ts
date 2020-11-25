@@ -1,7 +1,8 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { LayoutService } from '../../../../_metronic/core';
-import {StatsWidget, ValueAsset} from '../_models/stats-widget.model';
-import {DatePipe, DecimalPipe} from '@angular/common';
+import { StatsWidget, ValueAsset } from '../_models/stats-widget.model';
+import { DatePipe, DecimalPipe } from '@angular/common';
+import { BreachDto } from '../../_models/breachDto.model';
 
 @Component({
   selector: 'app-stats-widget',
@@ -23,6 +24,8 @@ export class StatsWidgetComponent implements OnChanges {
 
   @Input() info: StatsWidget;
   @Input() data: any;
+  @Input() min: number = undefined;
+  @Input() max: number = undefined;
 
   constructor(private layout: LayoutService, private datePipe: DatePipe, private decimalPipe: DecimalPipe) {
     this.fontFamily = this.layout.getProp('js.fontFamily');
@@ -48,35 +51,75 @@ export class StatsWidgetComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.chartOptions = this.getChartOptions();
-    if (this.data)
-    {
+    if (this.data) {
       const lastIndex = this.data.length - 1;
       const value = this.data[lastIndex].value;
       this.currentValue = Number.isInteger(value) ? value : this.decimalPipe.transform(value, this.info.digitsInfo);
     }
+
   }
 
   ngDoCheck() {
     this.chartOptions = this.getChartOptions();
-    if (this.data)
-    {
+    if (this.data) {
       const lastIndex = this.data.length - 1;
       this.currentValue = this.decimalPipe.transform(this.data[lastIndex].value, this.info.digitsInfo);
     }
-    var min = Math.min.apply(null, this.data.map((res) => res.value));
-    var max = Math.max.apply(null, this.data.map((res) => res.value));
   }
 
   getChartOptions() {
+    var minimum = this.min;
+    var maximum = this.max;
+    const minData = Math.min.apply(null, this.data.map((res) => res.value));
+    const maxData = Math.max.apply(null, this.data.map((res) => res.value));
+    const chartMin = minData < minimum ? minData : minimum;
+    const chartMax = maxData > maximum ? maxData : maximum;
+    const offset = (chartMax - chartMin) * 0.2;
+
+    let yaxisValues: any[] = [];
+    if (minimum){
+      yaxisValues.push({
+        y: minimum,
+        borderColor: '#F64E60',
+        label: {
+          borderColor: '#F64E60',
+          offsetX: -7,
+          offsetY: 19,
+          style: {
+            color: '#fff',
+            background: '#F64E60'
+          },
+          text: minimum + ' Min '
+        }
+      });
+    }
+
+    if (maximum){
+      yaxisValues.push({
+        y: maximum,
+        borderColor: '#F64E60',
+        label: {
+          borderColor: '#F64E60',
+          offsetX: -7,
+          style: {
+            color: '#fff',
+            background: '#F64E60'
+          },
+          text: maximum + ' Max '
+        }
+      });
+    }
+
     return {
       series: [
         {
           name: this.info.title,
-          data: this.data.map(({value}) => Number.isInteger(value) ? value : this.decimalPipe.transform(value, this.info.digitsInfo)),
-        },
-      ],
+          data: this.data.map(({ value }) => Number.isInteger(value) ? value : this.decimalPipe.transform(value, this.info.digitsInfo)),
+        }
+      ]
+      ,
       chart: {
-        type: 'area',
+        type: 'line',
         height: 150,
         toolbar: {
           show: false,
@@ -90,6 +133,10 @@ export class StatsWidgetComponent implements OnChanges {
         animations: {
           enabled: false,
         }
+      },
+      annotations: {
+        yaxis: yaxisValues
+
       },
       plotOptions: {},
       legend: {
@@ -109,7 +156,7 @@ export class StatsWidgetComponent implements OnChanges {
         colors: [this.colorsThemeBasePrimary],
       },
       xaxis: {
-        categories: this.data.map(({time}) => this.datePipe.transform(time, 'dd/MM/yyyy HH:mm')),
+        categories: this.data.map(({ time }) => this.datePipe.transform(time, 'dd/MM/yyyy HH:mm')),
         axisBorder: {
           show: false,
         },
@@ -144,8 +191,8 @@ export class StatsWidgetComponent implements OnChanges {
         },
       },
       yaxis: {
-        min: Math.min.apply(null, this.data.map((res) => res.value)),
-        max: Math.max.apply(null, this.data.map((res) => res.value)),
+        min: (chartMin - offset),
+        max: (chartMax + offset),
         labels: {
           show: false,
           style: {

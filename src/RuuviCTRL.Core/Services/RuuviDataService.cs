@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Core.Enums;
+using RuuviCTRL.Core.Interfaces;
 using RuuviCTRL.Core.Services.Interfaces;
 using RuuviCTRL.SharedKernel.Interfaces;
 
@@ -15,11 +16,13 @@ namespace RuuviCTRL.Core.Services
     {
         private readonly IMongoRepository<RuuviData> _repository;
         private readonly IEFRepository _eFRepository;
+        private readonly IAssetSlaRepository _assetSlaRepository;
 
-        public RuuviDataService(IMongoRepository<RuuviData> repository, IEFRepository eFRepository)
+        public RuuviDataService(IMongoRepository<RuuviData> repository, IEFRepository eFRepository, IAssetSlaRepository assetSlaRepository)
         {
             _repository = repository;
             _eFRepository = eFRepository;
+            _assetSlaRepository = assetSlaRepository;
         }
         public async Task<List<Notification>> AddMeasurePoint(RuuviData input)
         {
@@ -30,7 +33,7 @@ namespace RuuviCTRL.Core.Services
             var asset = await _eFRepository.FindAsync<Asset>(i => i.DeviceId == input.DeviceId);
             if (asset != null)
             {
-                var slas = await _eFRepository.WhereToListAsync<SLAAgreement>(i => i.AssetId == asset.Id);
+                var slas = await _assetSlaRepository.SlaListByAssetAsync(asset.Id);
 
                 if (slas.Count > 0)
                 {

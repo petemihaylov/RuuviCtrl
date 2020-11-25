@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
@@ -69,7 +70,7 @@ namespace RuuviCTRL.WebSpa.Api
 
         //GET api/assets/{id}/slas
         [HttpGet("{id}/slas")]
-        public async Task<ActionResult<AssetDto>> GetSlasByAssetId(int id)
+        public async Task<ActionResult<List<SLADto>>> GetSlasByAssetId(int id)
         {
             var slaDtos = await _assetService.GetSlasByAssetId(id);
             if (slaDtos != null)

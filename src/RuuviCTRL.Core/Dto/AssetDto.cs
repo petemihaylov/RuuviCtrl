@@ -30,5 +30,12 @@ namespace RuuviCTRL.Core.Dto
             Route = ruuviData.Select(c => new LocationStat {Latitude = c.Latitude, Longitude = c.Longitude, Time = c.Time}).ToArray();
         }
 
+        public AssetDto(Asset asset)
+        {
+            Id = asset.Id;
+            DeviceId = asset.DeviceId;
+            Name = asset.Name;
+        }
+
     }
 }

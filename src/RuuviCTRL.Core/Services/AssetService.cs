@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RuuviCTRL.Core.Dto;
 using RuuviCTRL.Core.Entities;
+using RuuviCTRL.Core.Interfaces;
 using RuuviCTRL.Core.Services.Interfaces;
 using RuuviCTRL.Core.ValueObjects;
 using RuuviCTRL.SharedKernel.Interfaces;
@@ -15,11 +16,13 @@ namespace RuuviCTRL.Core.Services
     {
         private readonly IMongoRepository<RuuviData> _repository;
         private readonly IEFRepository _eFRepository;
+        private readonly IAssetSlaRepository _assetSlaRepository;
 
-        public AssetService(IMongoRepository<RuuviData> repository, IEFRepository eFRepository)
+        public AssetService(IMongoRepository<RuuviData> repository, IEFRepository eFRepository, IAssetSlaRepository assetSlaRepository)
         {
             _repository = repository;
             _eFRepository = eFRepository;
+            _assetSlaRepository = assetSlaRepository;
         }
 
         public async Task<AssetDto> GetAssetDtoById(int id)
@@ -67,16 +70,15 @@ namespace RuuviCTRL.Core.Services
 
         public async Task<List<SLADto>> GetSlasByAssetId(int id)
         {
-            var slaEntities = await _eFRepository.WhereToListAsync<SLAAgreement>(a => a.AssetId == id);
-            var slaDtos = slaEntities.Select(s => new SLADto(s)).ToList();
+            var slaEntities = await _assetSlaRepository.SlaListByAssetAsync(id);
 
-            return slaDtos;
+            return slaEntities.Select(c => new SLADto(c)).ToList();
         }
 
         public async Task<List<BreachDto>> GetBreachesByAssetId(int id)
         {
             var breachesEntities = await _eFRepository.WhereToListAsync<Breach>(a => a.AssetId == id);
-            var breachDtos = breachesEntities.Select(b => new BreachDto(b)).ToList();
+            var breachDtos = breachesEntities.OrderByDescending(c => c.CreatedAt).Select(b => new BreachDto(b)).ToList();
 
             return breachDtos;
         }

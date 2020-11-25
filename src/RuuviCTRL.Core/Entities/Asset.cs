@@ -11,6 +11,6 @@ namespace RuuviCTRL.Core.Entities
 
         public ICollection<Breach> Breaches { get; set; }
 
-        public ICollection<SLAAgreement> SlaAgreements { get; set; }
+        public ICollection<AssetSLAAgreement> AssetSlaAgreements { get; set; }
     }
 }

@@ -27,7 +27,7 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
   private dataSubject: BehaviorSubject<AssetDto>;
   public readonly Data$: Observable<AssetDto>;
 
-  slas$: Observable<SlaDto[]>;
+  public slas$: Observable<SlaDto[]>;
   breaches$: Observable<BreachDto[]>;
 
   assetId: number;
@@ -35,9 +35,9 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
   data: BreachDto[] = [];
 
   temperatureBreach: TemperatureBreachModel[] = [];
-  humidityBreach: HumidityBreachModel[] = [];
-  pressureBreach: PressureBreachModel[] = [];
-  locationBreach: LocationBreachModel[] = [];
+  humidityBreach:    HumidityBreachModel[] = [];
+  pressureBreach:    PressureBreachModel[] = [];
+  locationBreach:    LocationBreachModel[] = [];
 
   temperature: StatsWidget = {
     title: "Temperature",
@@ -71,6 +71,9 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
     maxValue: 100,
     digitsInfo: "1.0-0"
   };
+
+  warningClass = '';
+  dangerClass = '';
 
   private unsubscribe: Subscription[] = [];
 
@@ -117,6 +120,8 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
     this.unsubscribe.push(paramsSub);
 
     this.PushBreachModel();
+
+    console.log(this.data);
   }
 
   addToData(obj: RuuviWebsocket) {
@@ -164,9 +169,12 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
 
   PushBreachModel() {
     this.breaches$.subscribe((breach: BreachDto[]) => {
+      console.log(breach);
       breach.forEach(detail => {
         this.data.push(detail);
       });
+      console.log(this.data);
+
       for (let i = 0; i < this.data.length; i++) {
         if (this.data[i].hasHumidityBreach) {
           this.humidityBreach.push(this.data[i]);
@@ -185,5 +193,27 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  selectBreachClass(breach: BreachDto){
+    if (
+        ((breach.hasTempratureBreach && breach.hasTempratureBoundry) ||
+        (breach.hasHumidityBreach && breach.hasHumidityBoundry) ||
+        (breach.hasPressureBreach && breach.hasTempratureBoundry))  &&
+        !breach.hasEnded
+    ) {
+      switch (breach.type) {
+        case 1:
+          return 'text-warning';
+          break;
+        case 2:
+          return 'text-danger';
+          break;
+        default:
+          return '';
+          break;
+      }
+    }
+    return '';
   }
 }
