@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AssetData } from '../_models/asset-data.model';
 import { AssetDto } from '../_models/assetDto.model';
 import { RuuviWebsocketService } from '../_services/ruuvi-websocket.service';
 import { BreachDto } from '../../../modules/ruuvi-monitoring/_models/breachDto.model';
 import { SlaDto } from '../../../modules/settings/_models/slaDto.model';
 import { AssetDetailService } from '../../../modules/ruuvi-monitoring/_services/asset-detail.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-dashboard-table',
@@ -17,19 +18,21 @@ export class DashboardTableComponent implements OnInit {
 
     @Input('assetData') assetData: Observable<AssetDto[]>;
     slaData: Observable<SlaDto[]>;
+    private slas: Map<number, SlaDto[]>;
 
-    //Issue 62-63
-    private textcolor: String;
-    private boundaries: String;
+
+    // Issue 62-63
+    private textcolor: string;
     private data: SlaDto;
 
-    //tempBreach;
-    //pressureBreach;
-    //humidityBreach;
+    // tempBreach;
+    // pressureBreach;
+    // humidityBreach;
 
     constructor(private assetdetailService: AssetDetailService) {
-        //Add for loop for each ruuvi tag for multiple support
+        // Add for loop for each ruuvi tag for multiple support
         this.slaData = this.assetdetailService.getSlasForAsset(1);
+        this.slas = new Map<number, SlaDto[]>();
     }
 
     ngOnInit(): void {
@@ -38,27 +41,27 @@ export class DashboardTableComponent implements OnInit {
         });
     }
 
-    getTextColor(value: number, type: String) {
+    getTextColor(value: number, type: string, sla: SlaDto) {
         this.textcolor = 'black';
 
         switch (type) {
             case 'Temperature':
-                if (this.data.hasTempratureBoundry) {
-                    if (value > this.data.maxTemprature || value < this.data.minTemprature) {
+                if (sla.hasTempratureBoundry) {
+                    if (value > sla.maxTemprature || value < sla.minTemprature) {
                         this.textcolor = 'red';
                     }
                 }
                 break;
             case 'Pressure':
-                if (this.data.hasPressureBoundry) {
-                    if (value > this.data.maxPressure || value < this.data.minPressure) {
+                if (sla.hasPressureBoundry) {
+                    if (value > sla.maxPressure || value < sla.minPressure) {
                         this.textcolor = 'red';
                     }
                 }
                 break;
             case 'Humidity':
-                if (this.data.hasHumidityBoundry) {
-                    if (value > this.data.maxHumidity || value < this.data.minHumidity) {
+                if (sla.hasHumidityBoundry) {
+                    if (value > sla.maxHumidity || value < sla.minHumidity) {
                         this.textcolor = 'red';
                     }
                 }
@@ -67,27 +70,35 @@ export class DashboardTableComponent implements OnInit {
         return this.textcolor;
     }
 
-    getBoundary(type: String) {
-        this.boundaries = '';
+
+    getBoundary(sla: SlaDto, type: string) {
+        let boundaries = '';
 
         switch (type) {
             case 'Temperature':
-                if (this.data.hasTempratureBoundry) {
-                    this.boundaries = this.data.minTemprature + ' - ' + this.data.maxTemprature;
+                if (sla.hasTempratureBoundry) {
+                    boundaries = sla.minTemprature + ' - ' + sla.maxTemprature;
                 }
                 break;
             case 'Pressure':
-                if (this.data.hasPressureBoundry) {
-                    this.boundaries = this.data.minPressure + ' - ' + this.data.maxPressure;
+                if (sla.hasPressureBoundry) {
+                    boundaries = sla.minPressure + ' - ' + sla.maxPressure;
                 }
                 break;
             case 'Humidity':
-                if (this.data.hasHumidityBoundry) {
-                    this.boundaries = this.data.minHumidity + ' - ' + this.data.maxHumidity;
+                if (sla.hasHumidityBoundry) {
+                    boundaries = sla.minHumidity + ' - ' + sla.maxHumidity;
                 }
                 break;
         }
 
-        return this.boundaries;
+        return boundaries;
+    }
+
+    getSla(assetId: number): Observable<SlaDto[]>{
+        if(this.slas.has(assetId)){
+            return of(this.slas.get(assetId));
+        }
+        return this.slaData = this.assetdetailService.getSlasForAsset(assetId).pipe(tap(res => this.slas.set(assetId, res)));
     }
 }
