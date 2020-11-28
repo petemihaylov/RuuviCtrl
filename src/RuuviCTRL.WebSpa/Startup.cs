@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RuuviCTRL.Core;
 using RuuviCTRL.Infrastructure;
-using RuuviCTRL.StorageApi.Hubs;
 
 namespace RuuviCTRL.WebSpa
 {
@@ -83,8 +82,6 @@ namespace RuuviCTRL.WebSpa
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
-
-                endpoints.MapHub<LiveNotificationHub>("/livenotification");
             });
 
             app.UseSpa(spa =>
