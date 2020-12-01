@@ -1,13 +1,14 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { SlaAssetsServiceService } from './sla-assets.service';
+import { SlaAssetsService } from './sla-assets.service';
 
-describe('SlaAssetsServiceService', () => {
-  let service: SlaAssetsServiceService;
+describe('SlaAssetsService', () => {
+  let service: SlaAssetsService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(SlaAssetsServiceService);
+    TestBed.configureTestingModule({   imports:[HttpClientTestingModule ],});
+    service = TestBed.inject(SlaAssetsService);
   });
 
   it('should be created', () => {

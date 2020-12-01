@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SlaComponent } from './sla.component';
@@ -8,6 +9,7 @@ describe('SlaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports:[HttpClientTestingModule ],
       declarations: [ SlaComponent ]
     })
     .compileComponents();
