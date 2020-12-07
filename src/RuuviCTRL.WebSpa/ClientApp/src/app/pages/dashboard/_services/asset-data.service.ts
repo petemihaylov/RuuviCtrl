@@ -26,4 +26,11 @@ export class AssetDataService {
     return this.httpClient
         .get<AssetDto[]>(`${this.url}/${this.endpoint}`);
     }
+
+    search(search: string): Observable<AssetDto[]> {
+        const url = (search) ? `${this.url}/${this.endpoint}/searchByName?search=${search}` : `${this.url}/${this.endpoint}/searchByName`;
+        console.log(url);
+        return this.httpClient
+        .get<AssetDto[]>(url);
+    }
 }

@@ -15,6 +15,7 @@ import { RuuviWebsocketService } from './_services/ruuvi-websocket.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
+  assetSearch: string;
 
   private _notifications: BehaviorSubject<NotificationDto[]> = new BehaviorSubject([]);
   public Notifications: Observable<NotificationDto[]> = this._notifications.asObservable();
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public isShow = false;
   private unsubscribe: Subscription[] = [];
 
+  public loadingAssets = false;
   
   constructor(
     private assetDataService: AssetDataService,
@@ -34,18 +36,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    const listSub = this.assetDataService.list().subscribe(res => {
-      this._data.next(res);
-
-      const websocketSub = this.ruuviDataService
-      .retrieveMappedObject()
-      .subscribe((receivedObj: RuuviWebsocket) => {
-        this.addToData(receivedObj);
-      });
-      this.unsubscribe.push(websocketSub);
-
-    });
-    this.unsubscribe.push(listSub);
+    this.searchAssets();
 
         // Alerts from Notification Websocket
     const websocketAlerts = this.notificationWebsocketService
@@ -93,5 +84,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe.forEach(sb => sb.unsubscribe());
     this.subscription.unsubscribe();
+  }
+
+  searchAssets(){
+    this.loadingAssets = true;
+
+    const listSub = this.assetDataService.search(this.assetSearch).subscribe(res => {
+      this._data.next(res);
+
+      const websocketSub = this.ruuviDataService
+          .retrieveMappedObject()
+          .subscribe((receivedObj: RuuviWebsocket) => {
+            this.addToData(receivedObj);
+          });
+      this.unsubscribe.push(websocketSub);
+      this.loadingAssets = false;
+    });
+    this.unsubscribe.push(listSub);
   }
 }

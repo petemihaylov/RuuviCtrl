@@ -11,4 +11,4 @@
 
 <app-dashboard-map [assetData]="Data"></app-dashboard-map>
 
-<app-dashboard-table [assetData]="Data"></app-dashboard-table>
+<app-dashboard-table [assetData]="Data" [(searchInput)]="assetSearch" [searchingAsset]="loadingAssets" (searchInputChange)="searchAssets()"></app-dashboard-table>

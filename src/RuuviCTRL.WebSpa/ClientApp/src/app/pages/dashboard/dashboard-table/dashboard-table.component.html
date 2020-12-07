@@ -1,6 +1,5 @@
-
 <!--begin::Dashboard Table Widget-->
-<div class="card card-custom card-stretch gutter-b" style="height: 200px">
+<div class="card card-custom gutter-b" style="min-height: 200px">
     <div class="card-header border-0 py-5">
         <h3 class="card-title align-items-start flex-column">
             <span class="card-label font-weight-bolder text-dark">Assets Stats</span>
@@ -8,6 +7,34 @@
     </div>
     <div class="card-body pt-0 pb-3">
         <div class="tab-content">
+
+            <div class="quick-search quick-search-dropdown" id="kt_quick_search_dropdown" >
+                <!--begin:Form-->
+                <form method="get" class="quick-search-form">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <span
+                                      class="svg-icon svg-icon-lg"
+                                      [inlineSVG]="'./assets/media/svg/icons/General/Search.svg'"
+                              ></span>
+                            </span>
+                        </div>
+                        <input
+                            [(ngModel)]="_searchInput"
+                            (ngModelChange)="searchAsset()"
+                            name="searchAsset"
+                            type="text"
+                            class="form-control"
+                            placeholder="Search..."/>
+                        <div class="input-group-append" [ngClass]="{ 'spinner spinner-sm spinner-primary': searchingAsset }">
+                        </div>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+
+
             <table class="table table-head-custom table-head-bg table-borderless table-vertical-center">
                 <thead>
                     <tr class="text-left text-uppercase">
