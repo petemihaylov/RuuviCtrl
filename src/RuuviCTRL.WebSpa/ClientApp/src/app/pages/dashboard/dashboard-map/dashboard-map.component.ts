@@ -100,7 +100,11 @@ export class DashboardMapComponent implements AfterViewInit {
           assetLocation.longitude = loc.longitude;
           assetLocation.latitude = loc.latitude;
        });
-
+      if (this.map && this.map.remove) {
+          this.map.off();
+          this.map.remove();
+      }
+      
       this.map = L.map("map", {
           center: [assetLocation.latitude, assetLocation.longitude],
           fullscreenControl: true,
