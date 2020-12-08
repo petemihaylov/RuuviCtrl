@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
@@ -9,6 +9,8 @@ import { RuuviWebsocketService } from './_services/ruuvi-websocket.service';
 import { NotificationWebsocketService } from './_services/notification-websocket.service';
 import { DashboardMapComponent } from './dashboard-map/dashboard-map.component';
 import { LeafletWidgetComponent } from './_widgets/leaflet-widget/leaflet-widget.component';
+import { PopupComponent } from './dashboard-map/popup.component';
+import { createCustomElement } from '@angular/elements';
 
 @NgModule({
   declarations: [DashboardComponent, DashboardTableComponent, DashboardMapComponent, LeafletWidgetComponent],
@@ -22,6 +24,13 @@ import { LeafletWidgetComponent } from './_widgets/leaflet-widget/leaflet-widget
       },
     ]),
   ],
-  providers: [HttpClient, RuuviWebsocketService, NotificationWebsocketService]
+  providers: [HttpClient, RuuviWebsocketService, NotificationWebsocketService],
+  entryComponents: [PopupComponent]
 })
-export class DashboardModule {}
+export class DashboardModule {
+  constructor(private injector: Injector) {
+    const PopupElement = createCustomElement(PopupComponent, {injector});
+    // Register the custom element with the browser.
+    customElements.define('popup-element', PopupElement);
+  }
+}

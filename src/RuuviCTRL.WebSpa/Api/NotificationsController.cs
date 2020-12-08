@@ -6,7 +6,7 @@ using RuuviCTRL.StorageApi.Hubs;
 using Microsoft.AspNetCore.SignalR;
 
 
-namespace RuuviCTRL.StorageApi.Api
+namespace RuuviCTRL.WebSpa.Api
 {
     public class NotificationsController : BaseApiController
     {
