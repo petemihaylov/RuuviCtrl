@@ -35,16 +35,42 @@
 	</div>
 </ng-container>
 
-	<div class="col-12">
-		<div class="card card-custom card-stretch gutter-b">
-			<div class="card-header">
-				<div class="card-title">
-					<h3 class="card-label">
-						Breaches:
-						<small>amount: {{data?.length}}</small>
-					</h3>
-				</div>
+<div class="col-12">
+	<div class="card card-custom card-stretch gutter-b">
+		<div class="card-header">
+			<div class="card-title">
+				<h3 class="card-label">
+					Breaches:
+					<small>amount: {{data?.length}}</small>
+				</h3>
 			</div>
+		</div>
+		<!--Breaches search bar-->
+		<div class="quick-search quick-search-dropdown" id="kt_quick_search_dropdown" >
+		  <!--begin:Form-->
+		  <form method="get" class="quick-search-form">
+			  <div class="input-group">
+				  <div class="input-group-prepend">
+					  <span class="input-group-text">
+						<span
+								class="svg-icon svg-icon-lg"
+								[inlineSVG]="'./assets/media/svg/icons/General/Search.svg'"
+						></span>
+					  </span>
+				  </div>
+				  <input
+					  [(ngModel)]="_searchInput" 
+					  (ngModelChange)="searchAsset()"
+					  name="searchAsset"
+					  type="text"
+					  class="form-control"
+					  placeholder="Search..."/>
+				  <div class="input-group-append" [ngClass]="{ 'spinner spinner-sm spinner-primary': searchingAsset }">
+				  </div>
+			  </div>
+		  </form>
+		  <!--end::Form-->
+		</div >
 			<div class="card-body">
 				<table class="table table-vertical-center">
 					<thead>
@@ -68,7 +94,7 @@
 						></span>
 						</td>
 						<th>{{(breach.slaTitle)?breach.slaTitle: 'SLA ' + breach.slaAgreementId}}</th>
-						<td>{{breach.createdAt | date: 'dd-MM-yyyy hh:mm'}}</td>
+						<td>{{breach.createdAt | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
 						<td [class.text-danger]="breach.hasTempratureBreach"><span placement="top" ngbTooltip="Min: {{breach.minTemprature}} | Max: {{breach.maxTemprature}}">{{breach.temperature}}</span></td>
 						<td [class.text-danger]="breach.hasHumidityBreach"><span placement="top" ngbTooltip="Min: {{breach.minHumidity}} | Max: {{breach.maxHumidity}}">{{breach.humidity}}</span></td>
 						<td [class.text-danger]="breach.hasPressureBreach"><span placement="top" ngbTooltip="Min: {{breach.minPressure}} | Max: {{breach.maxPressure}}">{{breach.pressure}}</span></td>

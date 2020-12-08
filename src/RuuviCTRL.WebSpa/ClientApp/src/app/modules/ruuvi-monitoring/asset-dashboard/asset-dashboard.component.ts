@@ -17,6 +17,7 @@ import { LocationBreachModel } from "../_models/BreachModels/locationBreach.mode
 import { async } from "@angular/core/testing";
 import { ObserversModule } from "@angular/cdk/observers";
 import { DatePipe } from "@angular/common";
+import { Console } from 'console';
 
 @Component({
   selector: "app-asset-dashboard",
@@ -27,9 +28,13 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
   private dataSubject: BehaviorSubject<AssetDto>;
   public readonly Data$: Observable<AssetDto>;
 
+  public _searchInput : string;
+  public searchingAsset = false;
+
+
   public slas$: Observable<SlaDto[]>;
   breaches$: Observable<BreachDto[]>;
-
+  
   assetId: number;
 
   data: BreachDto[] = [];
@@ -167,14 +172,25 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
     return this.datepipe.transform(date, "yyyy-MM-ddThh:mm:ss");
   }
 
-  PushBreachModel() {
-    this.breaches$.subscribe((breach: BreachDto[]) => {
-      console.log(breach);
-      breach.forEach(detail => {
-        this.data.push(detail);
-      });
-      console.log(this.data);
+  PushBreachModel(filter = "") {
+    filter = filter.toLowerCase();
+    this.data = [];
+    this.humidityBreach = [];
+    this.pressureBreach = [];
+    this.temperatureBreach = [];
+    this.locationBreach = [];
 
+    this.breaches$.subscribe((breach: BreachDto[]) => {
+      breach.forEach(detail => {
+        if(filter !== ""){
+            if(detail.assetId.toString().toLowerCase().includes(filter) || this.datepipe.transform(detail.createdAt,"dd-MM-yyyy hh:mm:ss").toLowerCase().includes(filter)){
+              this.data.push(detail);
+            }
+        }
+        else{
+          this.data.push(detail);
+        }
+      });
       for (let i = 0; i < this.data.length; i++) {
         if (this.data[i].hasHumidityBreach) {
           this.humidityBreach.push(this.data[i]);
@@ -193,6 +209,10 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  searchAsset(){
+    this.PushBreachModel(this._searchInput);
   }
 
   selectBreachClass(breach: BreachDto){
