@@ -29,7 +29,7 @@ export class AssetDataService {
 
     search(search: string): Observable<AssetDto[]> {
         const url = (search) ? `${this.url}/${this.endpoint}/searchByName?search=${search}` : `${this.url}/${this.endpoint}/searchByName`;
-        console.log(url);
+        // console.log(url);
         return this.httpClient
         .get<AssetDto[]>(url);
     }

@@ -11,6 +11,7 @@ import { DashboardMapComponent } from './dashboard-map/dashboard-map.component';
 import { LeafletWidgetComponent } from './_widgets/leaflet-widget/leaflet-widget.component';
 import {InlineSVGModule} from 'ng-inline-svg';
 import {FormsModule} from '@angular/forms';
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [DashboardComponent, DashboardTableComponent, DashboardMapComponent, LeafletWidgetComponent],
@@ -25,6 +26,7 @@ import {FormsModule} from '@angular/forms';
         ]),
         InlineSVGModule,
         FormsModule,
+        NgbPaginationModule,
     ],
   providers: [HttpClient, RuuviWebsocketService, NotificationWebsocketService]
 })

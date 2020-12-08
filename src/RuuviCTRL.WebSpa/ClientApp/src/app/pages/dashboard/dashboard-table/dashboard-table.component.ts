@@ -30,6 +30,8 @@ export class DashboardTableComponent implements OnInit {
     @Output()
     searchInputChange: EventEmitter<string> = new EventEmitter<string>();
 
+    page = 4;
+
     slaData: Observable<SlaDto[]>;
     private slas: Map<number, SlaDto[]>;
 
