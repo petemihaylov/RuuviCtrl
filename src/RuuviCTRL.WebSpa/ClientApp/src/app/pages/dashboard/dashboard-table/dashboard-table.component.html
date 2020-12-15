@@ -52,8 +52,8 @@
                         <th style="min-width: 100px;" class="w-100">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr *ngFor="let item of assetData | async | slice: (assetData) * 10 : page * 10">
+                <tbody *ngIf="assetData | async as assetDataList">
+                    <tr *ngFor="let item of assetDataList | slice: (page-1) * 10 : page * 10">
                         <td>
                             <span class="75 font-weight-bolder d-block font-size-lg">
                                 {{item.name}}
@@ -99,7 +99,7 @@
                 </tbody>
             </table>
             <div class="col-12" *ngIf="(assetData | async)?.length !== 0">
-                <ngb-pagination class="d-flex justify-content-center" [collectionSize]="(assetData | async)?.length" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+                <ngb-pagination class="d-flex justify-content-center" [collectionSize]="(assetData | async)?.length" [pageSize]="10" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
             </div>
         </div>
     </div>
