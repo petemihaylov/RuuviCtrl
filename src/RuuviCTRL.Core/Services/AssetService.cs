@@ -82,6 +82,26 @@ namespace RuuviCTRL.Core.Services
 
             return breachDtos;
         }
+
+        public async Task<List<AssetDto>> GetAssetDtosBySearch(string search)
+        {
+            var assets = await _eFRepository.WhereToListAsync<Asset>(a => a.Name.ToLower().Contains(search.ToLower()));
+            List<AssetDto> resultDtos = new List<AssetDto>();
+            assets.ForEach(asset =>
+                {
+                    var ruuviData = _repository.FilterBy(s => s.DeviceId == asset.DeviceId).ToList();
+                    if (ruuviData.Count != 0)
+                    {
+                        var assetDto = new AssetDto(asset, ruuviData);
+
+                        resultDtos.Add(assetDto);
+                    }
+                }
+
+            );
+
+            return resultDtos;
+        }
     }
 
 }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Input, Injectable } from '@angular/core';
+import {Component, OnInit, Input, Injectable, Output, EventEmitter} from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { AssetData } from '../_models/asset-data.model';
 import { AssetDto } from '../_models/assetDto.model';
@@ -17,6 +17,21 @@ import { tap } from 'rxjs/operators';
 export class DashboardTableComponent implements OnInit {
 
     @Input('assetData') assetData: Observable<AssetDto[]>;
+    @Input('searchingAsset') searchingAsset = false;
+    @Input()
+    set searchInput(val: string) {
+        this._searchInput = val;
+        this.searchInputChange.emit(val);
+
+    }
+    get searchInput() {
+        return this._searchInput;
+    }
+    @Output()
+    searchInputChange: EventEmitter<string> = new EventEmitter<string>();
+
+    page = 4;
+
     slaData: Observable<SlaDto[]>;
     private slas: Map<number, SlaDto[]>;
 
@@ -28,6 +43,8 @@ export class DashboardTableComponent implements OnInit {
     // tempBreach;
     // pressureBreach;
     // humidityBreach;
+
+    _searchInput: string;
 
     constructor(private assetdetailService: AssetDetailService) {
         // Add for loop for each ruuvi tag for multiple support
@@ -100,5 +117,10 @@ export class DashboardTableComponent implements OnInit {
             return of(this.slas.get(assetId));
         }
         return this.slaData = this.assetdetailService.getSlasForAsset(assetId).pipe(tap(res => this.slas.set(assetId, res)));
+    }
+
+    searchAsset(){
+        this.searchingAsset = true;
+        this.searchInputChange.emit(this._searchInput);
     }
 }

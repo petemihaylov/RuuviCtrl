@@ -11,6 +11,9 @@ import { DashboardMapComponent } from './dashboard-map/dashboard-map.component';
 import { LeafletWidgetComponent } from './_widgets/leaflet-widget/leaflet-widget.component';
 import { PopupComponent } from './dashboard-map/popup.component';
 import { createCustomElement } from '@angular/elements';
+import {InlineSVGModule} from 'ng-inline-svg';
+import {FormsModule} from '@angular/forms';
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [DashboardComponent, DashboardTableComponent, DashboardMapComponent, LeafletWidgetComponent],
@@ -23,10 +26,14 @@ import { createCustomElement } from '@angular/elements';
         component: DashboardComponent,
       },
     ]),
+    InlineSVGModule,
+    FormsModule,
+    NgbPaginationModule,
   ],
   providers: [HttpClient, RuuviWebsocketService, NotificationWebsocketService],
   entryComponents: [PopupComponent]
 })
+
 export class DashboardModule {
   constructor(private injector: Injector) {
     const PopupElement = createCustomElement(PopupComponent, {injector});
