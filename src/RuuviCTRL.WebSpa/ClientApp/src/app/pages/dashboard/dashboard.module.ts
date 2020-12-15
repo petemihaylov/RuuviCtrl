@@ -9,19 +9,25 @@ import { RuuviWebsocketService } from './_services/ruuvi-websocket.service';
 import { NotificationWebsocketService } from './_services/notification-websocket.service';
 import { DashboardMapComponent } from './dashboard-map/dashboard-map.component';
 import { LeafletWidgetComponent } from './_widgets/leaflet-widget/leaflet-widget.component';
+import {InlineSVGModule} from 'ng-inline-svg';
+import {FormsModule} from '@angular/forms';
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [DashboardComponent, DashboardTableComponent, DashboardMapComponent, LeafletWidgetComponent],
-  imports: [
-    CommonModule,
-    WidgetsModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: DashboardComponent,
-      },
-    ]),
-  ],
+    imports: [
+        CommonModule,
+        WidgetsModule,
+        RouterModule.forChild([
+            {
+                path: '',
+                component: DashboardComponent,
+            },
+        ]),
+        InlineSVGModule,
+        FormsModule,
+        NgbPaginationModule,
+    ],
   providers: [HttpClient, RuuviWebsocketService, NotificationWebsocketService]
 })
 export class DashboardModule {}

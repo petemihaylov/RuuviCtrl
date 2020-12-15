@@ -43,6 +43,18 @@ namespace RuuviCTRL.WebSpa.Api
             return NotFound();
         }
 
+        [HttpGet("searchByName", Name = "GetAssetBySearch")]
+        public async Task<IActionResult> GetAssetBySearch([CanBeNull] string search)
+        {
+            if (search == null || search == "")
+            {
+                //var assets = await _assetService.GetAssetDtos();
+                return Ok(await _assetService.GetAssetDtos());
+            }
+            //var assets = await _assetService.GetAssetDtos();
+            return Ok(await _assetService.GetAssetDtosBySearch(search));
+        }
+
         [HttpGet("byTime", Name = "GetAssetByTime")]
         public async Task<ActionResult<AssetDto>> GetAssetByTime(int? id, DateTime? start, DateTime? end)
         {

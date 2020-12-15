@@ -9,6 +9,8 @@
     <p>{{item.description}}</p>
 </div>
 
-<app-dashboard-map [assetData]="Data"></app-dashboard-map>
+<div class="row">
+    <app-dashboard-map class="col-lg-4 col-md-6 col-xs-12 order-1 order-md-0" [assetData]="Data"></app-dashboard-map>
 
-<app-dashboard-table [assetData]="Data"></app-dashboard-table>
+    <app-dashboard-table class="col-lg-8 col-md-6 col-xs-12 order-0 order-md-1" [assetData]="Data" [(searchInput)]="assetSearch" [searchingAsset]="loadingAssets" (searchInputChange)="searchAssets()"></app-dashboard-table>
+</div>
