@@ -1,6 +1,5 @@
-
 <!--begin::Dashboard Table Widget-->
-<div class="card card-custom card-stretch gutter-b" style="height: 200px">
+<div class="card card-custom gutter-b card-stretch">
     <div class="card-header border-0 py-5">
         <h3 class="card-title align-items-start flex-column">
             <span class="card-label font-weight-bolder text-dark">Assets Stats</span>
@@ -8,33 +7,65 @@
     </div>
     <div class="card-body pt-0 pb-3">
         <div class="tab-content">
-            <table class="table table-head-custom table-head-bg table-borderless table-vertical-center">
+
+            <div class="quick-search quick-search-dropdown" id="kt_quick_search_dropdown" >
+                <!--begin:Form-->
+                <form method="get" class="quick-search-form">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <span
+                                      class="svg-icon svg-icon-lg"
+                                      [inlineSVG]="'./assets/media/svg/icons/General/Search.svg'"
+                              ></span>
+                            </span>
+                        </div>
+                        <input
+                            [(ngModel)]="_searchInput"
+                            (ngModelChange)="searchAsset()"
+                            name="searchAsset"
+                            type="text"
+                            class="form-control"
+                            placeholder="Search..."/>
+                        <div class="input-group-append" [ngClass]="{ 'spinner spinner-sm spinner-primary': searchingAsset }">
+                        </div>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+
+            <div  *ngIf="(assetData | async)?.length === 0">
+                <h5 class="text-center">No Assets could be found.</h5>
+            </div>
+
+
+            <table class="table table-head-custom table-head-bg table-borderless table-vertical-center table-responsive w-100" *ngIf="(assetData | async)?.length !== 0">
                 <thead>
                     <tr class="text-left text-uppercase">
                         <th style="min-width: 250px;" class="pl-7">
                             <span class="text-dark-75">Name</span>
                         </th>
-                        <th style="min-width: 100px;">Device Id</th>
-                        <th style="min-width: 100px;">Temperature</th>
-                        <th style="min-width: 100px;">Pressure</th>
-                        <th style="min-width: 100px;">Humidity</th>
-                        <th style="min-width: 100px;">Actions</th>
+                        <th style="min-width: 100px;" class="d-none d-lg-table-cell">Device Id</th>
+                        <th style="min-width: 100px;" class="d-none d-lg-table-cell">Temperature</th>
+                        <th style="min-width: 100px;" class="d-none d-lg-table-cell">Pressure</th>
+                        <th style="min-width: 100px;" class="d-none d-lg-table-cell">Humidity</th>
+                        <th style="min-width: 100px;" class="w-100">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr *ngFor="let item of assetData | async">
+                <tbody *ngIf="assetData | async as assetDataList">
+                    <tr *ngFor="let item of assetDataList | slice: (page-1) * 10 : page * 10">
                         <td>
                             <span class="75 font-weight-bolder d-block font-size-lg">
                                 {{item.name}}
                             </span>
                         </td>
-                        <td>
+                        <td class="d-none d-lg-table-cell">
                             <span class="75 font-weight-bolder d-block font-size-lg">
                                 {{item.deviceId}}
                             </span>
                         </td>
                         <ng-container *ngIf="getSla(item.id) | async as slas">
-                            <td> 
+                            <td class="d-none d-lg-table-cell">
                                 <span [ngStyle]="{'color': getTextColor(item.temperature[item.temperature.length - 1].value, 'Temperature', slas[0])}" class="75 font-weight-bolder d-block font-size-lg">
                                     {{item.temperature[item.temperature.length - 1].value}} °C
                                 </span>
@@ -42,7 +73,7 @@
                                     {{ getBoundary(slas[0], 'Temperature') }}
                                 </span>
                             </td>
-                            <td>
+                            <td class="d-none d-lg-table-cell">
                                 <span [ngStyle]="{'color': getTextColor(item.pressure[item.pressure.length - 1].value, 'Pressure', slas[0])}" class="75 font-weight-bolder d-block font-size-lg">
                                     {{item.pressure[item.pressure.length - 1].value | number:'5.0-0'}} Pa
                                 </span>
@@ -50,7 +81,7 @@
                                     {{ getBoundary(slas[0], 'Pressure') }}
                                 </span>
                             </td>
-                            <td>
+                            <td class="d-none d-lg-table-cell">
                                 <span [ngStyle]="{'color': getTextColor(item.humidity[item.humidity.length - 1].value, 'Humidity', slas[0])}" class="75 font-weight-bolder d-block font-size-lg">
                                     {{item.humidity[item.humidity.length - 1].value | number:'1.1-2'}} %
                                 </span>
@@ -67,6 +98,9 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="col-12" *ngIf="(assetData | async)?.length !== 0">
+                <ngb-pagination class="d-flex justify-content-center" [collectionSize]="(assetData | async)?.length" [pageSize]="10" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+            </div>
         </div>
     </div>
 </div>
