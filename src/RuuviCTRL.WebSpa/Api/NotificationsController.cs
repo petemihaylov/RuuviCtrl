@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using RuuviCTRL.Core.Entities;
 using RuuviCTRL.SharedKernel.Interfaces;
-using RuuviCTRL.StorageApi.Hubs;
+
 using Microsoft.AspNetCore.SignalR;
+using RuuviCTRL.StorageApi.Hubs;
 
-
-namespace RuuviCTRL.StorageApi.Api
+namespace RuuviCTRL.WebSpa.Api
 {
     public class NotificationsController : BaseApiController
     {
@@ -47,7 +47,7 @@ namespace RuuviCTRL.StorageApi.Api
             var notificationItem = await _repository.AddAsync(message);
 
             // SignalR event
-            await _hubContext.Clients.All.SendAsync("GetNewNotification", notificationItem);
+            await _hubContext.Clients.All.SendAsync("Notification", notificationItem);
 
             return Ok();
            // return CreatedAtRoute(nameof(GetNotificationById), new { id = notificationItem.Id }, notificationItem);

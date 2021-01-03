@@ -38,6 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RuuviCTRL.Infrastructure\RuuviCTRL.Infrastructure.csproj" />
+    <ProjectReference Include="..\RuuviCTRL.StorageApi\RuuviCTRL.StorageApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

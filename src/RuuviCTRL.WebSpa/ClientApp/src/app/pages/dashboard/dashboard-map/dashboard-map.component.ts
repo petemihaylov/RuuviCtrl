@@ -1,11 +1,12 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
 import { AssetDto } from '../_models/assetDto.model';
 import { Observable } from 'rxjs';
-import { AssetData } from '../_models/asset-data.model';
 
 import * as L from 'leaflet';
 import { icon, Marker } from 'leaflet';
 import 'leaflet.smooth_marker_bouncing';
+import { NgElement, WithProperties } from '@angular/elements';
+import { PopupComponent } from './popup.component';
 const iconUrl = 'assets/blue-pin.png';
 
 // Customize the icon
@@ -36,7 +37,8 @@ export class DashboardMapComponent implements AfterViewInit {
 
     this.assetData.subscribe(items => { 
       if(items.length > 0) {
-      
+        
+          console.log(items);
           this.initMap();
 
           // Creating assetsLayer with all the markers
@@ -71,19 +73,15 @@ export class DashboardMapComponent implements AfterViewInit {
     const lastPressure = asset.pressure[asset.pressure.length - 1].value;
     const lastHumidity = asset.humidity[asset.humidity.length - 1].value;
     const lastTemperature = asset.temperature[asset.temperature.length - 1].value;
-
+    const popupEl: NgElement & WithProperties<PopupComponent> = document.createElement('popup-element') as any;
+    popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
+    this.assetData.subscribe(a => popupEl.item = a.find(arr => arr.id = asset.id));
+          
     return {
       type: "Feature",
       properties: {
         name: asset.name,
-        popupContent:
-        "<div>  " +
-        "<div><img src=\"https://static.thenounproject.com/png/159069-200.png\" width=\"28\" height=\"28\"> <b>"+ asset.deviceId + "</b> </div>" +
-        "<div> <b>name: </b> "+ asset.name + " </div>" +
-        "<div> <b>pressure: </b> "+ lastPressure + " Pa</div>" +
-        "<div> <b>humidity: </b> "+ lastHumidity + " %</div>" +
-        "<div> <b>temperature: </b> "+ lastTemperature + " °C</div>" +
-        "</div> "
+        popupContent: popupEl
       },
       geometry: {
         type: "Point",
@@ -100,7 +98,11 @@ export class DashboardMapComponent implements AfterViewInit {
           assetLocation.longitude = loc.longitude;
           assetLocation.latitude = loc.latitude;
        });
-
+      if (this.map && this.map.remove) {
+          this.map.off();
+          this.map.remove();
+      }
+      
       this.map = L.map("map", {
           center: [assetLocation.latitude, assetLocation.longitude],
           fullscreenControl: true,

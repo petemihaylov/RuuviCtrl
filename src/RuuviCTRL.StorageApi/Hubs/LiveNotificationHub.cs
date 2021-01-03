@@ -8,7 +8,7 @@ namespace RuuviCTRL.StorageApi.Hubs
     {
         public Task GetNewNotification(Notification value)
         {
-            return Clients.All.SendAsync("GetNewNotification", value);
+            return Clients.All.SendAsync("Notification", value);
         }
     }
 }
