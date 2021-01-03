@@ -85,7 +85,7 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr *ngFor="let breach of data" [class]="(breach.hasEnded)?'breach-ended': ''">
+					<tr *ngFor="let breach of data | slice: (page-1) * 10 : page * 10" [class]="(breach.hasEnded)?'breach-ended': ''">
 						<td>
 							<span
 								[inlineSVG]="(breach.hasEnded)?'../assets/media/svg/icons/Communication/Clipboard-check.svg': '../assets/media/svg/icons/Communication/Flag.svg'"
@@ -105,6 +105,9 @@
 					</tr>
 					</tbody>
 				</table>
+				<div class="col-12" breach>
+					<ngb-pagination class="d-flex justify-content-center" [collectionSize]="data?.length" [pageSize]="10" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+				</div>
 			</div>
 		</div>
 	</div>

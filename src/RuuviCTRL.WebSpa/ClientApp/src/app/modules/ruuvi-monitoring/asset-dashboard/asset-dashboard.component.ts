@@ -79,6 +79,7 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
 
   warningClass = '';
   dangerClass = '';
+  page = 1;
 
   private unsubscribe: Subscription[] = [];
 
@@ -174,6 +175,7 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
 
   PushBreachModel(filter = "") {
     filter = filter.toLowerCase();
+    console.log(filter);
     this.data = [];
     this.humidityBreach = [];
     this.pressureBreach = [];
