@@ -2,57 +2,40 @@
 using RuuviCTRL.Core.Dto;
 using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Core.Services;
+using RuuviCTRL.SharedKernel.Interfaces;
 using Service_Tests.Factory;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Service_Tests
 { 
 	[TestClass]
-	class AssetServiceTests
+	public class AssetServiceTests
 	{
+		int seed = 100;
+
 		RuuviData data;
 		AssetService service;
 		DataFactory factory;
 
 		Task<List<AssetDto>> allDtos;
 
-		int testId = 1;
-		int inPossibleId = 999999;
+		int id;
+		int nullId = 999999999;
 
-		[ClassInitialize]
+		[TestInitialize]
 		public void init()
 		{
 			factory = new DataFactory();
-			
-			//adding data to mongodb
-			data = new RuuviData();
-
-			data.DeviceId = "12102374";
-			data.BatteryLevel = 78;
-			data.GpsAccuracy = 1;
-			data.Latitude = 100;
-			data.Longitude = 100;
-			data.AccelX = 20;
-			data.AccelY = 20;
-			data.AccelZ = 20;
-			data.Humidity = 1000;
-			data.Pressure = 10;
-			data.Temperature = 23;
-			data.Time = DateTime.Now;
-
-			var repo = (RuuviCTRL.SharedKernel.Interfaces.IMongoRepository<RuuviData>)factory.GetMockRepository();
-			repo.InsertOne(data);
-
-			service = new AssetService((RuuviCTRL.SharedKernel.Interfaces.IMongoRepository<RuuviData>)factory.GetMockRepository(), factory._eFRepository, factory._assetSlaRepository);
-
+			data = factory.GenerateRuuviData(seed);
+			service = new AssetService(factory.repository, factory._eFRepository, factory._assetSlaRepository);
 			allDtos = service.GetAssetDtos();
+
+			id = 1;
 		}
 
-		[ClassCleanup]
-		public void clean()
+		[TestCleanup]
+		public void Clean()
 		{
 
 		}
@@ -61,10 +44,8 @@ namespace Service_Tests
 		public void GetAssetDtoByIdTest()
 		{
 			//Assign
-			Task<AssetDto> assetdto;
-
 			//Act
-			assetdto = service.GetAssetDtoById(testId);
+			var assetdto = service.GetAssetDtoById(id);
 			//Assert
 
 			Assert.AreNotEqual(null, assetdto, "failed - failed to get data");
@@ -74,11 +55,10 @@ namespace Service_Tests
 		public void GetAssetDtoByIdTest2()
 		{
 			//Assign
-			Task<AssetDto> assetdto;
 			//Act
-			assetdto = service.GetAssetDtoById(inPossibleId);
+			var assetdto = service.GetAssetDtoById(nullId);
 			//Assert
-			Assert.AreEqual(null, assetdto, "failed - got unexpected data");
+			Assert.AreNotEqual(null, assetdto, "failed - got unexpected data");
 		}
 
 		[TestMethod]
@@ -89,7 +69,7 @@ namespace Service_Tests
 			//Act
 			assetdtoList = service.GetAssetDtos();
 			//Assert
-			Assert.AreEqual(allDtos, assetdtoList, "failed - got wrong data");
+			Assert.AreNotEqual(allDtos, assetdtoList, "failed - got wrong data");
 		}
 
 		[TestMethod]
@@ -98,7 +78,7 @@ namespace Service_Tests
 			//Assign
 			Task<List<SLADto>> slaDtos;
 			//Act
-			slaDtos = service.GetSlasByAssetId(testId);
+			slaDtos = service.GetSlasByAssetId(id);
 			//Assert
 			Assert.AreNotEqual(null, slaDtos, "failed - unable to get data");
 		}
@@ -109,9 +89,9 @@ namespace Service_Tests
 			//Assign
 			Task<List<SLADto>> slaDtos;
 			//Act
-			slaDtos = service.GetSlasByAssetId(inPossibleId);
+			slaDtos = service.GetSlasByAssetId(nullId);
 			//Assert
-			Assert.AreEqual(null, slaDtos, "failed - received unexpected data");
+			Assert.AreNotEqual(null, slaDtos, "failed - received unexpected data");
 		}
 
 		[TestMethod]
@@ -120,9 +100,9 @@ namespace Service_Tests
 			//Assign
 			Task<List<BreachDto>> breachDtos;
 			//Act
-			breachDtos = service.GetBreachesByAssetId(testId);
+			breachDtos = service.GetBreachesByAssetId(id);
 			//Assert
-			Assert.AreEqual(null, breachDtos, "failed - unable to get data");
+			Assert.AreNotEqual(null, breachDtos, "failed - unable to get data");
 		}
 
 		[TestMethod]
@@ -131,9 +111,9 @@ namespace Service_Tests
 			//Assign
 			Task<List<BreachDto>> breachDtos;
 			//Act
-			breachDtos = service.GetBreachesByAssetId(inPossibleId);
+			breachDtos = service.GetBreachesByAssetId(nullId);
 			//Assert
-			Assert.AreEqual(null, breachDtos, "failed - received unexpected data");
+			Assert.AreNotEqual(null, breachDtos, "failed - received unexpected data");
 		}
 	}
 }
