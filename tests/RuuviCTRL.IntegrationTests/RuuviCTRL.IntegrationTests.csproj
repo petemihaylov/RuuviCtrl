@@ -26,7 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\RuuviCTRL.Core\RuuviCTRL.Core.csproj" />
     <ProjectReference Include="..\..\src\RuuviCTRL.Infrastructure\RuuviCTRL.Infrastructure.csproj" />
-    <ProjectReference Include="..\RuuviCTRL.UnitTests\RuuviCTRL.UnitTests.csproj" />
   </ItemGroup>
 
 </Project>
