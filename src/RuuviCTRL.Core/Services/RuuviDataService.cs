@@ -43,6 +43,13 @@ namespace RuuviCTRL.Core.Services
                         var humidityDateTime = DateTime.Now.Subtract(slaAgreement.HumidityTime);
                         var pressureDateTime = DateTime.Now.Subtract(slaAgreement.PressureTime);
 
+                        await EndWarningsThatCausedBreach(i =>
+                            !i.HasEnded &&
+                            i.Type == BreachType.Warning &&
+                            i.AssetId == asset.Id &&
+                            i.SlaAgreementId == slaAgreement.Id &&
+                            (i.CreatedAt <= tempratureDateTime && i.CreatedAt <= humidityDateTime && i.CreatedAt <= pressureDateTime));
+
                         var tempratureBreaches = await _eFRepository.CountAsync<Breach>(i => !i.HasEnded && (i.Temperature <= i.MinTemprature || i.Temperature >= i.MaxTemprature) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= tempratureDateTime);
                         var humidityBreaches = await _eFRepository.CountAsync<Breach>(i => !i.HasEnded && (i.Humidity <= i.MinHumidity || i.Humidity >= i.MaxHumidity) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= humidityDateTime);
                         var pressureBreaches = await _eFRepository.CountAsync<Breach>(i => !i.HasEnded && (i.Pressure <= i.MinPressure || i.Pressure >= i.MaxPressure) && i.AssetId == asset.Id && i.SlaAgreementId == slaAgreement.Id && i.CreatedAt >= pressureDateTime);
