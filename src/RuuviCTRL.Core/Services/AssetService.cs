@@ -39,7 +39,8 @@ namespace RuuviCTRL.Core.Services
 
             var ruuviData = _repository.FilterBy(s => s.DeviceId == asset.DeviceId).ToList();
 
-            var selectedRuuviData = ruuviData.Where(x => x.Time.Date >= startDate.Date && x.Time.Date <= endDate).ToList();
+            //var selectedRuuviData = ruuviData.Where(x => x.Time.Date >= startDate.Date && x.Time.Date <= endDate).ToList();
+            var selectedRuuviData = ruuviData;
 
             if (selectedRuuviData.Count == 0)
                 return null;

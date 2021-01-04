@@ -12,6 +12,8 @@ import { AssetDetailService } from './_services/asset-detail.service';
 import { NgbdDatepickerRangeComponent } from './ngbd-datepicker-range/ngbd-datepicker-range.component';
 import {FormsModule} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @NgModule({
     declarations: [
