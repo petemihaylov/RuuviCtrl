@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { LayoutService } from '../../../../../core';
@@ -14,8 +14,8 @@ import { NotificationWebsocketService } from './_sevices/notification-websocket.
 })
 export class QuickPanelOffcanvasComponent implements OnInit {
   
-  private _data: BehaviorSubject<NotificationDto[]> = new BehaviorSubject([]);
-  public Data: Observable<NotificationDto[]> = this._data.asObservable();
+  private _notifications: BehaviorSubject<NotificationDto[]>;;
+  public Notifications$: Observable<NotificationDto[]>;
   private unsubscribe: Subscription[] = [];
 
  
@@ -29,7 +29,10 @@ export class QuickPanelOffcanvasComponent implements OnInit {
 
   constructor(private layout: LayoutService, 
     private notificationDataService: NotificationDataService,
-    private notificationWebsocketService: NotificationWebsocketService) {}
+    private notificationWebsocketService: NotificationWebsocketService) {
+      this._notifications = new BehaviorSubject<NotificationDto[]>([]);
+      this.Notifications$ = this._notifications.asObservable();
+    }
 
   ngOnInit(): void {
     this.extrasQuickPanelOffcanvasDirectionCSSClass = `offcanvas-${this.layout.getProp(
@@ -38,12 +41,13 @@ export class QuickPanelOffcanvasComponent implements OnInit {
 
     const listSub = this.notificationDataService.list().subscribe(res => {
       res.reverse();
-      this._data.next(res);
+      this._notifications.next(res);
 
       const websocketSub = this.notificationWebsocketService
       .retrieveMappedObject()
       .subscribe((receivedObj: NotificationDto) => {
-        this.addToData(receivedObj);
+        console.log("notification sidebar recieved")
+        this.addToNotifications(receivedObj);
       });
       this.unsubscribe.push(websocketSub);
     });
@@ -51,14 +55,16 @@ export class QuickPanelOffcanvasComponent implements OnInit {
     this.unsubscribe.push(listSub);
   }
 
-  addToData(obj: NotificationDto) {
-    const nextData = this._data.getValue();
-    nextData[0].id = obj.id;
-    nextData[0].title = obj.title;
-    nextData[0].description = obj.description;
-    nextData[0].type = obj.type;
-    nextData[0].createAt = obj.createAt;
-    this._data.next(nextData);
+  addToNotifications(obj: NotificationDto) {   
+    if(this._notifications.getValue()[0] == undefined){
+      of([obj]).subscribe(res =>{
+          this._notifications.next(res);
+      });
+    }else { 
+      const nextData = this._notifications.getValue();
+      nextData.push(obj);
+      this._notifications.next(nextData);
+    }
   }
 
   ngOnDestroy() {
@@ -72,12 +78,12 @@ export class QuickPanelOffcanvasComponent implements OnInit {
   deleteNotification(id: any){
     this.notificationDataService.delete(id);
 
-    const arr: NotificationDto[] = this._data.getValue();
+    const arr: NotificationDto[] = this._notifications.getValue();
     arr.forEach((item, index) => {
       if (item.id === id) { arr.splice(index, 1); }
     });
 
-    this._data.next(arr);
+    this._notifications.next(arr);
   }
 
   getActiveCSSClasses(tabId) {

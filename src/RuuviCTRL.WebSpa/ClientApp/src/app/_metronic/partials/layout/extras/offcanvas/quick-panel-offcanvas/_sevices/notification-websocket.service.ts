@@ -24,9 +24,12 @@ export class NotificationWebsocketService {
     this.connection.onclose(async () => {
       await this.start();
     });
-    this.connection.on('GetNewNotification', output => {
-      this.mapReceivedMessage(output);
+    this.connection.on('Notification', output => {
+          console.log(output);
+          this.mapReceivedMessage(output);
+          console.log("recieves a notification");
     });
+    
     this.start();
   }
 
@@ -46,6 +49,7 @@ export class NotificationWebsocketService {
 
   private mapReceivedMessage(output: NotificationDto): void {
     this.receivedMessageObject = output;
+    console.log(output);
     this.sharedObj.next(this.receivedMessageObject);
   }
 

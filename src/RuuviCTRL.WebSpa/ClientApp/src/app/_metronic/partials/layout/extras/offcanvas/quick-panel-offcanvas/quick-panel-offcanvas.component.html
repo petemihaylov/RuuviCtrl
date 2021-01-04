@@ -30,7 +30,7 @@
                 <div class="navi navi-icon-circle navi-spacer-x-0">
 
                     <!--begin::Item-->
-                    <div class="navi-item" *ngFor="let item of Data | async">
+                    <div class="navi-item" *ngFor="let notification of Notifications$ | async">
 
                         <div class="navi-link rounded">
                             <div class="symbol symbol-50 mr-3">
@@ -40,15 +40,18 @@
                             </div>
                             <div class="navi-text">
                                 <div class="font-weight-bold font-size-lg">
-                                    {{item.title}}
+                                    {{notification.title}}
                                 </div>
                                 <div class="text-muted">
-                                    {{item.description}}
+                                    {{notification.description}}
+                                </div>
+                                <div class="text-muted">
+                                    {{notification.createdAt  | date:'short'}}
                                 </div>
                             </div>
                             <div class="mt-n1 pr-5">
                                 <button class="btn btn-xs btn-icon btn-light btn-hover-danger" type="button"
-                                    (click)="deleteNotification(item.id)">
+                                    (click)="deleteNotification(notification.id)">
                                     <i class="ki ki-minus icon-xs text-muted"></i>
                                 </button>
                             </div>

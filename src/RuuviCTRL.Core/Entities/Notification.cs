@@ -17,12 +17,12 @@ namespace RuuviCTRL.Core.Entities
             
         }
 
-        public Notification(string title, string description, string type, DateTime dateTime)
+        public Notification(string title, string description, string type, DateTime createdAt)
         {
             Title = title;
             Description = description;
             Type = type;
-            CreatedAt = CreatedAt;
+            CreatedAt = createdAt;
         }
     }
 }
