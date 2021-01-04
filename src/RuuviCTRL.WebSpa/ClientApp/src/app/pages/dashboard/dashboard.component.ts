@@ -71,11 +71,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });
     }else { 
       const nextData = this._notifications.getValue();
-      nextData[0].id = obj.id;
-      nextData[0].title = obj.title;
-      nextData[0].description = obj.description;
-      nextData[0].type = obj.type;
-      nextData[0].createdAt = obj.createdAt;
+      nextData.push(obj);
       this._notifications.next(nextData);
     }
   }

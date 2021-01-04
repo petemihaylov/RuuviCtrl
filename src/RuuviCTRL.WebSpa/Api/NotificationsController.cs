@@ -3,20 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 using RuuviCTRL.Core.Entities;
 using RuuviCTRL.SharedKernel.Interfaces;
 
-using Microsoft.AspNetCore.SignalR;
-using RuuviCTRL.StorageApi.Hubs;
-
 namespace RuuviCTRL.WebSpa.Api
 {
     public class NotificationsController : BaseApiController
     {
         private readonly IEFRepository _repository;
-        private readonly IHubContext<LiveNotificationHub> _hubContext;
 
-        public NotificationsController(IEFRepository repository, IHubContext<LiveNotificationHub> hubContext)
+        public NotificationsController(IEFRepository repository)
         {
             this._repository = repository;
-            this._hubContext = hubContext;
         }
 
         // GET: api/notifications
@@ -27,32 +22,6 @@ namespace RuuviCTRL.WebSpa.Api
 
             return Ok(notifications);
         }
-
-        //GET api/notifications/{id}
-        [HttpGet("{id}", Name = "GetNotificationById")]
-        public async Task<ActionResult<Notification>> GetNotificationById(int id)
-        {
-            var notificationItem = await _repository.GetByIdAsync<Notification>(id);
-            if (notificationItem != null)
-            {
-                return Ok(notificationItem);
-            }
-            return NotFound();
-        }
-
-        // POST: api/notifications
-        [HttpPost]
-        public async Task<IActionResult> Uplink(Notification message)
-        {
-            var notificationItem = await _repository.AddAsync(message);
-
-            // SignalR event
-            await _hubContext.Clients.All.SendAsync("Notification", notificationItem);
-
-            return Ok();
-           // return CreatedAtRoute(nameof(GetNotificationById), new { id = notificationItem.Id }, notificationItem);
-        }
-
         // Delete: api/notifications/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
@@ -63,7 +32,7 @@ namespace RuuviCTRL.WebSpa.Api
                 return NotFound();
             }
 
-            await _repository.DeleteAsync<Notification>(notificationItem);
+            await _repository.DeleteAsync(notificationItem);
             return NoContent();
 
         }
