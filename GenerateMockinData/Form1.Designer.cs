@@ -56,6 +56,8 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Location = new System.Drawing.Point(12, 377);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(137, 17);
@@ -66,6 +68,7 @@
             // 
             // TimerGenerateData
             // 
+            this.TimerGenerateData.Enabled = true;
             this.TimerGenerateData.Interval = 10000;
             this.TimerGenerateData.Tick += new System.EventHandler(this.TimerGenerateData_Tick_1);
             // 
@@ -78,7 +81,7 @@
             this.Controls.Add(this.btnGenerateAssets);
             this.Controls.Add(this.lblAssets);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "RuuviCTRL Mocker";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
