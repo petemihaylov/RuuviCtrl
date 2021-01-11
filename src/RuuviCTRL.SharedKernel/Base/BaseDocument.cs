@@ -1,6 +1,6 @@
-﻿using System;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using RuuviCTRL.SharedKernel.Interfaces;
+using System;
 
 namespace RuuviCTRL.SharedKernel.Base
 {

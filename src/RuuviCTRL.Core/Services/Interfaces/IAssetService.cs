@@ -1,7 +1,7 @@
-﻿using System;
+﻿using RuuviCTRL.Core.Dto;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using RuuviCTRL.Core.Dto;
 
 namespace RuuviCTRL.Core.Services.Interfaces
 {

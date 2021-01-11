@@ -30,7 +30,7 @@ namespace RuuviCTRL.Infrastructure
             services.AddSingleton<IMongoDbSettings>(mongoDbSettings);
 
             services.AddScoped(typeof(IMongoRepository<>), typeof(MongoRepository<>));
-           
+
         }
     }
 }

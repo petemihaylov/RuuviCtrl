@@ -1,12 +1,9 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Core.Services.Interfaces;
-using RuuviCTRL.Core.ValueObjects;
-using RuuviCTRL.SharedKernel.Interfaces;
 using RuuviCTRL.StorageApi.ApiModels;
 using RuuviCTRL.StorageApi.Hubs;
+using System.Threading.Tasks;
 
 namespace RuuviCTRL.StorageApi.Api
 {

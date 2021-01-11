@@ -1,6 +1,5 @@
-﻿using System.Collections;
+﻿using RuuviCTRL.SharedKernel.Base;
 using System.Collections.Generic;
-using RuuviCTRL.SharedKernel.Base;
 
 namespace RuuviCTRL.Core.Entities
 {

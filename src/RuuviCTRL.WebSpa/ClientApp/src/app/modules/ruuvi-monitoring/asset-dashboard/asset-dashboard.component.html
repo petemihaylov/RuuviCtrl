@@ -17,215 +17,223 @@
 
 
 
-<ng-container *ngIf="slas$ | async as slaDataList; else loading">
-	<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.temperature != null">
-		<app-stats-widget [info]="temperature" [data]="ruuviDataList.temperature" [max] = slaDataList[0].maxTemprature [min] = slaDataList[0].minTemprature></app-stats-widget>
-	</div>
-	<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.pressure != null">
-		<app-stats-widget [info]="pressure" [data]="ruuviDataList.pressure" [max] = slaDataList[0].maxPressure [min] = slaDataList[0].minPressure></app-stats-widget>
-	</div>
-	<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.humidity != null">
-		<app-stats-widget [info]="humidity" [data]="ruuviDataList.humidity" [max] = slaDataList[0].maxHumidity [min] = slaDataList[0].minHumidity></app-stats-widget>
-	</div>
-	<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.batteryLevel != null">
-		<app-stats-widget [info]="batteryLevel" [data]="ruuviDataList.batteryLevel"></app-stats-widget>
-	</div>
-	<div class="col-lg-12" *ngIf="ruuviDataList.route != null">
-		<app-map-widget [routeHistory]="ruuviDataList.route" [geoJson]="slaDataList[0].locationBoundary"></app-map-widget>
-	</div>
-</ng-container>
-
-<div class="col-12">
-	<div class="card card-custom card-stretch gutter-b">
-		<div class="card-header">
-			<div class="card-title">
-				<h3 class="card-label">
-					Breaches:
-					<small>amount: {{data?.length}}</small>
-				</h3>
-			</div>
+	<ng-container *ngIf="slas$ | async as slaDataList; else loading" class="col-12">
+		<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.temperature != null">
+			<app-stats-widget [info]="temperature" [data]="ruuviDataList.temperature" [max]=slaDataList[0].maxTemprature
+				[min]=slaDataList[0].minTemprature></app-stats-widget>
 		</div>
-		<!--Breaches search bar-->
-		<div class="quick-search quick-search-dropdown" id="kt_quick_search_dropdown" >
-		  <!--begin:Form-->
-		  <form method="get" class="quick-search-form">
-			  <div class="input-group">
-				  <div class="input-group-prepend">
-					  <span class="input-group-text">
-						<span
-								class="svg-icon svg-icon-lg"
-								[inlineSVG]="'./assets/media/svg/icons/General/Search.svg'"
-						></span>
-					  </span>
-				  </div>
-				  <input
-					  [(ngModel)]="_searchInput" 
-					  (ngModelChange)="searchAsset()"
-					  name="searchAsset"
-					  type="text"
-					  class="form-control"
-					  placeholder="Search..."/>
-				  <div class="input-group-append" [ngClass]="{ 'spinner spinner-sm spinner-primary': searchingAsset }">
-				  </div>
-			  </div>
-		  </form>
-		  <!--end::Form-->
-		</div >
+		<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.pressure != null">
+			<app-stats-widget [info]="pressure" [data]="ruuviDataList.pressure" [max]=slaDataList[0].maxPressure
+				[min]=slaDataList[0].minPressure></app-stats-widget>
+		</div>
+		<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.humidity != null">
+			<app-stats-widget [info]="humidity" [data]="ruuviDataList.humidity" [max]=slaDataList[0].maxHumidity
+				[min]=slaDataList[0].minHumidity></app-stats-widget>
+		</div>
+		<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.batteryLevel != null">
+			<app-stats-widget [info]="batteryLevel" [data]="ruuviDataList.batteryLevel"></app-stats-widget>
+		</div>
+		<div class="col-lg-12" *ngIf="ruuviDataList.route != null">
+			<app-map-widget [routeHistory]="ruuviDataList.route" [geoJson]="slaDataList[0].locationBoundary">
+			</app-map-widget>
+		</div>
+	</ng-container>
+
+	<div class="col-12">
+		<div class="card card-custom card-stretch gutter-b">
+			<div class="card-header">
+				<div class="card-title">
+					<h3 class="card-label">
+						Breaches:
+						<small>amount: {{data?.length}}</small>
+					</h3>
+				</div>
+			</div>
+			<!--Breaches search bar-->
+			<div class="quick-search quick-search-dropdown" id="kt_quick_search_dropdown">
+				<!--begin:Form-->
+				<form method="get" class="quick-search-form">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<span class="svg-icon svg-icon-lg"
+									[inlineSVG]="'./assets/media/svg/icons/General/Search.svg'"></span>
+							</span>
+						</div>
+						<input [(ngModel)]="_searchInput" (ngModelChange)="searchAsset()" name="searchAsset" type="text"
+							class="form-control" placeholder="Search..." />
+						<div class="input-group-append"
+							[ngClass]="{ 'spinner spinner-sm spinner-primary': searchingAsset }">
+						</div>
+					</div>
+				</form>
+				<!--end::Form-->
+			</div>
 			<div class="card-body">
 				<table class="table table-vertical-center">
 					<thead>
-					<tr>
-						<td></td>
-						<td>SLA</td>
-						<td>Time</td>
-						<td>Temperature</td>
-						<td>Humidity</td>
-						<td>Pressure</td>
-						<td>Breach type</td>
-					</tr>
+						<tr>
+							<td></td>
+							<td>SLA</td>
+							<td>Time</td>
+							<td>Temperature</td>
+							<td>Humidity</td>
+							<td>Pressure</td>
+							<td>Breach type</td>
+						</tr>
 					</thead>
 					<tbody>
-					<tr *ngFor="let breach of data | slice: (page-1) * 10 : page * 10" [class]="(breach.hasEnded)?'breach-ended': ''">
-						<td>
-							<span
-								[inlineSVG]="(breach.hasEnded)?'../assets/media/svg/icons/Communication/Clipboard-check.svg': '../assets/media/svg/icons/Communication/Flag.svg'"
-								cacheSVG="true"
-								class="icon-breach"
-						></span>
-						</td>
-						<th>{{(breach.slaTitle)?breach.slaTitle: 'SLA ' + breach.slaAgreementId}}</th>
-						<td>{{breach.createdAt | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
-						<td [class.text-danger]="breach.hasTempratureBreach"><span placement="top" ngbTooltip="Min: {{breach.minTemprature}} | Max: {{breach.maxTemprature}}">{{breach.temperature}}</span></td>
-						<td [class.text-danger]="breach.hasHumidityBreach"><span placement="top" ngbTooltip="Min: {{breach.minHumidity}} | Max: {{breach.maxHumidity}}">{{breach.humidity}}</span></td>
-						<td [class.text-danger]="breach.hasPressureBreach"><span placement="top" ngbTooltip="Min: {{breach.minPressure}} | Max: {{breach.maxPressure}}">{{breach.pressure}}</span></td>
-						<td [ngSwitch]="breach.type">
-							<div *ngSwitchCase="1"><span class="label label-sm label-pill label-inline label-warning w-100">Warning</span></div>
-							<div *ngSwitchCase="2"><span class="label label-sm label-pill label-inline label-danger w-100">Breach</span></div>
-						</td>
-					</tr>
+						<tr *ngFor="let breach of data | slice: (page-1) * 10 : page * 10"
+							[class]="(breach.hasEnded)?'breach-ended': ''">
+							<td>
+								<span
+									[inlineSVG]="(breach.hasEnded)?'../assets/media/svg/icons/Communication/Clipboard-check.svg': '../assets/media/svg/icons/Communication/Flag.svg'"
+									cacheSVG="true" class="icon-breach"></span>
+							</td>
+							<th>{{(breach.slaTitle)?breach.slaTitle: 'SLA ' + breach.slaAgreementId}}</th>
+							<td>{{breach.createdAt | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
+							<td [class.text-danger]="breach.hasTempratureBreach"><span placement="top"
+									ngbTooltip="Min: {{breach.minTemprature}} | Max: {{breach.maxTemprature}}">{{breach.temperature}}</span>
+							</td>
+							<td [class.text-danger]="breach.hasHumidityBreach"><span placement="top"
+									ngbTooltip="Min: {{breach.minHumidity}} | Max: {{breach.maxHumidity}}">{{breach.humidity}}</span>
+							</td>
+							<td [class.text-danger]="breach.hasPressureBreach"><span placement="top"
+									ngbTooltip="Min: {{breach.minPressure}} | Max: {{breach.maxPressure}}">{{breach.pressure}}</span>
+							</td>
+							<td [ngSwitch]="breach.type">
+								<div *ngSwitchCase="1"><span
+										class="label label-sm label-pill label-inline label-warning w-100">Warning</span>
+								</div>
+								<div *ngSwitchCase="2"><span
+										class="label label-sm label-pill label-inline label-danger w-100">Breach</span>
+								</div>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 				<div class="col-12" breach>
-					<ngb-pagination class="d-flex justify-content-center" [collectionSize]="data?.length" [pageSize]="10" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+					<ngb-pagination class="d-flex justify-content-center" [collectionSize]="data?.length"
+						[pageSize]="10" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
 				</div>
 			</div>
 		</div>
 	</div>
 
 
-<!--	<div class="col-lg-6 col-xxl-4">-->
-<!--		<div class="card card-custom card-stretch gutter-b">-->
-<!--			<div class="card-header">-->
-<!--				<div class="card-title">-->
-<!--					<h3 class="card-label">-->
-<!--						Temperature Breaches:-->
-<!--						<small>amount: {{temperatureBreach?.length}}</small>-->
-<!--					</h3>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--			<div class="card-body">-->
-<!--				<table class="table table-vertical-center">-->
-<!--					<thead>-->
-<!--						<tr>-->
-<!--							<td>Temperature </td>-->
-<!--							<td>Min</td>-->
-<!--							<td>Max</td>-->
-<!--							<td>Breach type</td>-->
-<!--						</tr>-->
-<!--					</thead>-->
-<!--					<tbody>-->
-<!--						<tr *ngFor="let breach of temperatureBreach">-->
-<!--							<th class="text-dark-75">{{breach.temperature}}</th>-->
-<!--							<th>{{breach.minTemprature}}</th>-->
-<!--							<th>{{breach.maxTemprature}}</th>-->
-<!--							<th [ngSwitch]="breach.type">-->
-<!--								<div *ngSwitchCase="1"><span class="label label-sm label-pill label-inline label-warning">Warning</span></div>-->
-<!--								<div *ngSwitchCase="2"><span class="label label-sm label-pill label-inline label-danger">Breach</span></div>-->
-<!--							</th>-->
-<!--						</tr>-->
-<!--					</tbody>-->
-<!--				</table>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--	<div class="col-lg-6 col-xxl-4">-->
-<!--		<div class="card card-custom card-stretch gutter-b">-->
-<!--			<div class="card-header">-->
-<!--				<div class="card-title">-->
-<!--					<h3 class="card-label">-->
-<!--						Humidity Breaches:-->
-<!--						<small>amount: {{humidityBreach?.length}}</small>-->
-<!--					</h3>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--			<div class="card-body">-->
-<!--				<table class="table table-vertical-center">-->
-<!--					<thead>-->
-<!--						<tr>-->
-<!--							<td>Humidity </td>-->
-<!--							<td>Min</td>-->
-<!--							<td>Max</td>-->
-<!--							<td>Breach type</td>-->
-<!--						</tr>-->
-<!--					</thead>-->
-<!--					<tbody>-->
-<!--						<tr *ngFor="let breach of humidityBreach">-->
-<!--							<th class="text-dark-75">{{breach.humidity}}</th>-->
-<!--							<th>{{breach.minHumidity}}</th>-->
-<!--							<th>{{breach.maxHumidity}}</th>-->
-<!--							<th [ngSwitch]="breach.type">-->
-<!--								<div *ngSwitchCase="1"><span class="label label-sm label-pill label-inline label-warning">Warning</span></div>-->
-<!--								<div *ngSwitchCase="2"><span class="label label-sm label-pill label-inline label-danger">Breach</span></div>-->
-<!--							</th>-->
-<!--						</tr>-->
-<!--					</tbody>-->
-<!--				</table>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--	<div class="col-lg-6 col-xxl-4">-->
-<!--		<div class="card card-custom card-stretch gutter-b">-->
-<!--			<div class="card-header">-->
-<!--				<div class="card-title">-->
-<!--					<h3 class="card-label">-->
-<!--						Pressure Breaches:-->
-<!--						<small>amount: {{pressureBreach?.length}}</small>-->
-<!--					</h3>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--			<div class="card-body">-->
-<!--				<table class="table table-vertical-center">-->
-<!--					<thead>-->
-<!--						<tr>-->
-<!--							<td class="text-dark-75">Pressure</td>-->
-<!--							<td>Min</td>-->
-<!--							<td>Max</td>-->
-<!--							<td>Breach type</td>-->
-<!--						</tr>-->
-<!--					</thead>-->
-<!--					<tbody>-->
-<!--						<tr *ngFor="let breach of pressureBreach">-->
-<!--							<th>{{breach.pressure}}</th>-->
-<!--							<th>{{breach.minPressure}}</th>-->
-<!--							<th>{{breach.maxPressure}}</th>-->
-<!--							<th [ngSwitch]="breach.type">-->
-<!--								<div *ngSwitchCase="1"><span class="label label-sm label-pill label-inline label-warning">Warning</span></div>-->
-<!--								<div *ngSwitchCase="2"><span class="label label-sm label-pill label-inline label-danger">Breach</span></div>-->
-<!--							</th>-->
-<!--						</tr>-->
-<!--					</tbody>-->
-<!--				</table>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
+	<!--	<div class="col-lg-6 col-xxl-4">-->
+	<!--		<div class="card card-custom card-stretch gutter-b">-->
+	<!--			<div class="card-header">-->
+	<!--				<div class="card-title">-->
+	<!--					<h3 class="card-label">-->
+	<!--						Temperature Breaches:-->
+	<!--						<small>amount: {{temperatureBreach?.length}}</small>-->
+	<!--					</h3>-->
+	<!--				</div>-->
+	<!--			</div>-->
+	<!--			<div class="card-body">-->
+	<!--				<table class="table table-vertical-center">-->
+	<!--					<thead>-->
+	<!--						<tr>-->
+	<!--							<td>Temperature </td>-->
+	<!--							<td>Min</td>-->
+	<!--							<td>Max</td>-->
+	<!--							<td>Breach type</td>-->
+	<!--						</tr>-->
+	<!--					</thead>-->
+	<!--					<tbody>-->
+	<!--						<tr *ngFor="let breach of temperatureBreach">-->
+	<!--							<th class="text-dark-75">{{breach.temperature}}</th>-->
+	<!--							<th>{{breach.minTemprature}}</th>-->
+	<!--							<th>{{breach.maxTemprature}}</th>-->
+	<!--							<th [ngSwitch]="breach.type">-->
+	<!--								<div *ngSwitchCase="1"><span class="label label-sm label-pill label-inline label-warning">Warning</span></div>-->
+	<!--								<div *ngSwitchCase="2"><span class="label label-sm label-pill label-inline label-danger">Breach</span></div>-->
+	<!--							</th>-->
+	<!--						</tr>-->
+	<!--					</tbody>-->
+	<!--				</table>-->
+	<!--			</div>-->
+	<!--		</div>-->
+	<!--	</div>-->
+	<!--	<div class="col-lg-6 col-xxl-4">-->
+	<!--		<div class="card card-custom card-stretch gutter-b">-->
+	<!--			<div class="card-header">-->
+	<!--				<div class="card-title">-->
+	<!--					<h3 class="card-label">-->
+	<!--						Humidity Breaches:-->
+	<!--						<small>amount: {{humidityBreach?.length}}</small>-->
+	<!--					</h3>-->
+	<!--				</div>-->
+	<!--			</div>-->
+	<!--			<div class="card-body">-->
+	<!--				<table class="table table-vertical-center">-->
+	<!--					<thead>-->
+	<!--						<tr>-->
+	<!--							<td>Humidity </td>-->
+	<!--							<td>Min</td>-->
+	<!--							<td>Max</td>-->
+	<!--							<td>Breach type</td>-->
+	<!--						</tr>-->
+	<!--					</thead>-->
+	<!--					<tbody>-->
+	<!--						<tr *ngFor="let breach of humidityBreach">-->
+	<!--							<th class="text-dark-75">{{breach.humidity}}</th>-->
+	<!--							<th>{{breach.minHumidity}}</th>-->
+	<!--							<th>{{breach.maxHumidity}}</th>-->
+	<!--							<th [ngSwitch]="breach.type">-->
+	<!--								<div *ngSwitchCase="1"><span class="label label-sm label-pill label-inline label-warning">Warning</span></div>-->
+	<!--								<div *ngSwitchCase="2"><span class="label label-sm label-pill label-inline label-danger">Breach</span></div>-->
+	<!--							</th>-->
+	<!--						</tr>-->
+	<!--					</tbody>-->
+	<!--				</table>-->
+	<!--			</div>-->
+	<!--		</div>-->
+	<!--	</div>-->
+	<!--	<div class="col-lg-6 col-xxl-4">-->
+	<!--		<div class="card card-custom card-stretch gutter-b">-->
+	<!--			<div class="card-header">-->
+	<!--				<div class="card-title">-->
+	<!--					<h3 class="card-label">-->
+	<!--						Pressure Breaches:-->
+	<!--						<small>amount: {{pressureBreach?.length}}</small>-->
+	<!--					</h3>-->
+	<!--				</div>-->
+	<!--			</div>-->
+	<!--			<div class="card-body">-->
+	<!--				<table class="table table-vertical-center">-->
+	<!--					<thead>-->
+	<!--						<tr>-->
+	<!--							<td class="text-dark-75">Pressure</td>-->
+	<!--							<td>Min</td>-->
+	<!--							<td>Max</td>-->
+	<!--							<td>Breach type</td>-->
+	<!--						</tr>-->
+	<!--					</thead>-->
+	<!--					<tbody>-->
+	<!--						<tr *ngFor="let breach of pressureBreach">-->
+	<!--							<th>{{breach.pressure}}</th>-->
+	<!--							<th>{{breach.minPressure}}</th>-->
+	<!--							<th>{{breach.maxPressure}}</th>-->
+	<!--							<th [ngSwitch]="breach.type">-->
+	<!--								<div *ngSwitchCase="1"><span class="label label-sm label-pill label-inline label-warning">Warning</span></div>-->
+	<!--								<div *ngSwitchCase="2"><span class="label label-sm label-pill label-inline label-danger">Breach</span></div>-->
+	<!--							</th>-->
+	<!--						</tr>-->
+	<!--					</tbody>-->
+	<!--				</table>-->
+	<!--			</div>-->
+	<!--		</div>-->
+	<!--	</div>-->
 </div>
 <ng-template #loading>
-	<div class="card">
+	<div class="col-12 card">
 		<div class="card-body">
 			<div class="spinner spinner-primary"></div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="col-12 row">
 		<div class="col-lg-6 col-xxl-3">
 			<div class="card">
 				<div class="card-body">
@@ -263,7 +271,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="card">
+	<div class="col-12 card mb-4">
+		<div class="card-body">
+			<div class="spinner spinner-primary"></div>
+		</div>
+	</div>
+	<div class="col-12 card mb-4">
 		<div class="card-body">
 			<div class="spinner spinner-primary"></div>
 		</div>

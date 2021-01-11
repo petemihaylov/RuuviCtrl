@@ -74,9 +74,13 @@ export class MapWidgetComponent implements AfterViewInit {
   }
 
   private addBoundary() {
-    L.geoJSON(JSON.parse(this.geoJson), {
+    const geojsonLayer = L.geoJSON(JSON.parse(this.geoJson), {
       style: {color: "#F64E60"}
-    }).addTo(this.map);
+    });
+    this.map.addLayer(geojsonLayer);
+
+    this.map.fitBounds(geojsonLayer.getBounds());
+
   }
 
   private dataToGeoJson(): any {

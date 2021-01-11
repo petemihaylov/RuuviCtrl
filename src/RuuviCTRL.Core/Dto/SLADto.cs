@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using RuuviCTRL.Core.Entities;
+using System;
 using System.Linq;
-using System.Text;
-using RuuviCTRL.Core.Entities;
 
 namespace RuuviCTRL.Core.Dto
 {
@@ -40,7 +38,7 @@ namespace RuuviCTRL.Core.Dto
 
         public SLADto()
         {
-            
+
         }
 
         public SLADto(SLAAgreement sla)
@@ -68,7 +66,7 @@ namespace RuuviCTRL.Core.Dto
             LocationTime = sla.LocationTime;
             Assets = sla.AssetSlaAgreements != null
                 ? sla.AssetSlaAgreements.Select(a => a.Asset).ToArray()
-                : new Asset[]{};
+                : new Asset[] { };
             CreatedAt = sla.CreatedAt;
         }
     }

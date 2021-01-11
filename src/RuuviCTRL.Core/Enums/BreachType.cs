@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RuuviCTRL.Core.Enums
+﻿namespace RuuviCTRL.Core.Enums
 {
     public enum BreachType
     {

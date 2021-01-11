@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using RuuviCTRL.Core.Entities;
 using RuuviCTRL.SharedKernel.Interfaces;
 using RuuviCTRL.StorageApi.Hubs;
+using System.Threading.Tasks;
 
 namespace RuuviCTRL.StorageApi.Api
 {
@@ -49,7 +49,7 @@ namespace RuuviCTRL.StorageApi.Api
             await _hubContext.Clients.All.SendAsync("Notification", notificationItem);
 
             return Ok();
-           // return CreatedAtRoute(nameof(GetNotificationById), new { id = notificationItem.Id }, notificationItem);
+            // return CreatedAtRoute(nameof(GetNotificationById), new { id = notificationItem.Id }, notificationItem);
         }
 
         // Delete: api/notifications/{id}

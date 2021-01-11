@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using RuuviCTRL.Core.Entities;
+﻿using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Core.Enums;
 using RuuviCTRL.Core.Interfaces;
 using RuuviCTRL.Core.Services.Interfaces;
 using RuuviCTRL.SharedKernel.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace RuuviCTRL.Core.Services
 {

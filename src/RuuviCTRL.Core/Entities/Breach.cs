@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using RuuviCTRL.Core.Enums;
+﻿using RuuviCTRL.Core.Enums;
 using RuuviCTRL.SharedKernel.Base;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RuuviCTRL.Core.Entities
 {
@@ -58,7 +56,7 @@ namespace RuuviCTRL.Core.Entities
 
         public Breach()
         {
-            
+
         }
         public Breach(Asset asset, RuuviData ruuviData, SLAAgreement slaAgreement, BreachType type)
         {

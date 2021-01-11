@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using RuuviCTRL.Core.Dto;
+﻿using RuuviCTRL.Core.Dto;
 using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Core.Interfaces;
 using RuuviCTRL.Core.Services.Interfaces;
-using RuuviCTRL.Core.ValueObjects;
 using RuuviCTRL.SharedKernel.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace RuuviCTRL.Core.Services
@@ -39,8 +38,7 @@ namespace RuuviCTRL.Core.Services
 
             var ruuviData = _repository.FilterBy(s => s.DeviceId == asset.DeviceId).ToList();
 
-            //var selectedRuuviData = ruuviData.Where(x => x.Time.Date >= startDate.Date && x.Time.Date <= endDate).ToList();
-            var selectedRuuviData = ruuviData;
+            var selectedRuuviData = ruuviData.Where(x => x.Time.Date >= startDate.Date && x.Time.Date <= endDate).ToList();
 
             if (selectedRuuviData.Count == 0)
                 return null;

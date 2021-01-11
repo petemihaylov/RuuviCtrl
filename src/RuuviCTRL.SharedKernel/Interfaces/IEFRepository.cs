@@ -1,9 +1,8 @@
-﻿using System;
+﻿using RuuviCTRL.SharedKernel.Base;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using RuuviCTRL.SharedKernel.Base;
 
 namespace RuuviCTRL.SharedKernel.Interfaces
 {
@@ -15,7 +14,7 @@ namespace RuuviCTRL.SharedKernel.Interfaces
         Task<int> CountAsync<T>(Expression<Func<T, bool>> filter = null) where T : BaseEntity;
         Task<T> LastAsync<T, TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> orderBy)
             where T : BaseEntity;
-        
+
         Task<List<T>> ListAsync<T>() where T : BaseEntity;
         Task<T> AddAsync<T>(T entity) where T : BaseEntity;
         Task UpdateAsync<T>(T entity) where T : BaseEntity;

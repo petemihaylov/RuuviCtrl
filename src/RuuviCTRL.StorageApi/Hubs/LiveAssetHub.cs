@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
 using RuuviCTRL.StorageApi.ApiModels;
+using System.Threading.Tasks;
 
 namespace RuuviCTRL.StorageApi.Hubs
 {

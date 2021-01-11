@@ -15,7 +15,7 @@ import {SlaAssetsService} from '../_services/sla-assets.service';
 export class SlaEditComponent implements OnInit, OnDestroy {
 
   sla: SlaDto = {} as SlaDto;
-  isValid: boolean;
+  isValid = true;
 
 
   private unsubscribe: Subscription[] = [];

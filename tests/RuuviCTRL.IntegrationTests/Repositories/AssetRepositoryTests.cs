@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Infrastructure.Data.EntityFramework;
 using RuuviCTRL.IntegrationTests.Mockers;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace RuuviCTRL.IntegrationTests.Repositories

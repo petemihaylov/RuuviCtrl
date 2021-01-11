@@ -1833,6 +1833,16 @@ KTUtil.ready(function() {
 	}
 });
 
+function addNonGroupLayers(sourceLayer, targetGroup) {
+    if (sourceLayer instanceof L.LayerGroup) {
+        sourceLayer.eachLayer(function(layer) {
+        this.addNonGroupLayers(layer, targetGroup);
+        });
+    } else {
+        targetGroup.addLayer(sourceLayer);
+    }
+}
+
 // CSS3 Transitions only after page load(.page-loading class added to body tag and remove with JS on page load)
 window.onload = function() {
     var result = KTUtil.getByTagName('body');
