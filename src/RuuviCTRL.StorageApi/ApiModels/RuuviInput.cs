@@ -32,10 +32,11 @@ namespace RuuviCTRL.StorageApi.ApiModels
             };
         }
 
-        public static LiveRuuviOutput ToLiveRuuviOutput(RuuviInput input)
+        public static LiveRuuviOutput ToLiveRuuviOutput(RuuviInput input, int assetId)
         {
             return new LiveRuuviOutput()
             {
+                AssetId = assetId,
                 Temperature = new SingleStat { Value = input.tags[0].temperature, Time = input.time },
                 BatteryLevel =
                     new SingleStat { Value = input.batteryLevel, Time = input.time },

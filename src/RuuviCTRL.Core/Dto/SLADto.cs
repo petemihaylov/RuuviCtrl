@@ -65,7 +65,7 @@ namespace RuuviCTRL.Core.Dto
             LocationCount = sla.LocationCount;
             LocationTime = sla.LocationTime;
             Assets = sla.AssetSlaAgreements != null
-                ? sla.AssetSlaAgreements.Select(a => a.Asset).ToArray()
+                ? sla.AssetSlaAgreements.Select(a => new Asset() {Id = a.Asset.Id, DeviceId = a.Asset.DeviceId, Name = a.Asset.Name}).ToArray()
                 : new Asset[] { };
             CreatedAt = sla.CreatedAt;
         }

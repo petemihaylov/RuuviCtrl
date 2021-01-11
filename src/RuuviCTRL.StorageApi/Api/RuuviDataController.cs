@@ -28,7 +28,9 @@ namespace RuuviCTRL.StorageApi.Api
                 var structuredInput = RuuviInput.ToRuuviData(input);
                 var notifications = await _ruuviDataService.AddMeasurePoint(structuredInput);
 
-                var liveOutput = RuuviInput.ToLiveRuuviOutput(input);
+                var assetId = await _ruuviDataService.GetAssetId(input.deviceId);
+
+                var liveOutput = RuuviInput.ToLiveRuuviOutput(input, assetId);
                 await _assetHubContext.Clients.All.SendAsync("GetNewAssetData", liveOutput);
 
                 foreach (var notification in notifications)

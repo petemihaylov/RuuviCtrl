@@ -22,7 +22,7 @@
                         </div>
                         <input
                             [(ngModel)]="_searchInput"
-                            (ngModelChange)="searchAsset()"
+                            (change)="searchAsset()"
                             name="searchAsset"
                             type="text"
                             class="form-control"
@@ -45,7 +45,7 @@
                         <th style="min-width: 250px;" class="pl-7">
                             <span class="text-dark-75">Name</span>
                         </th>
-                        <th style="min-width: 100px;" class="d-none d-lg-table-cell">Device Id</th>
+                        <!-- <th style="min-width: 100px;" class="d-none d-lg-table-cell">Device Id</th> -->
                         <th style="min-width: 100px;" class="d-none d-lg-table-cell">Temperature</th>
                         <th style="min-width: 100px;" class="d-none d-lg-table-cell">Pressure</th>
                         <th style="min-width: 100px;" class="d-none d-lg-table-cell">Humidity</th>
@@ -59,11 +59,11 @@
                                 {{item.name}}
                             </span>
                         </td>
-                        <td class="d-none d-lg-table-cell">
+                        <!-- <td class="d-none d-lg-table-cell">
                             <span class="75 font-weight-bolder d-block font-size-lg">
                                 {{item.deviceId}}
                             </span>
-                        </td>
+                        </td> -->
                         <ng-container *ngIf="getSla(item.id) | async as slas">
                             <td class="d-none d-lg-table-cell">
                                 <span [ngStyle]="{'color': getTextColor(item.temperature[item.temperature.length - 1].value, 'Temperature', slas[0])}" class="75 font-weight-bolder d-block font-size-lg">
@@ -77,7 +77,7 @@
                                 <span [ngStyle]="{'color': getTextColor(item.pressure[item.pressure.length - 1].value, 'Pressure', slas[0])}" class="75 font-weight-bolder d-block font-size-lg">
                                     {{item.pressure[item.pressure.length - 1].value | number:'5.0-0'}} Pa
                                 </span>
-                                <span class="boundaries">
+                                <span class="boundaries" *ngIf="slas.length > 0">
                                     {{ getBoundary(slas[0], 'Pressure') }}
                                 </span>
                             </td>
@@ -85,7 +85,7 @@
                                 <span [ngStyle]="{'color': getTextColor(item.humidity[item.humidity.length - 1].value, 'Humidity', slas[0])}" class="75 font-weight-bolder d-block font-size-lg">
                                     {{item.humidity[item.humidity.length - 1].value | number:'1.1-2'}} %
                                 </span>
-                                <span class="boundaries">
+                                <span class="boundaries" *ngIf="slas.length > 0">
                                     {{ getBoundary(slas[0], 'Humidity') }}
                                 </span>
                             </td>

@@ -50,7 +50,7 @@ namespace RuuviCTRL.Core.Services
 
         public async Task<List<SLADto>> GetSLADtos()
         {
-            var slaEntities = await _eFRepository.ListAsync<SLAAgreement>();
+            var slaEntities = await _assetSlaRepository.GetSlasWithAssets();
             var slaDtos = slaEntities.Select(s => new SLADto(s)).ToList();
 
             return slaDtos;

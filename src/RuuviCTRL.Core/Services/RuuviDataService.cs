@@ -22,6 +22,13 @@ namespace RuuviCTRL.Core.Services
             _eFRepository = eFRepository;
             _assetSlaRepository = assetSlaRepository;
         }
+
+        public async Task<int> GetAssetId(string deviceId)
+        {
+            var asset = await _eFRepository.FindAsync<Asset>(i => i.DeviceId == deviceId);
+            return asset.Id;
+        }
+
         public async Task<List<Notification>> AddMeasurePoint(RuuviData input)
         {
             var output = new List<Notification>();

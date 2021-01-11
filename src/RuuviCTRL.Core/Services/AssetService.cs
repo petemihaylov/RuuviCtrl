@@ -53,7 +53,7 @@ namespace RuuviCTRL.Core.Services
             List<AssetDto> resultDtos = new List<AssetDto>();
             assets.ForEach(asset =>
                 {
-                    var ruuviData = _repository.FilterBy(s => s.DeviceId == asset.DeviceId).ToList();
+                    var ruuviData = _repository.FilterBy(s => s.DeviceId == asset.DeviceId).OrderByDescending(s => s.CreatedAt).Take(1).ToList();
                     if (ruuviData.Count != 0)
                     {
                         var assetDto = new AssetDto(asset, ruuviData);

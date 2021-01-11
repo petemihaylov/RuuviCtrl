@@ -3,9 +3,9 @@
         <input type="text" matInput placeholder="SLA Title" [name]="localSla.title" [(ngModel)]="localSla.title"
             (ngModelChange)="isValid()">
     </mat-form-field>
-    <mat-form-field class="col-md-6 example-full-width">
+    <mat-form-field class="col-md-6 example-full-width" *ngIf="Assets | async as assets">
         <mat-select placeholder="Select Asset(s)" [(ngModel)]="localSla.assets" multiple>
-            <mat-option *ngFor="let asset of Assets | async" [value]="asset.id">{{asset.name}}</mat-option>
+            <mat-option *ngFor="let asset of assets" [value]="asset.id">{{asset.name}}</mat-option>
         </mat-select>
     </mat-form-field>
     <div>

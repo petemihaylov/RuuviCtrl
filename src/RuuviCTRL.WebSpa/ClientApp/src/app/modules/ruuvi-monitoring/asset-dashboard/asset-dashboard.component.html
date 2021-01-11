@@ -19,22 +19,22 @@
 
 	<ng-container *ngIf="slas$ | async as slaDataList; else loading" class="col-12">
 		<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.temperature != null">
-			<app-stats-widget [info]="temperature" [data]="ruuviDataList.temperature" [max]=slaDataList[0].maxTemprature
-				[min]=slaDataList[0].minTemprature></app-stats-widget>
+			<app-stats-widget [info]="temperature" [data]="ruuviDataList.temperature" [max]="slaDataList[0] != null ? slaDataList[0].maxTemprature : null"
+				[min]="slaDataList[0] != null ? slaDataList[0].minTemprature : null"></app-stats-widget>
 		</div>
 		<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.pressure != null">
-			<app-stats-widget [info]="pressure" [data]="ruuviDataList.pressure" [max]=slaDataList[0].maxPressure
-				[min]=slaDataList[0].minPressure></app-stats-widget>
+			<app-stats-widget [info]="pressure" [data]="ruuviDataList.pressure"  [max]="slaDataList[0] != null ? slaDataList[0].maxPressure : null"
+			[min]="slaDataList[0] != null ? slaDataList[0].minPressure : null"></app-stats-widget>
 		</div>
 		<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.humidity != null">
-			<app-stats-widget [info]="humidity" [data]="ruuviDataList.humidity" [max]=slaDataList[0].maxHumidity
-				[min]=slaDataList[0].minHumidity></app-stats-widget>
+			<app-stats-widget [info]="humidity" [data]="ruuviDataList.humidity"  [max]="slaDataList[0] != null ? slaDataList[0].maxHumidity : null"
+			[min]="slaDataList[0] != null ? slaDataList[0].minHumidity : null"></app-stats-widget>
 		</div>
 		<div class="col-lg-6 col-xxl-3" *ngIf="ruuviDataList.batteryLevel != null">
 			<app-stats-widget [info]="batteryLevel" [data]="ruuviDataList.batteryLevel"></app-stats-widget>
 		</div>
 		<div class="col-lg-12" *ngIf="ruuviDataList.route != null">
-			<app-map-widget [routeHistory]="ruuviDataList.route" [geoJson]="slaDataList[0].locationBoundary">
+			<app-map-widget [routeHistory]="ruuviDataList.route" [geoJson]="slaDataList[0] != null ? slaDataList[0].locationBoundary : null">
 			</app-map-widget>
 		</div>
 	</ng-container>
@@ -119,113 +119,6 @@
 			</div>
 		</div>
 	</div>
-
-
-	<!--	<div class="col-lg-6 col-xxl-4">-->
-	<!--		<div class="card card-custom card-stretch gutter-b">-->
-	<!--			<div class="card-header">-->
-	<!--				<div class="card-title">-->
-	<!--					<h3 class="card-label">-->
-	<!--						Temperature Breaches:-->
-	<!--						<small>amount: {{temperatureBreach?.length}}</small>-->
-	<!--					</h3>-->
-	<!--				</div>-->
-	<!--			</div>-->
-	<!--			<div class="card-body">-->
-	<!--				<table class="table table-vertical-center">-->
-	<!--					<thead>-->
-	<!--						<tr>-->
-	<!--							<td>Temperature </td>-->
-	<!--							<td>Min</td>-->
-	<!--							<td>Max</td>-->
-	<!--							<td>Breach type</td>-->
-	<!--						</tr>-->
-	<!--					</thead>-->
-	<!--					<tbody>-->
-	<!--						<tr *ngFor="let breach of temperatureBreach">-->
-	<!--							<th class="text-dark-75">{{breach.temperature}}</th>-->
-	<!--							<th>{{breach.minTemprature}}</th>-->
-	<!--							<th>{{breach.maxTemprature}}</th>-->
-	<!--							<th [ngSwitch]="breach.type">-->
-	<!--								<div *ngSwitchCase="1"><span class="label label-sm label-pill label-inline label-warning">Warning</span></div>-->
-	<!--								<div *ngSwitchCase="2"><span class="label label-sm label-pill label-inline label-danger">Breach</span></div>-->
-	<!--							</th>-->
-	<!--						</tr>-->
-	<!--					</tbody>-->
-	<!--				</table>-->
-	<!--			</div>-->
-	<!--		</div>-->
-	<!--	</div>-->
-	<!--	<div class="col-lg-6 col-xxl-4">-->
-	<!--		<div class="card card-custom card-stretch gutter-b">-->
-	<!--			<div class="card-header">-->
-	<!--				<div class="card-title">-->
-	<!--					<h3 class="card-label">-->
-	<!--						Humidity Breaches:-->
-	<!--						<small>amount: {{humidityBreach?.length}}</small>-->
-	<!--					</h3>-->
-	<!--				</div>-->
-	<!--			</div>-->
-	<!--			<div class="card-body">-->
-	<!--				<table class="table table-vertical-center">-->
-	<!--					<thead>-->
-	<!--						<tr>-->
-	<!--							<td>Humidity </td>-->
-	<!--							<td>Min</td>-->
-	<!--							<td>Max</td>-->
-	<!--							<td>Breach type</td>-->
-	<!--						</tr>-->
-	<!--					</thead>-->
-	<!--					<tbody>-->
-	<!--						<tr *ngFor="let breach of humidityBreach">-->
-	<!--							<th class="text-dark-75">{{breach.humidity}}</th>-->
-	<!--							<th>{{breach.minHumidity}}</th>-->
-	<!--							<th>{{breach.maxHumidity}}</th>-->
-	<!--							<th [ngSwitch]="breach.type">-->
-	<!--								<div *ngSwitchCase="1"><span class="label label-sm label-pill label-inline label-warning">Warning</span></div>-->
-	<!--								<div *ngSwitchCase="2"><span class="label label-sm label-pill label-inline label-danger">Breach</span></div>-->
-	<!--							</th>-->
-	<!--						</tr>-->
-	<!--					</tbody>-->
-	<!--				</table>-->
-	<!--			</div>-->
-	<!--		</div>-->
-	<!--	</div>-->
-	<!--	<div class="col-lg-6 col-xxl-4">-->
-	<!--		<div class="card card-custom card-stretch gutter-b">-->
-	<!--			<div class="card-header">-->
-	<!--				<div class="card-title">-->
-	<!--					<h3 class="card-label">-->
-	<!--						Pressure Breaches:-->
-	<!--						<small>amount: {{pressureBreach?.length}}</small>-->
-	<!--					</h3>-->
-	<!--				</div>-->
-	<!--			</div>-->
-	<!--			<div class="card-body">-->
-	<!--				<table class="table table-vertical-center">-->
-	<!--					<thead>-->
-	<!--						<tr>-->
-	<!--							<td class="text-dark-75">Pressure</td>-->
-	<!--							<td>Min</td>-->
-	<!--							<td>Max</td>-->
-	<!--							<td>Breach type</td>-->
-	<!--						</tr>-->
-	<!--					</thead>-->
-	<!--					<tbody>-->
-	<!--						<tr *ngFor="let breach of pressureBreach">-->
-	<!--							<th>{{breach.pressure}}</th>-->
-	<!--							<th>{{breach.minPressure}}</th>-->
-	<!--							<th>{{breach.maxPressure}}</th>-->
-	<!--							<th [ngSwitch]="breach.type">-->
-	<!--								<div *ngSwitchCase="1"><span class="label label-sm label-pill label-inline label-warning">Warning</span></div>-->
-	<!--								<div *ngSwitchCase="2"><span class="label label-sm label-pill label-inline label-danger">Breach</span></div>-->
-	<!--							</th>-->
-	<!--						</tr>-->
-	<!--					</tbody>-->
-	<!--				</table>-->
-	<!--			</div>-->
-	<!--		</div>-->
-	<!--	</div>-->
 </div>
 <ng-template #loading>
 	<div class="col-12 card">

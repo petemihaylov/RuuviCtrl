@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private _notifications: BehaviorSubject<NotificationDto[]> = new BehaviorSubject([]);
   public Notifications: Observable<NotificationDto[]> = this._notifications.asObservable();
   private subscription: Subscription = new Subscription;
-  
+
 
   private _data: BehaviorSubject<AssetDto[]> = new BehaviorSubject([]);
   public Data: Observable<AssetDto[]> = this._data.asObservable();
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
 
   public loadingAssets = false;
-  
+
   constructor(
     private assetDataService: AssetDataService,
     private ruuviDataService: RuuviWebsocketService,
@@ -36,40 +36,54 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.searchAssets();
+    //this.searchAssets();
 
-        // Alerts from Notification Websocket
+    // Alerts from Notification Websocket
     const websocketAlerts = this.notificationWebsocketService
       .retrieveMappedObject()
       .subscribe((receivedObj: NotificationDto) => {
-        console.log("message");
         this.addToNotifications(receivedObj);
       });
     this.subscription.add(websocketAlerts);
 
-    }
+    const websocketSub = this.ruuviDataService
+      .retrieveMappedObject()
+      .subscribe((receivedObj: RuuviWebsocket) => {
+        this.addToData(receivedObj);
+      });
+    this.unsubscribe.push(websocketSub);
 
-  deleteNotification(){
+  }
+
+  deleteNotification() {
     this.isShow = !this.isShow;
   }
 
   addToData(obj: RuuviWebsocket) {
-  
     const nextData = this._data.getValue();
-    nextData[0].temperature.push(obj.temperature);
-    nextData[0].humidity.push(obj.humidity);
-    nextData[0].pressure.push(obj.pressure);
-    nextData[0].batteryLevel.push(obj.batteryLevel);
-    nextData[0].route.push(obj.route);
+
+    let updateItem = nextData.find(this.findIndexToUpdate, obj.assetId);
+
+    let index = nextData.indexOf(updateItem);
+
+    nextData[index].temperature.push(obj.temperature);
+    nextData[index].humidity.push(obj.humidity);
+    nextData[index].pressure.push(obj.pressure);
+    nextData[index].batteryLevel.push(obj.batteryLevel);
+    nextData[index].route.push(obj.route);
     this._data.next(nextData);
   }
 
-  addToNotifications(obj: NotificationDto) {   
-    if(this._notifications.getValue()[0] == undefined){
-      of([obj]).subscribe(res =>{
-          this._notifications.next(res);
+  findIndexToUpdate(newItem) {
+    return newItem.id === this;
+  }
+
+  addToNotifications(obj: NotificationDto) {
+    if (this._notifications.getValue()[0] == undefined) {
+      of([obj]).subscribe(res => {
+        this._notifications.next(res);
       });
-    }else { 
+    } else {
       const nextData = this._notifications.getValue();
       nextData.push(obj);
       this._notifications.next(nextData);
@@ -82,18 +96,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  searchAssets(){
+  searchAssets() {
     this.loadingAssets = true;
 
     const listSub = this.assetDataService.search(this.assetSearch).subscribe(res => {
-      this._data.next(res);
-
-      const websocketSub = this.ruuviDataService
-          .retrieveMappedObject()
-          .subscribe((receivedObj: RuuviWebsocket) => {
-            this.addToData(receivedObj);
-          });
-      this.unsubscribe.push(websocketSub);
+      let nextData = this._data.getValue();
+      nextData = res;
+      this._data.next(nextData);
       this.loadingAssets = false;
     });
     this.unsubscribe.push(listSub);

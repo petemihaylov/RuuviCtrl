@@ -4,6 +4,7 @@ namespace RuuviCTRL.StorageApi.ApiModels
 {
     public class LiveRuuviOutput
     {
+        public int AssetId { get; set; }
         public SingleStat Temperature { get; set; }
         public SingleStat Humidity { get; set; }
         public SingleStat Pressure { get; set; }

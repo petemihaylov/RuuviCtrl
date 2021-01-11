@@ -6,6 +6,8 @@ namespace RuuviCTRL.Core.Interfaces
 {
     public interface IAssetSlaRepository
     {
+        Task<List<SLAAgreement>> GetSlasWithAssets();
+
         Task<List<Asset>> AssetListBySlaAsync(int slaId);
 
         Task<List<SLAAgreement>> SlaListByAssetAsync(int assetId);

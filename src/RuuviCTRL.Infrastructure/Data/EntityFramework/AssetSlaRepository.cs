@@ -16,6 +16,11 @@ namespace RuuviCTRL.Infrastructure.Data.EntityFramework
             _dbContext = dbContext;
         }
 
+        public Task<List<SLAAgreement>> GetSlasWithAssets()
+        {
+            return _dbContext.Set<SLAAgreement>().Include(c => c.AssetSlaAgreements).ThenInclude(a => a.Asset).ToListAsync();
+        }
+
         public Task<List<Asset>> AssetListBySlaAsync(int slaId)
         {
             return _dbContext.Set<AssetSLAAgreement>().Include(c => c.Asset).Where(id => id.SlaAgreementId == slaId).Select(a => a.Asset).ToListAsync();
