@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using RuuviCTRL.SharedKernel.Base;
+﻿using RuuviCTRL.SharedKernel.Base;
+using System.Threading.Tasks;
 
 namespace RuuviCTRL.SharedKernel.Interfaces
 {

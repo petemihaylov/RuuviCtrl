@@ -30,9 +30,10 @@ namespace RuuviCTRL.WebSpa
 
             services.AddControllersWithViews().AddNewtonsoftJson();
 
+            services.AddCors();
 
             services.AddSignalR();
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -60,6 +61,12 @@ namespace RuuviCTRL.WebSpa
                 app.UseHsts();
             }
 
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true)
+                .AllowCredentials());
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -70,7 +77,7 @@ namespace RuuviCTRL.WebSpa
             app.UseRouting();
 
 
-            
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 

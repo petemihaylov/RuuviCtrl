@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Channels;
-using Bogus;
+﻿using Bogus;
 using RuuviCTRL.Core.Entities;
+using System;
 
 namespace RuuviCTRL.IntegrationTests.Mockers
 {

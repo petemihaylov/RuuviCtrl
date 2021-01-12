@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Ardalis.ListStartupServices;
+﻿using Ardalis.ListStartupServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using RuuviCTRL.Core;
 using RuuviCTRL.Infrastructure;
 using RuuviCTRL.StorageApi.Hubs;
+using System.Collections.Generic;
 
 namespace RuuviCTRL.StorageApi
 {
@@ -33,7 +33,8 @@ namespace RuuviCTRL.StorageApi
             });
 
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            
+
+            services.AddCors();
             services.AddServices();
             services.AddDbContext(connectionString);
             services.AddMongoDb(Configuration);
@@ -73,12 +74,11 @@ namespace RuuviCTRL.StorageApi
             }
             app.UseRouting();
 
-            app.UseCors(builder => builder
-                .WithOrigins("https://localhost:44322", "https://ruuvispa.jordihuntjens.nl")
-                .AllowAnyHeader()
+            app.UseCors(x => x
                 .AllowAnyMethod()
-                .AllowCredentials()
-            );
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true)
+                .AllowCredentials());
 
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
@@ -90,8 +90,8 @@ namespace RuuviCTRL.StorageApi
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
-            
-            
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<LiveAssetHub>("/liveasset");

@@ -109,7 +109,6 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
       const detailsSub = this.assetDetailService
         .readByDate(this.assetId, this.DateToString(fromDate), this.DateToString(toDate))
         .subscribe(res => {
-          console.log(res);
           this.dataSubject.next(res);
 
           const websocketSub = this.ruuviWebsocketService
@@ -126,18 +125,18 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
     this.unsubscribe.push(paramsSub);
 
     this.PushBreachModel();
-
-    console.log(this.data);
   }
 
   addToData(obj: RuuviWebsocket) {
     const nextData = this.dataSubject.getValue();
-    nextData.temperature.push(obj.temperature);
-    nextData.humidity.push(obj.humidity);
-    nextData.pressure.push(obj.pressure);
-    nextData.batteryLevel.push(obj.batteryLevel);
-    nextData.route.push(obj.route);
-    this.dataSubject.next(nextData);
+    if (obj.assetId == nextData.id) {
+      nextData.temperature.push(obj.temperature);
+      nextData.humidity.push(obj.humidity);
+      nextData.pressure.push(obj.pressure);
+      nextData.batteryLevel.push(obj.batteryLevel);
+      nextData.route.push(obj.route);
+      this.dataSubject.next(nextData);
+    }
   }
 
   ngOnDestroy() {
@@ -175,7 +174,6 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
 
   PushBreachModel(filter = "") {
     filter = filter.toLowerCase();
-    console.log(filter);
     this.data = [];
     this.humidityBreach = [];
     this.pressureBreach = [];

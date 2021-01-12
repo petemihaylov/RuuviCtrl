@@ -1,14 +1,12 @@
-﻿using System;
+﻿using RuuviCTRL.Core.Entities;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using RuuviCTRL.Core.Entities;
-using RuuviCTRL.Core.Enums;
 
 namespace RuuviCTRL.Core.Services.Interfaces
 {
     public interface IRuuviDataService
     {
+        Task<int> GetAssetId(string deviceId);
         Task<List<Notification>> AddMeasurePoint(RuuviData input);
     }
 }

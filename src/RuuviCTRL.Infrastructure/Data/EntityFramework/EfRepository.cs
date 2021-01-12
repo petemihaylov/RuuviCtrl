@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using RuuviCTRL.SharedKernel.Base;
+using RuuviCTRL.SharedKernel.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using RuuviCTRL.SharedKernel.Base;
-using RuuviCTRL.SharedKernel.Interfaces;
 
 namespace RuuviCTRL.Infrastructure.Data.EntityFramework
 {
@@ -22,7 +22,7 @@ namespace RuuviCTRL.Infrastructure.Data.EntityFramework
         public T GetById<T>(int id) where T : BaseEntity
         {
             return _dbContext.Set<T>().SingleOrDefault(e => e.Id == id);
-        }        
+        }
         public Task<T> FindAsync<T>(Expression<Func<T, bool>> filter = null) where T : BaseEntity
         {
             return _dbContext.Set<T>().SingleOrDefaultAsync(filter ?? (s => true));
@@ -46,7 +46,7 @@ namespace RuuviCTRL.Infrastructure.Data.EntityFramework
         }
         public Task<List<T>> ListAsync<T>() where T : BaseEntity
         {
-            return  _dbContext.Set<T>().ToListAsync();
+            return _dbContext.Set<T>().ToListAsync();
         }
         public async Task<T> AddAsync<T>(T entity) where T : BaseEntity
         {

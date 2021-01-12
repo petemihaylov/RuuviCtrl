@@ -60,29 +60,30 @@ export class DashboardTableComponent implements OnInit {
 
     getTextColor(value: number, type: string, sla: SlaDto) {
         this.textcolor = 'black';
-
-        switch (type) {
-            case 'Temperature':
-                if (sla.hasTempratureBoundry) {
-                    if (value > sla.maxTemprature || value < sla.minTemprature) {
-                        this.textcolor = 'red';
+        if (sla != null) {
+            switch (type) {
+                case 'Temperature':
+                    if (sla.hasTempratureBoundry) {
+                        if (value > sla.maxTemprature || value < sla.minTemprature) {
+                            this.textcolor = 'red';
+                        }
                     }
-                }
-                break;
-            case 'Pressure':
-                if (sla.hasPressureBoundry) {
-                    if (value > sla.maxPressure || value < sla.minPressure) {
-                        this.textcolor = 'red';
+                    break;
+                case 'Pressure':
+                    if (sla.hasPressureBoundry) {
+                        if (value > sla.maxPressure || value < sla.minPressure) {
+                            this.textcolor = 'red';
+                        }
                     }
-                }
-                break;
-            case 'Humidity':
-                if (sla.hasHumidityBoundry) {
-                    if (value > sla.maxHumidity || value < sla.minHumidity) {
-                        this.textcolor = 'red';
+                    break;
+                case 'Humidity':
+                    if (sla.hasHumidityBoundry) {
+                        if (value > sla.maxHumidity || value < sla.minHumidity) {
+                            this.textcolor = 'red';
+                        }
                     }
-                }
-                break;
+                    break;
+            }
         }
         return this.textcolor;
     }

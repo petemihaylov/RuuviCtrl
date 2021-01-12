@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RuuviCTRL.SharedKernel.Base;
+﻿using RuuviCTRL.SharedKernel.Base;
+using System;
 
 namespace RuuviCTRL.Core.Entities
 {
@@ -14,7 +12,7 @@ namespace RuuviCTRL.Core.Entities
 
         public Notification()
         {
-            
+
         }
 
         public Notification(string title, string description, string type, DateTime createdAt)

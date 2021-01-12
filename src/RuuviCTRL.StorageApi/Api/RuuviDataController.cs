@@ -1,12 +1,9 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Core.Services.Interfaces;
-using RuuviCTRL.Core.ValueObjects;
-using RuuviCTRL.SharedKernel.Interfaces;
 using RuuviCTRL.StorageApi.ApiModels;
 using RuuviCTRL.StorageApi.Hubs;
+using System.Threading.Tasks;
 
 namespace RuuviCTRL.StorageApi.Api
 {
@@ -31,7 +28,9 @@ namespace RuuviCTRL.StorageApi.Api
                 var structuredInput = RuuviInput.ToRuuviData(input);
                 var notifications = await _ruuviDataService.AddMeasurePoint(structuredInput);
 
-                var liveOutput = RuuviInput.ToLiveRuuviOutput(input);
+                var assetId = await _ruuviDataService.GetAssetId(input.deviceId);
+
+                var liveOutput = RuuviInput.ToLiveRuuviOutput(input, assetId);
                 await _assetHubContext.Clients.All.SendAsync("GetNewAssetData", liveOutput);
 
                 foreach (var notification in notifications)

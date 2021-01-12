@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RuuviCTRL.Core.Dto;
 using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Core.Services.Interfaces;
 using RuuviCTRL.SharedKernel.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RuuviCTRL.WebSpa.Api
 {

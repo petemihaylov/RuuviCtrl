@@ -6,8 +6,8 @@ namespace RuuviCTRL.Infrastructure.Data.EntityFramework
 {
     public class AppDbContext : DbContext
     {
-       
-        public AppDbContext(DbContextOptions<AppDbContext> opt): base(opt) 
+
+        public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt)
         { }
 
         public DbSet<Asset> Assets { get; set; }

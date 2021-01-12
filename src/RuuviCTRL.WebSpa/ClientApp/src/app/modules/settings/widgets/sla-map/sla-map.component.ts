@@ -52,13 +52,16 @@ export class SlaMapComponent implements OnChanges, AfterViewInit, ControlValueAc
     });
 
     this.drawnItems = new L.FeatureGroup();
+
     if (this.value !== null) {
       const geojsonLayer = L.geoJson(JSON.parse(this.value));
-      this.drawnItems.addLayer(geojsonLayer);
+      geojsonLayer.eachLayer(layer => {
+        this.drawnItems.addLayer(layer);
+      });
+      this.map.fitBounds(geojsonLayer.getBounds());
     }
-    this.map.addLayer(this.drawnItems);
 
-    console.log(this.drawnItems);
+    this.map.addLayer(this.drawnItems);
 
     const drawControl = new L.Control.Draw({
       draw: {
@@ -76,6 +79,14 @@ export class SlaMapComponent implements OnChanges, AfterViewInit, ControlValueAc
     this.map.on(L.Draw.Event.CREATED, function (event) {
       var layer = event.layer;
       layer.addTo(this.drawnItems);
+      this.onChange(this.getGeoJson());
+    }.bind(this));
+
+    this.map.on(L.Draw.Event.EDITED, function (event) {
+      this.onChange(this.getGeoJson());
+    }.bind(this));
+
+    this.map.on(L.Draw.Event.DELETED, function (event) {
       this.onChange(this.getGeoJson());
     }.bind(this));
 
@@ -101,6 +112,4 @@ export class SlaMapComponent implements OnChanges, AfterViewInit, ControlValueAc
   }
   registerOnTouched(fn: any): void {
   }
-
-
 }

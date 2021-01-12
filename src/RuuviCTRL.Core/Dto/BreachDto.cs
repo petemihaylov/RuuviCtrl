@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RuuviCTRL.Core.Entities;
+﻿using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Core.Enums;
+using System;
 
 namespace RuuviCTRL.Core.Dto
 {
@@ -56,7 +54,7 @@ namespace RuuviCTRL.Core.Dto
 
         public BreachDto()
         {
-            
+
         }
         public BreachDto(Breach breach)
         {

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Core.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RuuviCTRL.Infrastructure.Data.EntityFramework
 {
@@ -16,6 +14,11 @@ namespace RuuviCTRL.Infrastructure.Data.EntityFramework
         public AssetSlaRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public Task<List<SLAAgreement>> GetSlasWithAssets()
+        {
+            return _dbContext.Set<SLAAgreement>().Include(c => c.AssetSlaAgreements).ThenInclude(a => a.Asset).ToListAsync();
         }
 
         public Task<List<Asset>> AssetListBySlaAsync(int slaId)

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using RuuviCTRL.Core.Dto;
 using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Core.Services.Interfaces;
 using RuuviCTRL.SharedKernel.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RuuviCTRL.WebSpa.Api
 {
@@ -106,7 +106,7 @@ namespace RuuviCTRL.WebSpa.Api
 
         // POST: api/assets
         [HttpPost]
-        public async Task<IActionResult> PostAssets([FromBody]Asset asset)
+        public async Task<IActionResult> PostAssets([FromBody] Asset asset)
         {
             var assetItem = await _repository.AddAsync(asset);
             return CreatedAtRoute(nameof(GetAssetById), new { id = assetItem.Id }, assetItem);

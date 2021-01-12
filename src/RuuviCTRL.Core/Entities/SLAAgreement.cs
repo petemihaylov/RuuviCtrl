@@ -1,9 +1,8 @@
-﻿using System;
+﻿using RuuviCTRL.Core.Enums;
+using RuuviCTRL.SharedKernel.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using RuuviCTRL.Core.Enums;
-using RuuviCTRL.SharedKernel.Base;
 
 namespace RuuviCTRL.Core.Entities
 {
@@ -58,10 +57,10 @@ namespace RuuviCTRL.Core.Entities
                 return BreachType.Breach;
 
             if (HasTempratureBoundry && hasTempratureBreach)
-                return BreachType.Warning;            
+                return BreachType.Warning;
 
             if (HasHumidityBoundry && hasHumidityBreach)
-                return BreachType.Warning;            
+                return BreachType.Warning;
 
             if (HasPressureBoundry && hasPressureBreach)
                 return BreachType.Warning;

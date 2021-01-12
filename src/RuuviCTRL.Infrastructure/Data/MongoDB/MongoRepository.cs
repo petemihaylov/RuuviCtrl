@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using RuuviCTRL.Infrastructure.Settings.Interfaces;
 using RuuviCTRL.SharedKernel.Attributes;
 using RuuviCTRL.SharedKernel.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace RuuviCTRL.Infrastructure.Data.MongoDB
 {

@@ -1,6 +1,6 @@
-﻿using System;
-using RuuviCTRL.SharedKernel.Attributes;
+﻿using RuuviCTRL.SharedKernel.Attributes;
 using RuuviCTRL.SharedKernel.Base;
+using System;
 
 namespace RuuviCTRL.Core.Entities
 {
@@ -21,5 +21,5 @@ namespace RuuviCTRL.Core.Entities
         public DateTime Time { get; set; }
     }
 
-    
+
 }

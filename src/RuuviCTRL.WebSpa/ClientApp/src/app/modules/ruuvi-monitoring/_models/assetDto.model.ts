@@ -2,7 +2,7 @@ import { SingleStat } from './single-stat.model';
 import { LocationStat } from './location-stat.model';
 
 export class AssetDto {
-    id: string;
+    id: number;
     deviceId: string;
     name: string;
     temperature: SingleStat[];

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using RuuviCTRL.Core.Entities;
+﻿using RuuviCTRL.Core.Entities;
 using RuuviCTRL.Core.Enums;
 using RuuviCTRL.Core.Interfaces;
 using RuuviCTRL.Core.Services.Interfaces;
 using RuuviCTRL.SharedKernel.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace RuuviCTRL.Core.Services
 {
@@ -24,6 +22,13 @@ namespace RuuviCTRL.Core.Services
             _eFRepository = eFRepository;
             _assetSlaRepository = assetSlaRepository;
         }
+
+        public async Task<int> GetAssetId(string deviceId)
+        {
+            var asset = await _eFRepository.FindAsync<Asset>(i => i.DeviceId == deviceId);
+            return asset.Id;
+        }
+
         public async Task<List<Notification>> AddMeasurePoint(RuuviData input)
         {
             var output = new List<Notification>();

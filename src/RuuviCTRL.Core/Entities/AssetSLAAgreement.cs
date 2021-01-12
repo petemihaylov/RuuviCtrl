@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RuuviCTRL.Core.Entities
+﻿namespace RuuviCTRL.Core.Entities
 {
     public class AssetSLAAgreement
     {
@@ -13,7 +9,7 @@ namespace RuuviCTRL.Core.Entities
 
         public AssetSLAAgreement()
         {
-            
+
         }
 
         public AssetSLAAgreement(int slaId, int assetId)
