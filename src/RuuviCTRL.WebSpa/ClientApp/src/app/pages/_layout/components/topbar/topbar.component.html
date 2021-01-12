@@ -1,56 +1,5 @@
 <!--begin::Topbar-->
 
-<ng-container *ngIf="extraSearchDisplay">
-  <ng-container *ngIf="extrasSearchLayout === 'offcanvas'">
-    <!--begin::Search-->
-    <div class="topbar-item">
-      <div
-        class="btn btn-icon btn-clean btn-lg mr-1"
-        id="kt_quick_search_toggle"
-      >
-        <span
-          [inlineSVG]="'./assets/media/svg/icons/General/Search.svg'"
-          cacheSVG="true"
-          class="svg-icon svg-icon-xl svg-icon-primary"
-        ></span>
-      </div>
-    </div>
-    <!--end::Search-->
-  </ng-container>
-
-  <ng-container
-    *ngIf="extrasSearchLayout === 'dropdown'"
-    id="kt_quick_search_toggle"
-  >
-    <div
-      class="dropdown"
-      id="kt_quick_search_toggle"
-      autoClose="outside"
-      ngbDropdown
-    >
-      <!--begin::Toggle-->
-      <div class="topbar-item" ngbDropdownToggle>
-        <div class="btn btn-icon btn-clean btn-lg btn-dropdown mr-1">
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/General/Search.svg'"
-            cacheSVG="true"
-            class="svg-icon svg-icon-xl svg-icon-primary"
-          ></span>
-        </div>
-      </div>
-      <!--end::Toggle-->
-
-      <!--begin::Dropdown-->
-      <div
-        class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg"
-        ngbDropdownMenu
-      >
-        <app-search-dropdown-inner></app-search-dropdown-inner>
-      </div>
-      <!--end::Dropdown-->
-    </div>
-  </ng-container>
-</ng-container>
 
 <!-- Notifications button -->
 <ng-container

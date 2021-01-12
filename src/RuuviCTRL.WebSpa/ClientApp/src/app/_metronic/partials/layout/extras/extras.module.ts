@@ -18,7 +18,6 @@ import { QuickPanelOffcanvasComponent } from './offcanvas/quick-panel-offcanvas/
 import { UserOffcanvasComponent } from './offcanvas/user-offcanvas/user-offcanvas.component';
 import { CoreModule } from '../../../core';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NotificationWebsocketService } from './offcanvas/quick-panel-offcanvas/_sevices/notification-websocket.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -40,7 +39,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     QuickPanelOffcanvasComponent,
     UserOffcanvasComponent,
     ScrollTopComponent,
-    ToolbarComponent,
   ],
   imports: [CommonModule, InlineSVGModule, PerfectScrollbarModule, CoreModule],
   providers: [
@@ -62,7 +60,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CartOffcanvasComponent,
     QuickPanelOffcanvasComponent,
     UserOffcanvasComponent,
-    ToolbarComponent,
     ScrollTopComponent,
   ],
 })
