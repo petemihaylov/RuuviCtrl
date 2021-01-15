@@ -50,7 +50,7 @@
 				</div>
 			</div>
 			<!--Breaches search bar-->
-			<div class="quick-search quick-search-dropdown" id="kt_quick_search_dropdown">
+			<div class="quick-search quick-search-dropdown" id="kt_quick_search_dropdown" *ngIf="data.length > 0">
 				<!--begin:Form-->
 				<form method="get" class="quick-search-form">
 					<div class="input-group">
@@ -69,7 +69,7 @@
 				</form>
 				<!--end::Form-->
 			</div>
-			<div class="card-body">
+			<div class="card-body" *ngIf="data.length > 0; else noBreaches">
 				<table class="table table-vertical-center">
 					<thead>
 						<tr>
@@ -90,15 +90,15 @@
 									[inlineSVG]="(breach.hasEnded)?'../assets/media/svg/icons/Communication/Clipboard-check.svg': '../assets/media/svg/icons/Communication/Flag.svg'"
 									cacheSVG="true" class="icon-breach"></span>
 							</td>
-							<th>{{(breach.slaTitle)?breach.slaTitle: 'SLA ' + breach.slaAgreementId}}</th>
+							<th>{{breach.slaTitle != null ? breach.slaTitle : 'SLA ' + breach.slaAgreementId}}</th>
 							<td>{{breach.createdAt | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
-							<td [class.text-danger]="breach.hasTempratureBreach"><span placement="top"
-									ngbTooltip="Min: {{breach.minTemprature}} | Max: {{breach.maxTemprature}}">{{breach.temperature}}</span>
+							<td [class.text-danger]="breach.hasTempratureBreach">
+								<span placement="top" [disableTooltip]="!breach.hasTempratureBoundry" ngbTooltip="Min: {{breach.minTemprature}} | Max: {{breach.maxTemprature}}">{{breach.temperature}}</span>
 							</td>
-							<td [class.text-danger]="breach.hasHumidityBreach"><span placement="top"
+							<td [class.text-danger]="breach.hasHumidityBreach"><span placement="top" [disableTooltip]="!breach.hasHumidityBoundry"
 									ngbTooltip="Min: {{breach.minHumidity}} | Max: {{breach.maxHumidity}}">{{breach.humidity}}</span>
 							</td>
-							<td [class.text-danger]="breach.hasPressureBreach"><span placement="top"
+							<td [class.text-danger]="breach.hasPressureBreach"><span placement="top" [disableTooltip]="!breach.hasPressureBoundry"
 									ngbTooltip="Min: {{breach.minPressure}} | Max: {{breach.maxPressure}}">{{breach.pressure}}</span>
 							</td>
 							<td [ngSwitch]="breach.type">
@@ -117,6 +117,11 @@
 						[pageSize]="10" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
 				</div>
 			</div>
+			<ng-template #noBreaches>
+				<div class="card-body">
+					This assets does not yet have any breaches
+				</div>
+			</ng-template>
 		</div>
 	</div>
 </div>

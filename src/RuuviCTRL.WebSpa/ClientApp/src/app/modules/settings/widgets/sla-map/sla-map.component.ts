@@ -53,7 +53,7 @@ export class SlaMapComponent implements OnChanges, AfterViewInit, ControlValueAc
 
     this.drawnItems = new L.FeatureGroup();
 
-    if (this.value !== null) {
+    if (this.value != null && this.value != undefined) {
       const geojsonLayer = L.geoJson(JSON.parse(this.value));
       geojsonLayer.eachLayer(layer => {
         this.drawnItems.addLayer(layer);

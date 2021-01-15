@@ -66,12 +66,15 @@ namespace RuuviCTRL.Core.Services
 
                         if (lastBreach != null && lastBreach.HasEnded == false && lastBreach.Type == BreachType.Breach)
                         {
-                            if (result == BreachType.Breach) continue;
-
-                            lastBreach.EndBreach();
-                            await _eFRepository.UpdateAsync(lastBreach);
-
-                            continue;
+                            if (result == BreachType.None)
+                            {
+                                lastBreach.EndBreach();
+                                await _eFRepository.UpdateAsync(lastBreach);
+                            }
+                            else
+                            {
+                                continue;
+                            }
                         }
 
                         if (result != BreachType.None)

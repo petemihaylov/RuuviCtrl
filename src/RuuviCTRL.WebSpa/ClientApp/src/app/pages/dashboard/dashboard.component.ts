@@ -5,6 +5,7 @@ import { AssetDto } from './_models/assetDto.model';
 import { NotificationDto } from './_models/notificationDto.model';
 import { RuuviWebsocket } from './_models/ruuvi-websocket.model';
 import { AssetDataService } from './_services/asset-data.service';
+import { NotificationDataService } from './_services/notification-data.service';
 import { NotificationWebsocketService } from './_services/notification-websocket.service';
 import { RuuviWebsocketService } from './_services/ruuvi-websocket.service';
 
@@ -32,7 +33,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private assetDataService: AssetDataService,
     private ruuviDataService: RuuviWebsocketService,
-    private notificationWebsocketService: NotificationWebsocketService) { }
+    private notificationWebsocketService: NotificationWebsocketService,
+    private notificationDataService: NotificationDataService) { }
 
 
   ngOnInit(): void {
@@ -55,8 +57,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   }
 
-  deleteNotification() {
-    this.isShow = !this.isShow;
+  deleteNotification(id: any){
+    this.notificationDataService.delete(id);
+
+    const arr: NotificationDto[] = this._notifications.getValue();
+    arr.forEach((item, index) => {
+      if (item.id === id) { arr.splice(index, 1); }
+    });
+
+    this._notifications.next(arr);
   }
 
   addToData(obj: RuuviWebsocket) {

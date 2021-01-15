@@ -13,9 +13,9 @@ namespace RuuviCTRL.Core.Entities
         public float Latitude { get; set; }
         public float Longitude { get; set; }
 
-        public bool HasTempratureBreach => Temperature <= MinTemprature || Temperature >= MaxTemprature;
-        public bool HasHumidityBreach => Humidity <= MinHumidity || Humidity >= MaxHumidity;
-        public bool HasPressureBreach => Pressure <= MinPressure || Pressure >= MaxPressure;
+        public bool HasTempratureBreach => HasTempratureBoundry ? Temperature <= MinTemprature || Temperature >= MaxTemprature : false;
+        public bool HasHumidityBreach => HasHumidityBoundry ? Humidity <= MinHumidity || Humidity >= MaxHumidity : false;
+        public bool HasPressureBreach => HasPressureBoundry ? Pressure <= MinPressure || Pressure >= MaxPressure : false;
 
         public bool HasTempratureBoundry { get; set; }
         public float MaxTemprature { get; set; }
