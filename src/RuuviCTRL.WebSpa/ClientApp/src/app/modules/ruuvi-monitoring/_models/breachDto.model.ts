@@ -32,6 +32,7 @@ export class BreachDto {
     pressureCount: number;
     pressureTime: string;
 
+    hasLocationBreach: boolean;
     hasLocationBoundry: boolean;
     locationBoundary: string;
     locationCount: number;

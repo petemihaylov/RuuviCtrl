@@ -35,6 +35,7 @@ namespace RuuviCTRL.Core.Dto
         public float PressureCount { get; set; }
         public TimeSpan PressureTime { get; set; }
 
+        public bool HasLocationBreach { get; set; }
         public bool HasLocationBoundry { get; set; }
         public string LocationBoundary { get; set; }
         public float LocationCount { get; set; }
@@ -86,6 +87,7 @@ namespace RuuviCTRL.Core.Dto
             HasHumidityBreach = breach.HasHumidityBreach;
             HasPressureBreach = breach.HasPressureBreach;
             HasEnded = breach.HasEnded;
+            HasLocationBreach = breach.HasLocationBreach;
             HasTempratureBoundry = breach.HasTempratureBoundry;
             HasHumidityBoundry = breach.HasHumidityBoundry;
             HasPressureBoundry = breach.HasPressureBoundry;

@@ -79,6 +79,7 @@
 							<td>Temperature</td>
 							<td>Humidity</td>
 							<td>Pressure</td>
+							<td>Location</td>
 							<td>Breach type</td>
 						</tr>
 					</thead>
@@ -100,6 +101,9 @@
 							</td>
 							<td [class.text-danger]="breach.hasPressureBreach"><span placement="top" [disableTooltip]="!breach.hasPressureBoundry"
 									ngbTooltip="Min: {{breach.minPressure}} | Max: {{breach.maxPressure}}">{{breach.pressure}}</span>
+							</td>
+							<td [class.text-danger]="breach.hasLocationBreach">
+								<span placement="top">{{breach.hasLocationBreach}}</span>
 							</td>
 							<td [ngSwitch]="breach.type">
 								<div *ngSwitchCase="1"><span

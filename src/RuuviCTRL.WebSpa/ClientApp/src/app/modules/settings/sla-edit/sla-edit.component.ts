@@ -71,7 +71,7 @@ export class SlaEditComponent implements OnInit, OnDestroy {
     if (this.isValid) {
       this.setAssets(this.sla.id);
       this.slaService.update(this.sla).subscribe(res => {
-        this.router.navigate(['../']);
+        this.router.navigate(['/settings/overview']);
       });
     }
   }

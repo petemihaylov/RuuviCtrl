@@ -75,12 +75,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     let index = nextData.indexOf(updateItem);
 
-    nextData[index].temperature.push(obj.temperature);
-    nextData[index].humidity.push(obj.humidity);
-    nextData[index].pressure.push(obj.pressure);
-    nextData[index].batteryLevel.push(obj.batteryLevel);
-    nextData[index].route.push(obj.route);
-    this._data.next(nextData);
+    if (obj != null) {
+      nextData[index].temperature.push(obj.temperature);
+      obj.humidity ?? nextData[index].humidity.push(obj.humidity);
+      obj.pressure ?? nextData[index].pressure.push(obj.pressure);
+      obj.batteryLevel ?? nextData[index].batteryLevel.push(obj.batteryLevel);
+      obj.route ?? nextData[index].route.push(obj.route);
+      this._data.next(nextData);
+    }
   }
 
   findIndexToUpdate(newItem) {
