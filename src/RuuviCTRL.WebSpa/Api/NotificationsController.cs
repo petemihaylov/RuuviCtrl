@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using RuuviCTRL.Core.Entities;
 using RuuviCTRL.SharedKernel.Interfaces;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace RuuviCTRL.WebSpa.Api
         {
             var notifications = await _repository.ListAsync<Notification>();
 
-            return Ok(notifications);
+            return Ok(notifications.OrderByDescending(o => o.CreatedAt));
         }
         // Delete: api/notifications/{id}
         [HttpDelete("{id}")]

@@ -11,7 +11,7 @@ import {SlaAssetsService} from '../_services/sla-assets.service';
 })
 export class SlaCreateComponent implements OnInit {
 
-  sla: SlaDto = {} as SlaDto;
+  sla = new SlaDto();
   isValid = false;
 
   constructor(private slaService: SlaService, private router: Router, private slaAssetsService: SlaAssetsService) { }
@@ -20,7 +20,6 @@ export class SlaCreateComponent implements OnInit {
   }
 
   createSla(){
-    console.log(this.sla);
     if (this.isValid) {
       this.slaService.post(this.sla).subscribe(res => {
         if (this.sla.assets) {

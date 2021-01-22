@@ -13,9 +13,9 @@ namespace RuuviCTRL.Core.Entities
         public float Latitude { get; set; }
         public float Longitude { get; set; }
 
-        public bool HasTempratureBreach => Temperature <= MinTemprature || Temperature >= MaxTemprature;
-        public bool HasHumidityBreach => Humidity <= MinHumidity || Humidity >= MaxHumidity;
-        public bool HasPressureBreach => Pressure <= MinPressure || Pressure >= MaxPressure;
+        public bool HasTempratureBreach => HasTempratureBoundry ? Temperature <= MinTemprature || Temperature >= MaxTemprature : false;
+        public bool HasHumidityBreach => HasHumidityBoundry ? Humidity <= MinHumidity || Humidity >= MaxHumidity : false;
+        public bool HasPressureBreach => HasPressureBoundry ? Pressure <= MinPressure || Pressure >= MaxPressure : false;
 
         public bool HasTempratureBoundry { get; set; }
         public float MaxTemprature { get; set; }
@@ -38,6 +38,7 @@ namespace RuuviCTRL.Core.Entities
         [Column(TypeName = "bigint")]
         public TimeSpan PressureTime { get; set; }
 
+        public bool HasLocationBreach { get; set; }
         public bool HasLocationBoundry { get; set; }
         public string LocationBoundary { get; set; }
         public float LocationCount { get; set; }
@@ -58,7 +59,7 @@ namespace RuuviCTRL.Core.Entities
         {
 
         }
-        public Breach(Asset asset, RuuviData ruuviData, SLAAgreement slaAgreement, BreachType type)
+        public Breach(Asset asset, RuuviData ruuviData, SLAAgreement slaAgreement, BreachType type, bool hasLocationBreach)
         {
             AssetId = asset.Id;
             SlaAgreementId = slaAgreement.Id;
@@ -89,6 +90,7 @@ namespace RuuviCTRL.Core.Entities
             PressureCount = slaAgreement.PressureCount;
             PressureTime = slaAgreement.PressureTime;
 
+            HasLocationBreach = hasLocationBreach;
             HasLocationBoundry = slaAgreement.HasLocationBoundry;
             LocationBoundary = slaAgreement.LocationBoundary;
             LocationCount = slaAgreement.LocationCount;

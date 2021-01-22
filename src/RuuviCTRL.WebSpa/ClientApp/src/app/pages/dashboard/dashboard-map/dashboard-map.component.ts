@@ -106,7 +106,7 @@ export class DashboardMapComponent implements AfterViewInit, OnDestroy {
 
     const randomId = this.makeid(6);
 
-      this.renderer.setProperty(this.preMapElement.nativeElement, 'innerHTML', '<div id="map-' + randomId + '" class="h-100"></div>');
+      this.renderer.setProperty(this.preMapElement.nativeElement, 'innerHTML', '<div id="map-' + randomId + '" class="h-100" style="z-index: 1;"></div>');
 
     this.map = L.map("map-" + randomId, {
       center: [52.073274853882005, 5.4150805111515075],

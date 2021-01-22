@@ -129,13 +129,15 @@ export class AssetDashboardComponent implements OnInit, OnDestroy {
 
   addToData(obj: RuuviWebsocket) {
     const nextData = this.dataSubject.getValue();
-    if (obj.assetId == nextData.id) {
-      nextData.temperature.push(obj.temperature);
-      nextData.humidity.push(obj.humidity);
-      nextData.pressure.push(obj.pressure);
-      nextData.batteryLevel.push(obj.batteryLevel);
-      nextData.route.push(obj.route);
-      this.dataSubject.next(nextData);
+    if (obj != null){
+      if (obj.assetId == nextData.id) {
+        nextData.temperature.push(obj.temperature);
+        nextData.humidity.push(obj.humidity);
+        nextData.pressure.push(obj.pressure);
+        nextData.batteryLevel.push(obj.batteryLevel);
+        nextData.route.push(obj.route);
+        this.dataSubject.next(nextData);
+      }
     }
   }
 

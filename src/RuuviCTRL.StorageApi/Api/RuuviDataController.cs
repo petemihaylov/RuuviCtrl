@@ -35,7 +35,7 @@ namespace RuuviCTRL.StorageApi.Api
 
                 foreach (var notification in notifications)
                 {
-                    await _notificationHubContext.Clients.All.SendAsync("GetNewNotification", notification);
+                    await _notificationHubContext.Clients.All.SendAsync("Notification", notification);
                 }
             }
             return Ok();
